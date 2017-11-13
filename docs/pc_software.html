@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Tiny AVR/PIC Bootloader+ : Using PC Software</title>
+
+</head>
+<body>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="0">
+<tbody>
+<tr>
+<td style="text-align: center; vertical-align: top;">
+<h1 style="color: rgb(0, 0, 153);">Tiny AVVR/PIC
+Bootloader+</h1>
+<div style="text-align: left; color: rgb(0, 0, 153);">
+<h2>Using PC software:</h2>
+<hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><br>
+</span></div>
+<div style="text-align: left;">
+<h3>Linux specifics:</h3>
+This software works perfectly on Linux but you need to:<br>
+<ul>
+<li>install "mono" packages.</li>
+<li>allow normal user to read and write serial port, used
+to program your PIC device, with:<br>
+<span style="font-family: monospace;">sudo chmod
+a+rw /dev/ttyUSB0</span> <br>
+("/dev/ttyUSB0" can be "/dev/ttyS1", etc... it is just an example,
+change it by the serial port you effectly use).</li>
+</ul>
+To run the program, go to it's folder and type:<br>
+<span style="font-family: monospace;">mono
+TinyPicBootloader+.exe</span><br>
+<h3>Software User's manual:</h3>
+<h4>Main tab</h4>
+### todo<br>
+<h4>Configuration tab</h4>
+### todo<br>
+<h4>Debug tab</h4>
+### todo<br>
+<h4>Use TinyPicBootloader+ with command line</h4>
+Syntax is:<br>
+<pre>tinypicbootloader+.exe "c:\folder 1\folder etc\file name.hex" [COMx [BaudRate]|auto] [exit]</pre>
+If 'auto' is used, then&nbsp;autodetect&nbsp;the right COM port
+and baud rate (only if automatic Reset on RTS serial pin is enabled and
+correctly connected to PIC device).<br>
+If 'COMx' or 'BaudRate' aren't passed in arguments, the previuos option
+used in the GUI (stored in the it's depending "config.ini" file) will
+be used.<br>
+<br>
+Examples: <br>
+<pre>tinypicbootloader+.exe "c:\test file.hex" COM8 9600 exit</pre>
+<pre>tinypicbootloader+.exe "c:\test file.hex" com8</pre>
+<pre>tinypicbootloader+.exe "c:\test file.hex"</pre>
+<pre>tinypicbootloader+.exe "c:\test file.hex" EXIT</pre>
+<pre>tinypicbootloader+.exe "c:\test file.hex" auto</pre>
+<div style="margin-left: 40px;">
+<h5>Configure "Great Cow Graphical BASIC"</h5>
+- go to "Edit -&gt; Preferences..." menu<br>
+- in "Programmers" tab, click on [Add...]<br>
+- fill as follow:<br>
+<br>
+<div style="margin-left: 40px;"><img style="width: 290px; height: 304px;" alt="" src="GCGB_config.jpg"><br>
+</div>
+<h5>Configure "Flowcode V5"</h5>
+- go to "Build -&gt; Compiler options..." menu<br>
+- in "Programmer" tab,&nbsp;fill as follow (com9 and 115200 are
+just an example, change with your own configuration or live it blank):<br>
+<div style="margin-left: 40px;"><img style="width: 493px; height: 539px;" alt="" src="TinyPIC+Flowcode5.jpg"></div>
+<br>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+</body></html>

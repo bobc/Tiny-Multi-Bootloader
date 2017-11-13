@@ -1,0 +1,85 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Nov 27 23:52:30 2013
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000004
+                   .org_2       code   0x000004    program   0x000074
+                   .org_3       code   0x000100    program   0x000200
+                   .org_4       code   0x000200    program   0x00018e
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000001      
+                            0x000004    0x00003d      
+                            0x000100    0x0002c6      
+            515 out of 2311 program addresses used, program memory utilization is 22%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CRLF   0x0002a2    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                      Err   0x000277    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     Exit   0x000251    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                  GET2SUM   0x000280    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     GETC   0x0002ac    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     INIT   0x000200    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   LOOP_P   0x000293    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   MES001   0x000004    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   MES002   0x000028    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   MES003   0x00002d    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   MES004   0x000037    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     PUT2   0x00028f    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     PUTC   0x0002a5    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+    Processing_of_the_end   0x00023e    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     Read   0x0002bf    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                 Read_HEX   0x000205    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   STAMSG   0x000203    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                    Write   0x0002b3    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                  chk_sum   0x00024d    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                       cp   0x000262    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                    cp_bl   0x000260    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                       er   0x000258    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                    er_bl   0x000255    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   r_loop   0x00022c    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                set_pmadr   0x00027a    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   MES001   0x000004    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   MES002   0x000028    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   MES003   0x00002d    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   MES004   0x000037    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     INIT   0x000200    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   STAMSG   0x000203    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                 Read_HEX   0x000205    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   r_loop   0x00022c    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+    Processing_of_the_end   0x00023e    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                  chk_sum   0x00024d    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     Exit   0x000251    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                    er_bl   0x000255    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                       er   0x000258    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                    cp_bl   0x000260    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                       cp   0x000262    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                      Err   0x000277    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                set_pmadr   0x00027a    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                  GET2SUM   0x000280    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     PUT2   0x00028f    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                   LOOP_P   0x000293    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     CRLF   0x0002a2    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     PUTC   0x0002a5    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     GETC   0x0002ac    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                    Write   0x0002b3    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+                     Read   0x0002bf    program     static C:\picasm1\RewriteBL\PIC16F_wUART_RewriteBL\RewriteBL.asm
+
+

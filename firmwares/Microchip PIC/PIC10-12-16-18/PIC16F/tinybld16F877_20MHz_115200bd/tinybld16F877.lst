@@ -1,0 +1,763 @@
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001         radix DEC
+                      00002         LIST  F=INHX8M  
+                      00003         
+                      00004         ; change these lines accordingly to your application    
+                      00005 #include "p16f877.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F877 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2012 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00540         LIST
+  00000031            00006 IdTypePIC = 0x31                        ; must exist in "piccodes.ini"          
+                      00007 #define max_flash 0x2000        ; in WORDS, not bytes!!! (= 'max flash memory' from "piccodes.ini" divid
+                            ed by 2)
+  01312D00            00008 xtal EQU 20000000               ; you may also want to change: _HS_OSC _XT_OSC
+  0001C200            00009 baud EQU 115200                 ; standard TinyBld baud rates: 115200 or 19200
+                      00010         ; The above 5 lines can be changed and buid a bootloader for the desired frequency and PIC type
+                      00011 
+                      00012         ;********************************************************************
+                      00013         ;Modifications made after:
+                      00014         ;       Tiny Bootloader         16Fxxx series           Size=100words
+                      00015         ;       claudiu.chiculita@ugal.ro
+                      00016         ;This should work for 16F873
+                      00017         ;       
+                      00018         ;Now working for 16F873
+                      00019         ;Default write must be :        bsf             EECON1,EEPGD
+                      00020         ;Program is high, commenting out other lines made it always write to
+                      00021         ;Data EEPROM not Program.  This logic should be reversed for all similar
+                      00022         ;PICs, then the two lines for Data EE can be taken out if unused for any.
+                      00023         ;
+                      00024         ;Data EE could be brought back in, there are 2 unused words at end.
+                      00025         ;
+                      00026         ;Config is changed for 873 vs 873A.
+                      00027         ;
+                      00028         ;CB is check bank, for bank selects and the high variables.  16F873/4
+                      00029         ;have no common high variables.  Ended up being the EEPGD, but leaving
+                      00030         ;the CB etc in for reference.
+                      00031         ;********************************************************************
+                      00032 
+                      00033         #include "../../spbrgselect.inc"
+  00000000            00001 RoundResult SET 0                               ; Rounding function.  RoundResult = Round(aa/bb)
+                      00002 Round   macro aa,bb
+                      00003         LOCAL rr = aa/bb
+                      00004         LOCAL d1 = aa - rr*bb
+                      00005         LOCAL d2 = (rr+1)*bb - aa
+                      00006 RoundResult = rr
+                      00007         if d1 >= d2
+                      00008 RoundResult++
+                      00009         endif
+                      00010         endm
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00011 
+  00000000            00012 AbsResult SET 0
+                      00013 Abs             macro nr
+                      00014         if nr>=0
+                      00015 AbsResult = nr
+                      00016         else
+                      00017 AbsResult = -nr
+                      00018         endif
+                      00019         endm
+                      00020                 
+                      00021         Round xtal,(16*baud)
+  000A                    M         LOCAL rr = xtal/(16*baud)
+  ED00                    M         LOCAL d1 = xtal - rr*(16*baud)
+  3300                    M         LOCAL d2 = (rr+1)*(16*baud) - xtal
+  0000000A                M RoundResult = rr
+                          M         if d1 >= d2
+  0000000B                M RoundResult++
+                          M         endif
+  0000000A            00022 spbrg_value EQU RoundResult-1
+                      00023 
+                      00024         Round xtal,(16*(spbrg_value+1))
+  BBE4                    M         LOCAL rr = xtal/(16*(spbrg_value+1))
+  0040                    M         LOCAL d1 = xtal - rr*(16*(spbrg_value+1))
+  0070                    M         LOCAL d2 = (rr+1)*(16*(spbrg_value+1)) - xtal
+  0001BBE4                M RoundResult = rr
+                          M         if d1 >= d2
+                          M RoundResult++
+                          M         endif
+  0001BBE4            00025 baud_real EQU RoundResult
+                      00026         Abs(baud_real-baud)
+                          M         if (baud_real-baud)>=0
+                          M AbsResult = (baud_real-baud)
+                          M         else
+  0000061C                M AbsResult = -(baud_real-baud)
+                          M         endif
+  00000001            00027 errpercent EQU AbsResult*100/baud
+                      00028         if errpercent > 4
+                      00029                 ERROR big error in baudrate: 1%
+                      00030         endif
+                      00031         if errpercent >= 2
+                      00032                 messg baudrate not exact: 1%
+                      00033         endif
+                      00034         #include "../../bankswitch.inc"
+                      00001 
+                      00002 BANK0   macro
+                      00003         bcf     STATUS,RP0      ; select register bank 0
+                      00004         bcf     STATUS,RP1
+                      00005         endm
+                      00006 BANK1   macro
+                      00007         bsf     STATUS,RP0      ; select register bank 1
+                      00008         bcf             STATUS,RP1
+                      00009         endm
+                      00010 BANK2   macro
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00011         bcf     STATUS,RP0      ; select register bank 0
+                      00012         bsf     STATUS,RP1
+                      00013         endm
+                      00014 BANK3   macro
+                      00015         bsf     STATUS,RP0      ; select register bank 0
+                      00016         bsf     STATUS,RP1
+                      00017         endm
+                      00018 BANK1_ macro    ; switch only from BANK0 to BANK1
+                      00019         bsf     STATUS,RP0
+                      00020         endm
+                      00021 BANK0_ macro    ; switch only from BANK1 to BANK0
+                      00022         bcf     STATUS,RP0
+                      00023         endm
+                      00024 BANK3_ macro    ; switch only from BANK2 to BANK3
+                      00025         bsf     STATUS,RP0
+                      00026         endm
+                      00027 BANK2_ macro    ; switch only from BANK3 to BANK2
+                      00028         bcf     STATUS,RP0
+                      00029         endm
+                      00035         #define prima_adresa max_flash-100 ; 100 word in size
+                      00036 
+2007   3F72           00037         __CONFIG _CP_OFF & _WDT_OFF & _BODEN_ON & _PWRTE_ON & _HS_OSC & _WRT_ENABLE_ON & _LVP_OFF & _CPD
+                            _OFF
+                      00038 
+                      00039         errorlevel 1, -305                      ; suppress warning msg that takes f as default
+                      00040 
+                      00041         
+                      00042         cblock 0x20
+  00000020            00043         buffer:80
+                      00044         endc
+                      00045         
+                      00046         cblock 0x78
+  00000078            00047         crc
+  00000079            00048         contor
+  0000007A            00049         i
+  0000007B            00050         cnt1
+  0000007C            00051         cnt2
+  0000007D            00052         cnt3
+  0000007E            00053         flag    
+                      00054         endc
+                      00055         
+                      00056 
+                      00057 SendL macro car
+                      00058         movlw   car
+                      00059         movwf   TXREG
+                      00060         endm
+                      00061 
+                      00062 ;0000000000000000000000000 RESET 00000000000000000000000000
+                      00063 
+                      00064                 ORG     0x0000
+0000   ???? ????      00065                 PAGESEL IntrareBootloader
+0002   2???           00066                 GOTO    IntrareBootloader
+                      00067 
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00068 ;&&&&&&&&&&&&&&&&&&&&&&&   START     &&&&&&&&&&&&&&&&&
+                      00069 ;----------------------  Bootloader  ----------------------
+                      00070 ;               
+                      00071 ;PC_flash:      C1h                     AddrH  AddrL  nr  ...(DataLo DataHi)...  crc
+                      00072 ;PIC_response:          id   K                                                          K
+                      00073 
+                      00074         
+                      00075         ORG prima_adresa
+1F9C   0000           00076         nop
+1F9D   0000           00077         nop
+1F9E   0000           00078         nop
+1F9F   0000           00079         nop
+                      00080         org prima_adresa+4
+1FA0                  00081 IntrareBootloader
+                      00082                         ;init serial port
+1FA0   0183           00083         clrf    STATUS                                  ;bank0
+1FA1   1683           00084         bsf             STATUS,RP0                      ;BANK1_
+1FA2   3024           00085         movlw   b'00100100'
+1FA3   0098           00086         movwf   TXSTA
+1FA4   300A           00087         movlw   spbrg_value
+1FA5   0099           00088         movwf   SPBRG
+                      00089         BANK0_
+1FA6   1283               M         bcf     STATUS,RP0
+1FA7   3090           00090         movlw   b'10010000'
+1FA8   0098           00091         movwf   RCSTA
+                      00092                         ;wait for computer
+1FA9   2???           00093         call    Receive                 
+1FAA   3CC1           00094         sublw   0xC1                            ;Expect C1
+1FAB   1D03           00095         skpz
+1FAC   2???           00096         goto    way_to_exit
+                      00097         SendL IdTypePIC                         ;PIC type
+1FAD   3031               M         movlw   IdTypePIC
+1FAE   0099               M         movwf   TXREG
+                      00098         ;SendL IdSoftVer                        ;firmware ver x
+1FAF                  00099 MainLoop
+1FAF   0183           00100         clrf    STATUS                          ;bank0
+                      00101         SendL 'K'
+1FB0   304B               M         movlw   'K'
+1FB1   0099               M         movwf   TXREG
+1FB2                  00102 mainl
+1FB2   01F8           00103         clrf    crc                             ;CB
+1FB3   2???           00104         call    Receive                         ;H
+1FB4   1703           00105                 bsf STATUS,RP1                  ;bank2
+1FB5   008F           00106         movwf   EEADRH
+1FB6   00FE           00107         movwf   flag                    ;CB     ;used to detect if is eeprom
+1FB7   1683           00108         bsf     STATUS,RP0              ;BANK1  ; added for 16F873/4
+1FB8   00FE           00109         movwf   flag                    ;CB
+                      00110 
+1FB9   2???           00111         call    Receive         ;bank0  ;L
+1FBA   1703           00112                 bsf STATUS,RP1                  ;bank2  
+1FBB   008D           00113         movwf   EEADR
+                      00114 
+1FBC   2???           00115         call    Receive                 ;bank0  ;count
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+1FBD   00F9           00116         movwf   contor                  ;CB
+1FBE   00FA           00117         movwf   i                               ;CB
+1FBF   0AFA           00118         incf    i                               ;CB
+1FC0   301F           00119         movlw   buffer-1
+1FC1   0084           00120         movwf   FSR
+1FC2                  00121 rcvoct
+1FC2   2???           00122         call    Receive                 ;bank0
+1FC3   0A84           00123         incf    FSR
+1FC4   0080           00124         movwf   INDF
+1FC5   0BFA           00125         decfsz  i                               ;CB
+1FC6   2???           00126         goto    rcvoct
+                      00127         
+1FC7   08F8           00128         movf    crc,f                   ;CB     ;check crc
+1FC8   1D03           00129         skpz
+1FC9   2???           00130         goto    ziieroare
+                      00131                                 ;write
+1FCA   1703           00132                 bsf STATUS,RP1          ;bank2  ;bank switch 0->2
+1FCB   3020           00133         movlw   buffer
+1FCC   0084           00134         movwf   FSR
+1FCD                  00135 writeloop                                               ; write 2 bytes = 1 instruction
+1FCD   0064           00136         clrwdt
+1FCE   0800           00137         movf    INDF,w
+1FCF   008C           00138         movwf   EEDATA
+1FD0   0A84           00139         incf    FSR
+1FD1   0800           00140         movf    INDF,w
+1FD2   008E           00141         movwf   EEDATH
+1FD3   0A84           00142         incf    FSR     
+                      00143                 BANK3_                          ;bank3  ;bank  2->3
+1FD4   1683               M         bsf     STATUS,RP0
+1FD5   178C           00144         bsf             EECON1,EEPGD            
+1FD6   1B7E           00145         btfsc   flag,6                  ;EEPROM
+1FD7   138C           00146         bcf             EECON1,EEPGD
+1FD8   150C           00147         bsf             EECON1,WREN
+1FD9   3055           00148         movlw   0x55
+1FDA   008D           00149         movwf   EECON2
+1FDB   30AA           00150         movlw   0xaa
+1FDC   008D           00151         movwf   EECON2  
+1FDD   148C           00152         bsf             EECON1,WR
+1FDE   0000           00153         nop
+1FDF   0000           00154         nop
+1FE0                  00155 waitwre 
+1FE0   188C           00156         btfsc   EECON1,WR                       ;for eeprom writes (wait to finish write)
+1FE1   2???           00157         goto    waitwre
+1FE2   110C           00158         bcf             EECON1,WREN
+                      00159                 BANK2_                                  ;bank2
+1FE3   1283               M         bcf     STATUS,RP0
+1FE4   0A8D           00160         incf    EEADR                           ;does not cross zones
+1FE5   1F7E           00161         btfss   flag,6                          ; if writing to EEPROM, skip first counter dec. ;CB
+1FE6   03F9           00162         decf    contor                  ;CB
+1FE7   0BF9           00163         decfsz  contor                  ;CB
+1FE8   2???           00164         goto    writeloop
+                      00165         
+1FE9   2???           00166         goto    MainLoop
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+1FEA                  00167 ziieroare
+                      00168         SendL 'N'
+1FEA   304E               M         movlw   'N'
+1FEB   0099               M         movwf   TXREG
+1FEC   2???           00169         goto    mainl
+                      00170           
+                      00171 
+1FED                  00172 Receive
+1FED   0183           00173         clrf    STATUS                  ;CB bank0
+1FEE   300B           00174         movlw   xtal/2000000+1          ; for 20MHz => 11 => 1second
+1FEF   00FB           00175         movwf   cnt1                    ;CB
+1FF0                  00176 rpt2                                            
+1FF0   01FC           00177         clrf    cnt2                    ;CB
+1FF1                  00178 rpt3
+1FF1   01FD           00179         clrf    cnt3                    ;CB
+1FF2                  00180 rptc
+1FF2   1E8C           00181                 btfss PIR1,RCIF                 ;test RX
+1FF3   2???           00182                 goto $+4
+1FF4   081A           00183                 movf RCREG,w                    ;return in W
+1FF5   07F8           00184                 addwf crc,f                     ;CB     ;compute crc
+1FF6   0008           00185                 return
+1FF7   0064           00186         clrwdt
+1FF8   0BFD           00187         decfsz  cnt3                    ;CB
+1FF9   2???           00188         goto    rptc
+1FFA   0BFC           00189         decfsz  cnt2                    ;CB
+1FFB   2???           00190         goto    rpt3
+1FFC   0BFB           00191         decfsz  cnt1                    ;CB
+1FFD   2???           00192         goto    rpt2
+                      00193                                 ;timeout:
+1FFE                  00194 way_to_exit                     ;exit in all other cases; must be BANK0/1
+                      00195         ;BANK0_
+1FFE   1398           00196         bcf     RCSTA,  SPEN    ; deactivate UART
+1FFF   2F9C           00197         goto    prima_adresa
+                      00198 ;*************************************************************
+                      00199 ; After reset
+                      00200 ; Do not expect the memory to be zero,
+                      00201 ; Do not expect registers to be initialised like in catalog.
+                      00202 
+3F72                  00203             END
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+Abs                               
+AbsResult                         0000061C
+BANK0                             
+BANK0_                            
+BANK1                             
+BANK1_                            
+BANK2                             
+BANK2_                            
+BANK3                             
+BANK3_                            
+BCLIE                             00000003
+BCLIF                             00000003
+BF                                00000000
+BRGH                              00000002
+C                                 00000000
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2                             0000001B
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CKE                               00000006
+CKP                               00000004
+CREN                              00000004
+CSRC                              00000007
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+D_A                               00000005
+D_NOT_A                           00000005
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GCEN                              00000007
+GIE                               00000007
+GO                                00000002
+GO_DONE                           00000002
+GO_NOT_DONE                       00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IBF                               00000007
+IBOV                              00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+IdTypePIC                         00000031
+IntrareBootloader                 00001FA0
+MainLoop                          00001FAF
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+OPTION_REG                        00000081
+P                                 00000004
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSPIE                             00000007
+PSPIF                             00000007
+PSPMODE                           00000004
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC0                               00000000
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+Receive                           00001FED
+Round                             
+RoundResult                       0001BBE4
+S                                 00000003
+SEN                               00000000
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+SYNC                              00000004
+SendL                             
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRISD                             00000088
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+TRISD7                            00000007
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRMT                              00000001
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+W                                 00000000
+WCOL                              00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_.org_2_1FF3                      00001FF3
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00000FCF
+_CP_HALF                          00001FDF
+_CP_OFF                           00003FFF
+_CP_UPPER_256                     00002FEF
+_DEBUG_OFF                        00003FFF
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_DEBUG_ON                         000037FF
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_ENABLE_OFF                   00003DFF
+_WRT_ENABLE_ON                    00003FFF
+_WRT_OFF                          00003DFF
+_WRT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F877                          00000001
+baud                              0001C200
+baud_real                         0001BBE4
+buffer                            00000020
+cnt1                              0000007B
+cnt2                              0000007C
+cnt3                              0000007D
+contor                            00000079
+crc                               00000078
+errpercent                        00000001
+flag                              0000007E
+i                                 0000007A
+mainl                             00001FB2
+max_flash                         0x2000
+prima_adresa                      max_flash-100
+rcvoct                            00001FC2
+rpt2                              00001FF0
+rpt3                              00001FF1
+rptc                              00001FF2
+spbrg_value                       0000000A
+waitwre                           00001FE0
+way_to_exit                       00001FFE
+writeloop                         00001FCD
+xtal                              01312D00
+ziieroare                         00001FEA
+
+MPASM  5.47                 TINYBLD16F877.ASM   5-13-2013  18:06:35         PAGE 14
+
+
+
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,    26 suppressed
+
+

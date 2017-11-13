@@ -1,0 +1,40 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.42</VERSION>
+ <DEVICE>ATmega8</DEVICE>
+ <WORKING_DIR>C:\avrasm1\bootloader_M8</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes\m8def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\avrasm1\bootloader_M8\bootloader_M8.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>C:\avrasm1\bootloader_M8\bootloader_M8.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>C:\avrasm1\bootloader_M8\bootloader_M8.map</FILE>
+  <FILE>C:\avrasm1\bootloader_M8\bootloader_M8.lst</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <IntrareBootloader><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>67</LINE></IntrareBootloader>
+  <Receive><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>198</LINE></Receive>
+  <way_to_exit><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>214</LINE></way_to_exit>
+  <rs1tx><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>171</LINE></rs1tx>
+  <MainLoop><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>85</LINE></MainLoop>
+  <mainl><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>87</LINE></mainl>
+  <rcvoct><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>102</LINE></rcvoct>
+  <ctrl_flash><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>155</LINE></ctrl_flash>
+  <ziieroare><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>128</LINE></ziieroare>
+  <eeprom><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>125</LINE></eeprom>
+  <flash><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>119</LINE></flash>
+  <w_eeprom><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>140</LINE></w_eeprom>
+  <rs1rx><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>185</LINE></rs1rx>
+  <r1rx11><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>188</LINE></r1rx11>
+  <rpt2><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>200</LINE></rpt2>
+  <rptc><FILE>C:\avrasm1\bootloader_M8\bootloader_M8.asm</FILE><LINE>203</LINE></rptc>
+ </LABELS>
+</ASSEMBLER_INFO>

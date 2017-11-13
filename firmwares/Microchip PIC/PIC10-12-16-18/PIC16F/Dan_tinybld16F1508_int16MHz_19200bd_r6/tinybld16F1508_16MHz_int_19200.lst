@@ -1,0 +1,1536 @@
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001         radix   DEC
+                      00002         
+                      00003         ; change these lines accordingly to your application    
+                      00004 #include "p16f1508.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F1508 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      01952         LIST
+  00000027            00005 IdTypePIC = 0x27                ; Please refer to the table below, must exists in "piccodes.ini"        
+                      00006 #define max_flash  0x1000       ; in WORDS, not bytes!!! (= 'max flash memory' from "piccodes.ini" divid
+                            ed by 2), Please refer to the table below
+                      00007 
+                      00008 #define PDIP    20              ; PIN Count of Device (20/28/40/64), Please refer to the table below
+                      00009         
+  00F42400            00010 xtal    EQU     16000000        ; you may also want to change: _HS_OSC _XT_OSC
+  00004B00            00011 baud    EQU     19200           ; standard TinyBld baud rates: 115200 or 19200
+                      00012 
+                      00013  #if (PDIP==64)
+                      00014 ;       #define USE_TXRX2       ; TX,RX Bit Change from default (16F1527/28), Please refer to the table
+                      00015  #endif
+                      00016 ;   The above 9 lines can be changed and buid a bootloader for the desired frequency (and PIC type)
+                      00017 
+                      00018 ; +---------+--------+------------+--------+--------+-------+-------+-----------+--------+------+
+                      00019 ; |IdTypePIC| Device | Erase_Page | TX/TX1 | RX/RX1 |  TX2  |  RX2  | max_flash | EEPROM | PDIP |
+                      00020 ; +---------+--------+------------+--------+--------+-------+-------+-----------+--------+------+
+                      00021 ; |   0x27  |16F1508 |  32 words  | B7(7)  | B5(9)  |       |       |  0x1000   |    0   |  20  |
+                      00022 ; |   0x29  |16F1509 |  32 words  | B7(7)  | B5(9)  |       |       |  0x2000   |    0   |  20  |
+                      00023 ; |   0x25  |16F1512 |  32 words  | C6(17) | C7(18) |       |       |  0x0800   |    0   |  28  |
+                      00024 ; |   0x27  |16F1513 |  32 words  | C6(17) | C7(18) |       |       |  0x1000   |    0   |  28  |
+                      00025 ; |   0x29  |16F1516 |  32 words  | C6(17) | C7(18) |       |       |  0x2000   |    0   |  28  |
+                      00026 ; |   0x29  |16F1517 |  32 words  | C6(25) | C7(26) |       |       |  0x2000   |    0   |  40  |
+                      00027 ; |   0x2B  |16F1518 |  32 words  | C6(17) | C7(18) |       |       |  0x4000   |    0   |  28  |
+                      00028 ; |   0x2B  |16F1519 |  32 words  | C6(25) | C7(26) |       |       |  0x4000   |    0   |  40  |
+                      00029 ; |   0x29  |16F1526 |  32 words  | C6(31) | C7(32) | G1(4) | G2(5) |  0x2000   |    0   |  64  |
+                      00030 ; |   0x2B  |16F1527 |  32 words  | C6(31) | C7(32) | G1(4) | G2(5) |  0x4000   |    0   |  64  |
+                      00031 ; +---------+--------+------------+--------+--------+-------+-------+-----------+--------+------+
+                      00032 
+                      00033 ; +----------+------+----------+------+----------+------+
+                      00034 ; | register | BANK | register | BANK | register | BANK |
+                      00035 ; +----------+------+----------+------+----------+------+
+                      00036 ; | PMCON1/2 |  3   |PMADRL/DAT|  3   | ANSELA   |  3   |
+                      00037 ; +----------+------+----------+------+----------+------+
+                      00038 
+                      00039         ;********************************************************************
+                      00040         ;       Tiny Bootloader         16F15xx series          Size=100words
+                      00041         ;       claudiu.chiculita@ugal.ro
+                      00042         ;       http://www.etc.ugal.ro/cchiculita/software/picbootloader.htm
+                      00043         ;
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00044         ;       (2014.06.09  Revision 6)
+                      00045         ;
+                      00046         ;       This program is only available in Tiny PIC Bootloader +.
+                      00047         ;
+                      00048         ;       Tiny PIC Bootloader +
+                      00049         ;       https://sourceforge.net/projects/tinypicbootload/
+                      00050         ;
+                      00051         ;********************************************************************
+                      00052 
+                      00053         #include "../spbrgselect.inc"
+  00000000            00001 RoundResult SET 0                               ; Rounding function.  RoundResult = Round(aa/bb)
+                      00002 Round   macro aa,bb
+                      00003         LOCAL rr = aa/bb
+                      00004         LOCAL d1 = aa - rr*bb
+                      00005         LOCAL d2 = (rr+1)*bb - aa
+                      00006 RoundResult = rr
+                      00007         if d1 >= d2
+                      00008 RoundResult++
+                      00009         endif
+                      00010         endm
+                      00011 
+  00000000            00012 AbsResult SET 0
+                      00013 Abs             macro nr
+                      00014         if nr>=0
+                      00015 AbsResult = nr
+                      00016         else
+                      00017 AbsResult = -nr
+                      00018         endif
+                      00019         endm
+                      00020                 
+                      00021         Round xtal,(16*baud)
+  0034                    M         LOCAL rr = xtal/(16*baud)
+  6400                    M         LOCAL d1 = xtal - rr*(16*baud)
+  4C00                    M         LOCAL d2 = (rr+1)*(16*baud) - xtal
+  00000034                M RoundResult = rr
+                          M         if d1 >= d2
+                          M RoundResult++
+                          M         endif
+  00000033            00022 spbrg_value EQU RoundResult-1
+                      00023 
+                      00024         Round xtal,(16*(spbrg_value+1))
+  4B1E                    M         LOCAL rr = xtal/(16*(spbrg_value+1))
+  0280                    M         LOCAL d1 = xtal - rr*(16*(spbrg_value+1))
+  00C0                    M         LOCAL d2 = (rr+1)*(16*(spbrg_value+1)) - xtal
+  00004B1E                M RoundResult = rr
+                          M         if d1 >= d2
+  00004B1F                M RoundResult++
+                          M         endif
+  00004B1F            00025 baud_real EQU RoundResult
+                      00026         Abs(baud_real-baud)
+                          M         if (baud_real-baud)>=0
+  0000001F                M AbsResult = (baud_real-baud)
+                          M         else
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M AbsResult = -(baud_real-baud)
+                          M         endif
+  00000000            00027 errpercent EQU AbsResult*100/baud
+                      00028         if errpercent > 4
+                      00029                 ERROR big error in baudrate: 0%
+                      00030         endif
+                      00031         if errpercent >= 2
+                      00032                 messg baudrate not exact: 0%
+                      00033         endif
+                      00054 
+                      00055         #define first_address max_flash-100 ; 100 word in size
+                      00056 
+Message[303]: Program word too large.  Truncated to core size. (F9C4)
+8007   39C4           00057            __CONFIG    _CONFIG1, _FOSC_INTOSC & _BOREN_OFF & _WDTE_OFF & _CP_OFF & _PWRTE_ON & _MCLRE_ON
+Message[303]: Program word too large.  Truncated to core size. (DDFF)
+8008   1DFF           00058            __CONFIG    _CONFIG2, _LVP_OFF &_STVREN_OFF &_BORV_LO
+                      00059 
+                      00060 
+                      00061         errorlevel 1, -305              ; suppress warning msg that takes f as default
+                      00062 
+                      00063         cblock 0x7B
+  0000007B            00064         crc
+  0000007C            00065         i
+  0000007D            00066         cnt1
+  0000007E            00067         cnt2
+  0000007F            00068         cnt3
+                      00069         endc
+                      00070         
+                      00071 
+                      00072 ;0000000000000000000000000 RESET 00000000000000000000000000
+                      00073 
+0000                  00074         org     0x0000
+                      00075 ;       pagesel IntrareBootloader
+                      00076 ;       goto    IntrareBootloader
+0000   339F           00077         DW      0x339F          ;bra $-0x60
+                      00078 
+                      00079 ;view with TabSize=4
+                      00080 ;&&&&&&&&&&&&&&&&&&&&&&&   START     &&&&&&&&&&&&&&&&&
+                      00081 ;----------------------  Bootloader  ----------------------
+                      00082 ;
+                      00083 ;PC_flash:      C1h          AddrH  AddrL  nr  ...(DataLo DataHi)...  crc
+                      00084 ;PIC_response:  id   K                                                 K
+                      00085 
+0F9C                  00086         org     first_address
+                      00087 ;       nop
+                      00088 ;       nop
+                      00089 ;       nop
+                      00090 ;       nop
+                      00091 
+0FA0                  00092         org     first_address+4
+0FA0                  00093 IntrareBootloader:
+0FA0   318F           00094         movlp   (max_flash>>8)-1
+                      00095                                         ;init int clock & serial port
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00096 
+                      00097  #ifdef USE_TXRX2
+                      00098         movlw   PIR1+3                  ;FSR0=0x0014(PIR4)
+                      00099         movwf   FSR0L
+                      00100         bsf     FSR1H,2                 ;FSR1=0x0491(RC2REG)
+                      00101         movlw   0x91
+                      00102         movwf   FSR1L
+                      00103  #else
+0FA1   3011           00104         movlw   PIR1                    ;FSR0=0x0011(PIR1)
+0FA2   0084           00105         movwf   FSR0L
+0FA3   1407           00106         bsf     FSR1H,0                 ;FSR1=0x0199(RC1REG)
+0FA4   3099           00107         movlw   0x99
+0FA5   0086           00108         movwf   FSR1L
+                      00109  #endif
+                      00110                                         ;init int clock & serial port
+0FA6   0021           00111         movlb   0x01                    ;BANK1
+0FA7   1719           00112         bsf     OSCCON,6                ;internal clock 16MHz
+                      00113 
+0FA8   0023           00114         movlb   0x03                    ;BANK3
+                      00115 
+                      00116  #if (PDIP==20)
+0FA9   018D           00117         clrf    ANSELB
+                      00118  #else
+                      00119         clrf    ANSELC
+                      00120  #endif
+                      00121 
+0FAA   3024           00122         movlw   b'00100100'
+0FAB   3FC5           00123         movwi   5[INDF1]                ;TX1STA.or.TX2STA
+0FAC   3033           00124         movlw   spbrg_value
+0FAD   3FC2           00125         movwi   2[INDF1]                ;SP1BRGL.or.SP1BRGL
+0FAE   3090           00126         movlw   b'10010000'
+0FAF   3FC4           00127         movwi   4[INDF1]                ;RC1STA.or.RC2STA
+                      00128                                         ;wait for computer
+0FB0   27D1           00129         call    Receive
+0FB1   3CC1           00130         sublw   0xC1                    ;Expect C1
+0FB2   1D03           00131         skpz
+0FB3   322C           00132         bra     way_to_exit
+                      00133 
+0FB4   3027           00134         movlw   IdTypePIC               ;PIC type
+0FB5   3FC1           00135         movwi   1[INDF1]                ;TX1REG.or.TX2REG
+                      00136 ;       SendL   IdSoftVer               ;firmware ver x
+                      00137 
+0FB6                  00138 MainLoop:
+0FB6   3042           00139         movlw   'B'
+0FB7                  00140 mainl:
+0FB7   3FC1           00141         movwi   1[INDF1]                ;TX1REG.or.TX2REG
+0FB8   01FB           00142         clrf    crc
+0FB9   27D1           00143         call    Receive                 ;H
+0FBA   0092           00144         movwf   PMADRH
+0FBB   27D1           00145         call    Receive                 ;L
+0FBC   0091           00146         movwf   PMADRL
+0FBD   27D1           00147         call    Receive                 ;count
+0FBE   00FC           00148         movwf   i
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00149 
+0FBF                  00150 rcvoct:
+0FBF   27D1           00151         call    Receive                 ;data L
+0FC0   0093           00152         movwf   PMDATL
+0FC1   03FC           00153         decf    i,f
+0FC2   27D1           00154         call    Receive                 ;data H
+0FC3   0094           00155         movwf   PMDATH
+0FC4   3024           00156         movlw   ((1<<LWLO) | (1<<WREN))
+0FC5   27E6           00157         call    wr_w                    ;write Latches
+0FC6   0A91           00158         incf    PMADRL,f
+0FC7   0BFC           00159         decfsz  i,f
+0FC8   33F6           00160         bra     rcvoct
+                      00161 
+0FC9   27D1           00162         call    Receive                 ;crc
+0FCA                  00163 ziieroare:
+0FCA   304E           00164         movlw   'N'
+0FCB   1D03           00165         skpz
+0FCC   33EA           00166         bra     mainl
+                      00167 
+0FCD   0391           00168         decf    PMADRL,f                ;PMADRL=PMADRL-1
+0FCE   27E5           00169         call    wr_e                    ;erase operation
+0FCF   27E6           00170         call    wr_w                    ;write operation
+0FD0   33E5           00171         bra     MainLoop
+                      00172 
+0FD1                  00173 Receive:
+0FD1   3009           00174         movlw   xtal/2000000+1          ;for 20MHz => 11 => 1second
+0FD2   00FD           00175         movwf   cnt1
+0FD3                  00176 rpt2:
+0FD3   01FE           00177         clrf    cnt2
+0FD4                  00178 rpt3:
+0FD4   01FF           00179         clrf    cnt3
+0FD5                  00180 rptc:
+0FD5   1E80           00181         btfss   INDF0,5                 ;test RX
+0FD6   3203           00182         bra     $+4                     ;not recive
+0FD7   3F40           00183         moviw   0[INDF1]                ;read RCREG,return in w
+0FD8   07FB           00184         addwf   crc,f                   ;compute checksum
+0FD9   0008           00185         return
+                      00186 
+0FDA   0BFF           00187         decfsz  cnt3,f
+0FDB   33F9           00188         bra     rptc
+0FDC   0BFE           00189         decfsz  cnt2,f
+0FDD   33F6           00190         bra     rpt3
+0FDE   0BFD           00191         decfsz  cnt1,f
+0FDF   33F3           00192         bra     rpt2
+                      00193                                         ;timeout:
+0FE0                  00194 way_to_exit:                            ;exit in all other cases; must be BANK3
+0FE0   0195           00195         clrf    PMCON1
+0FE1   139D           00196         bcf     RCSTA,SPEN              ;deactivate UART
+0FE2   0020           00197         movlb   0x00                    ;BANK0
+0FE3   018A           00198         clrf    PCLATH
+0FE4   33B7           00199         bra     first_address           ; PCLATH=0, Please do not change the GOTO instruction.
+                      00200 
+0FE5                  00201 wr_e:
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0FE5   3014           00202         movlw   ((1<<FREE) | (1<<WREN))
+0FE6                  00203 wr_w:
+0FE6   0095           00204         movwf   PMCON1
+0FE7   3055           00205         movlw   0x55
+0FE8   0096           00206         movwf   PMCON2
+0FE9   30AA           00207         movlw   0xaa
+0FEA   0096           00208         movwf   PMCON2
+0FEB   1495           00209         bsf     PMCON1,WR
+0FEC   0000           00210         nop
+0FED   0000           00211         nop
+0FEE   3404           00212         retlw   ((1<<WREN))
+                      00213 
+                      00214 ;*************************************************************
+                      00215 ; After reset
+                      00216 ; Do not expect the memory to be zero,
+                      00217 ; Do not expect registers to be initialised like in catalog.
+                      00218 
+                      00219          end
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ACKTIM                            00000007
+ADCON0                            0000009D
+ADCON1                            0000009E
+ADCON2                            0000009F
+ADDEN                             00000003
+ADFM                              00000007
+ADFVR0                            00000000
+ADFVR1                            00000001
+ADGO                              00000001
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADPREF0                           00000000
+ADPREF1                           00000001
+ADRES                             0000009B
+ADRESH                            0000009C
+ADRESL                            0000009B
+AHEN                              00000001
+ANSA0                             00000000
+ANSA1                             00000001
+ANSA2                             00000002
+ANSA4                             00000004
+ANSB4                             00000004
+ANSB5                             00000005
+ANSC0                             00000000
+ANSC1                             00000001
+ANSC2                             00000002
+ANSC3                             00000003
+ANSC6                             00000006
+ANSC7                             00000007
+ANSELA                            0000018C
+ANSELB                            0000018D
+ANSELC                            0000018E
+APFCON                            0000011D
+Abs                               
+AbsResult                         0000001F
+BAUDCON                           0000019F
+BCL1IE                            00000003
+BCL1IF                            00000003
+BF                                00000000
+BKA0                              00000000
+BKA1                              00000001
+BKA10                             00000002
+BKA11                             00000003
+BKA12                             00000004
+BKA13                             00000005
+BKA14                             00000006
+BKA2                              00000002
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BKA3                              00000003
+BKA4                              00000004
+BKA5                              00000005
+BKA6                              00000006
+BKA7                              00000007
+BKA8                              00000000
+BKA9                              00000001
+BKEN                              00000007
+BKHLT                             00000000
+BOEN                              00000004
+BORCON                            00000116
+BORFS                             00000006
+BORRDY                            00000000
+BRG16                             00000003
+BRGH                              00000002
+BSR                               00000008
+BSR0                              00000000
+BSR1                              00000001
+BSR2                              00000002
+BSR3                              00000003
+BSR4                              00000004
+BSRICDSHAD                        00000FE3
+BSR_SHAD                          00000FE6
+C                                 00000000
+C1HYS                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1INTN                            00000006
+C1INTP                            00000007
+C1NCH0                            00000000
+C1NCH1                            00000001
+C1NCH2                            00000002
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1PCH0                            00000004
+C1PCH1                            00000005
+C1POL                             00000004
+C1SP                              00000002
+C1SYNC                            00000000
+C2HYS                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2INTN                            00000006
+C2INTP                            00000007
+C2NCH0                            00000000
+C2NCH1                            00000001
+C2NCH2                            00000002
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2PCH0                            00000004
+C2PCH1                            00000005
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C2POL                             00000004
+C2SP                              00000002
+C2SYNC                            00000000
+CDAFVR0                           00000002
+CDAFVR1                           00000003
+CFGS                              00000006
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CHS4                              00000006
+CKE                               00000006
+CKP                               00000004
+CLC1CON                           00000F10
+CLC1GLS0                          00000F14
+CLC1GLS1                          00000F15
+CLC1GLS2                          00000F16
+CLC1GLS3                          00000F17
+CLC1IE                            00000000
+CLC1IF                            00000000
+CLC1POL                           00000F11
+CLC1SEL                           00000001
+CLC1SEL0                          00000F12
+CLC1SEL1                          00000F13
+CLC2CON                           00000F18
+CLC2GLS0                          00000F1C
+CLC2GLS1                          00000F1D
+CLC2GLS2                          00000F1E
+CLC2GLS3                          00000F1F
+CLC2IE                            00000001
+CLC2IF                            00000001
+CLC2POL                           00000F19
+CLC2SEL0                          00000F1A
+CLC2SEL1                          00000F1B
+CLC3CON                           00000F20
+CLC3GLS0                          00000F24
+CLC3GLS1                          00000F25
+CLC3GLS2                          00000F26
+CLC3GLS3                          00000F27
+CLC3IE                            00000002
+CLC3IF                            00000002
+CLC3POL                           00000F21
+CLC3SEL0                          00000F22
+CLC3SEL1                          00000F23
+CLC4CON                           00000F28
+CLC4GLS0                          00000F2C
+CLC4GLS1                          00000F2D
+CLC4GLS2                          00000F2E
+CLC4GLS3                          00000F2F
+CLC4IE                            00000003
+CLC4IF                            00000003
+CLC4POL                           00000F29
+CLC4SEL0                          00000F2A
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CLC4SEL1                          00000F2B
+CLCDATA                           00000F0F
+CM1CON0                           00000111
+CM1CON1                           00000112
+CM2CON0                           00000113
+CM2CON1                           00000114
+CMOUT                             00000115
+CREN                              00000004
+CSRC                              00000007
+CWG1CON0                          00000693
+CWG1CON1                          00000694
+CWG1CON2                          00000695
+CWG1DBF                           00000692
+CWG1DBF0                          00000000
+CWG1DBF1                          00000001
+CWG1DBF2                          00000002
+CWG1DBF3                          00000003
+CWG1DBF4                          00000004
+CWG1DBF5                          00000005
+CWG1DBR                           00000691
+CWG1DBR0                          00000000
+CWG1DBR1                          00000001
+CWG1DBR2                          00000002
+CWG1DBR3                          00000003
+CWG1DBR4                          00000004
+CWG1DBR5                          00000005
+C_SHAD                            00000000
+D1N                               00000000
+D1S0                              00000000
+D1S1                              00000001
+D1S2                              00000002
+D1T                               00000001
+D2N                               00000002
+D2S0                              00000004
+D2S1                              00000005
+D2S2                              00000006
+D2T                               00000003
+D3N                               00000004
+D3S0                              00000000
+D3S1                              00000001
+D3S2                              00000002
+D3T                               00000005
+D4N                               00000006
+D4S0                              00000004
+D4S1                              00000005
+D4S2                              00000006
+D4T                               00000007
+DACCON0                           00000118
+DACCON1                           00000119
+DACEN                             00000007
+DACOE1                            00000005
+DACOE2                            00000004
+DACPSS                            00000002
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+DACR0                             00000000
+DACR1                             00000001
+DACR2                             00000002
+DACR3                             00000003
+DACR4                             00000004
+DBGIN0                            00000000
+DBGIN1                            00000001
+DBGIN10                           00000002
+DBGIN11                           00000003
+DBGIN12                           00000004
+DBGIN13                           00000005
+DBGIN2                            00000002
+DBGIN3                            00000003
+DBGIN4                            00000004
+DBGIN5                            00000005
+DBGIN6                            00000006
+DBGIN7                            00000007
+DBGIN8                            00000000
+DBGIN9                            00000001
+DBGINEX                           00000003
+DC                                00000001
+DC_SHAD                           00000001
+DEVSEL                            00000F95
+DEVSEL0                           00000000
+DEVSEL1                           00000001
+DEVSEL2                           00000002
+DHEN                              00000000
+D_NOT_A                           00000005
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FREE                              00000004
+FREEZ                             00000006
+FSR0                              00000004
+FSR0H                             00000005
+FSR0H_SHAD                        00000FE9
+FSR0L                             00000004
+FSR0L_SHAD                        00000FE8
+FSR1                              00000006
+FSR1H                             00000007
+FSR1H_SHAD                        00000FEB
+FSR1L                             00000006
+FSR1L_SHAD                        00000FEA
+FVRCON                            00000117
+FVREN                             00000007
+FVRRDY                            00000006
+G1ARSEN                           00000006
+G1ASDLA0                          00000004
+G1ASDLA1                          00000005
+G1ASDLB0                          00000006
+G1ASDLB1                          00000007
+G1ASDSC1                          00000002
+G1ASDSC2                          00000003
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+G1ASDSCLC2                        00000000
+G1ASDSFLT                         00000001
+G1ASE                             00000007
+G1CS0                             00000000
+G1EN                              00000007
+G1IS0                             00000000
+G1IS1                             00000001
+G1IS2                             00000002
+G1OEA                             00000005
+G1OEB                             00000006
+G1POL                             00000000
+G1POLA                            00000003
+G1POLB                            00000004
+G2POL                             00000001
+G3POL                             00000002
+G4D1N                             00000000
+G4D1T                             00000001
+G4D2N                             00000002
+G4D2T                             00000003
+G4D3N                             00000004
+G4D3T                             00000005
+G4D4N                             00000006
+G4D4T                             00000007
+G4POL                             00000003
+GCEN                              00000007
+GIE                               00000007
+GO                                00000001
+GO_NOT_DONE                       00000001
+HFIOFR                            00000004
+HFIOFS                            00000000
+ICDBK0CON                         00000F9C
+ICDBK0H                           00000F9E
+ICDBK0L                           00000F9D
+ICDCON0                           00000F8D
+ICDINSTH                          00000F97
+ICDINSTL                          00000F96
+ICDIO                             00000F8C
+ICDSTAT                           00000F91
+INBUG                             00000007
+INDF0                             00000000
+INDF1                             00000001
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOCAF                             00000393
+IOCAF0                            00000000
+IOCAF1                            00000001
+IOCAF2                            00000002
+IOCAF3                            00000003
+IOCAF4                            00000004
+IOCAF5                            00000005
+IOCAN                             00000392
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IOCAN0                            00000000
+IOCAN1                            00000001
+IOCAN2                            00000002
+IOCAN3                            00000003
+IOCAN4                            00000004
+IOCAN5                            00000005
+IOCAP                             00000391
+IOCAP0                            00000000
+IOCAP1                            00000001
+IOCAP2                            00000002
+IOCAP3                            00000003
+IOCAP4                            00000004
+IOCAP5                            00000005
+IOCBF                             00000396
+IOCBF4                            00000004
+IOCBF5                            00000005
+IOCBF6                            00000006
+IOCBF7                            00000007
+IOCBN                             00000395
+IOCBN4                            00000004
+IOCBN5                            00000005
+IOCBN6                            00000006
+IOCBN7                            00000007
+IOCBP                             00000394
+IOCBP4                            00000004
+IOCBP5                            00000005
+IOCBP6                            00000006
+IOCBP7                            00000007
+IOCIE                             00000003
+IOCIF                             00000000
+IRCF0                             00000003
+IRCF1                             00000004
+IRCF2                             00000005
+IRCF3                             00000006
+IdTypePIC                         00000027
+IntrareBootloader                 00000FA0
+LATA                              0000010C
+LATA0                             00000000
+LATA1                             00000001
+LATA2                             00000002
+LATA4                             00000004
+LATA5                             00000005
+LATB                              0000010D
+LATB4                             00000004
+LATB5                             00000005
+LATB6                             00000006
+LATB7                             00000007
+LATC                              0000010E
+LATC0                             00000000
+LATC1                             00000001
+LATC2                             00000002
+LATC3                             00000003
+LATC4                             00000004
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+LATC5                             00000005
+LATC6                             00000006
+LATC7                             00000007
+LAT_ICDCLK                        00000004
+LAT_ICDDAT                        00000005
+LC1D1S0                           00000000
+LC1D1S1                           00000001
+LC1D1S2                           00000002
+LC1D2S0                           00000004
+LC1D2S1                           00000005
+LC1D2S2                           00000006
+LC1D3S0                           00000000
+LC1D3S1                           00000001
+LC1D3S2                           00000002
+LC1D4S0                           00000004
+LC1D4S1                           00000005
+LC1D4S2                           00000006
+LC1EN                             00000007
+LC1G1D1N                          00000000
+LC1G1D1T                          00000001
+LC1G1D2N                          00000002
+LC1G1D2T                          00000003
+LC1G1D3N                          00000004
+LC1G1D3T                          00000005
+LC1G1D4N                          00000006
+LC1G1D4T                          00000007
+LC1G1POL                          00000000
+LC1G2D1N                          00000000
+LC1G2D1T                          00000001
+LC1G2D2N                          00000002
+LC1G2D2T                          00000003
+LC1G2D3N                          00000004
+LC1G2D3T                          00000005
+LC1G2D4N                          00000006
+LC1G2D4T                          00000007
+LC1G2POL                          00000001
+LC1G3D1N                          00000000
+LC1G3D1T                          00000001
+LC1G3D2N                          00000002
+LC1G3D2T                          00000003
+LC1G3D3N                          00000004
+LC1G3D3T                          00000005
+LC1G3D4N                          00000006
+LC1G3D4T                          00000007
+LC1G3POL                          00000002
+LC1G4D1N                          00000000
+LC1G4D1T                          00000001
+LC1G4D2N                          00000002
+LC1G4D2T                          00000003
+LC1G4D3N                          00000004
+LC1G4D3T                          00000005
+LC1G4D4N                          00000006
+LC1G4D4T                          00000007
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+LC1G4POL                          00000003
+LC1INTN                           00000003
+LC1INTP                           00000004
+LC1MODE0                          00000000
+LC1MODE1                          00000001
+LC1MODE2                          00000002
+LC1OE                             00000006
+LC1OUT                            00000005
+LC1POL                            00000007
+LC2D1S0                           00000000
+LC2D1S1                           00000001
+LC2D1S2                           00000002
+LC2D2S0                           00000004
+LC2D2S1                           00000005
+LC2D2S2                           00000006
+LC2D3S0                           00000000
+LC2D3S1                           00000001
+LC2D3S2                           00000002
+LC2D4S0                           00000004
+LC2D4S1                           00000005
+LC2D4S2                           00000006
+LC2EN                             00000007
+LC2G1D1N                          00000000
+LC2G1D1T                          00000001
+LC2G1D2N                          00000002
+LC2G1D2T                          00000003
+LC2G1D3N                          00000004
+LC2G1D3T                          00000005
+LC2G1D4N                          00000006
+LC2G1D4T                          00000007
+LC2G1POL                          00000000
+LC2G2D1N                          00000000
+LC2G2D1T                          00000001
+LC2G2D2N                          00000002
+LC2G2D2T                          00000003
+LC2G2D3N                          00000004
+LC2G2D3T                          00000005
+LC2G2D4N                          00000006
+LC2G2D4T                          00000007
+LC2G2POL                          00000001
+LC2G3D1N                          00000000
+LC2G3D1T                          00000001
+LC2G3D2N                          00000002
+LC2G3D2T                          00000003
+LC2G3D3N                          00000004
+LC2G3D3T                          00000005
+LC2G3D4N                          00000006
+LC2G3D4T                          00000007
+LC2G3POL                          00000002
+LC2G4D1N                          00000000
+LC2G4D1T                          00000001
+LC2G4D2N                          00000002
+LC2G4D2T                          00000003
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+LC2G4D3N                          00000004
+LC2G4D3T                          00000005
+LC2G4D4N                          00000006
+LC2G4D4T                          00000007
+LC2G4POL                          00000003
+LC2INTN                           00000003
+LC2INTP                           00000004
+LC2MODE0                          00000000
+LC2MODE1                          00000001
+LC2MODE2                          00000002
+LC2OE                             00000006
+LC2OUT                            00000005
+LC2POL                            00000007
+LC3D1S0                           00000000
+LC3D1S1                           00000001
+LC3D1S2                           00000002
+LC3D2S0                           00000004
+LC3D2S1                           00000005
+LC3D2S2                           00000006
+LC3D3S0                           00000000
+LC3D3S1                           00000001
+LC3D3S2                           00000002
+LC3D4S0                           00000004
+LC3D4S1                           00000005
+LC3D4S2                           00000006
+LC3EN                             00000007
+LC3G1D1N                          00000000
+LC3G1D1T                          00000001
+LC3G1D2N                          00000002
+LC3G1D2T                          00000003
+LC3G1D3N                          00000004
+LC3G1D3T                          00000005
+LC3G1D4N                          00000006
+LC3G1D4T                          00000007
+LC3G1POL                          00000000
+LC3G2D1N                          00000000
+LC3G2D1T                          00000001
+LC3G2D2N                          00000002
+LC3G2D2T                          00000003
+LC3G2D3N                          00000004
+LC3G2D3T                          00000005
+LC3G2D4N                          00000006
+LC3G2D4T                          00000007
+LC3G2POL                          00000001
+LC3G3D1N                          00000000
+LC3G3D1T                          00000001
+LC3G3D2N                          00000002
+LC3G3D2T                          00000003
+LC3G3D3N                          00000004
+LC3G3D3T                          00000005
+LC3G3D4N                          00000006
+LC3G3D4T                          00000007
+LC3G3POL                          00000002
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+LC3G4D1N                          00000000
+LC3G4D1T                          00000001
+LC3G4D2N                          00000002
+LC3G4D2T                          00000003
+LC3G4D3N                          00000004
+LC3G4D3T                          00000005
+LC3G4D4N                          00000006
+LC3G4D4T                          00000007
+LC3G4POL                          00000003
+LC3INTN                           00000003
+LC3INTP                           00000004
+LC3MODE0                          00000000
+LC3MODE1                          00000001
+LC3MODE2                          00000002
+LC3OE                             00000006
+LC3OUT                            00000005
+LC3POL                            00000007
+LC4D1S0                           00000000
+LC4D1S1                           00000001
+LC4D1S2                           00000002
+LC4D2S0                           00000004
+LC4D2S1                           00000005
+LC4D2S2                           00000006
+LC4D3S0                           00000000
+LC4D3S1                           00000001
+LC4D3S2                           00000002
+LC4D4S0                           00000004
+LC4D4S1                           00000005
+LC4D4S2                           00000006
+LC4EN                             00000007
+LC4G1D1N                          00000000
+LC4G1D1T                          00000001
+LC4G1D2N                          00000002
+LC4G1D2T                          00000003
+LC4G1D3N                          00000004
+LC4G1D3T                          00000005
+LC4G1D4N                          00000006
+LC4G1D4T                          00000007
+LC4G1POL                          00000000
+LC4G2D1N                          00000000
+LC4G2D1T                          00000001
+LC4G2D2N                          00000002
+LC4G2D2T                          00000003
+LC4G2D3N                          00000004
+LC4G2D3T                          00000005
+LC4G2D4N                          00000006
+LC4G2D4T                          00000007
+LC4G2POL                          00000001
+LC4G3D1N                          00000000
+LC4G3D1T                          00000001
+LC4G3D2N                          00000002
+LC4G3D2T                          00000003
+LC4G3D3N                          00000004
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+LC4G3D3T                          00000005
+LC4G3D4N                          00000006
+LC4G3D4T                          00000007
+LC4G3POL                          00000002
+LC4G4D1N                          00000000
+LC4G4D1T                          00000001
+LC4G4D2N                          00000002
+LC4G4D2T                          00000003
+LC4G4D3N                          00000004
+LC4G4D3T                          00000005
+LC4G4D4N                          00000006
+LC4G4D4T                          00000007
+LC4G4POL                          00000003
+LC4INTN                           00000003
+LC4INTP                           00000004
+LC4MODE0                          00000000
+LC4MODE1                          00000001
+LC4MODE2                          00000002
+LC4OE                             00000006
+LC4OUT                            00000005
+LC4POL                            00000007
+LCEN                              00000007
+LCINTN                            00000003
+LCINTP                            00000004
+LCMODE0                           00000000
+LCMODE1                           00000001
+LCMODE2                           00000002
+LCOE                              00000006
+LCOUT                             00000005
+LFIOFR                            00000001
+LWLO                              00000005
+MC1OUT                            00000000
+MC2OUT                            00000001
+MCLC1OUT                          00000000
+MCLC2OUT                          00000001
+MCLC3OUT                          00000002
+MCLC4OUT                          00000003
+MainLoop                          00000FB6
+N1CKS0                            00000000
+N1CKS1                            00000001
+N1EN                              00000007
+N1OE                              00000006
+N1OUT                             00000005
+N1PFM                             00000000
+N1POL                             00000004
+N1PWS0                            00000005
+N1PWS1                            00000006
+N1PWS2                            00000007
+NCO1ACC                           00000498
+NCO1ACC0                          00000000
+NCO1ACC1                          00000001
+NCO1ACC10                         00000002
+NCO1ACC11                         00000003
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NCO1ACC12                         00000004
+NCO1ACC13                         00000005
+NCO1ACC14                         00000006
+NCO1ACC15                         00000007
+NCO1ACC16                         00000000
+NCO1ACC17                         00000001
+NCO1ACC18                         00000002
+NCO1ACC19                         00000003
+NCO1ACC2                          00000002
+NCO1ACC3                          00000003
+NCO1ACC4                          00000004
+NCO1ACC5                          00000005
+NCO1ACC6                          00000006
+NCO1ACC7                          00000007
+NCO1ACC8                          00000000
+NCO1ACC9                          00000001
+NCO1ACCH                          00000499
+NCO1ACCL                          00000498
+NCO1ACCU                          0000049A
+NCO1CLK                           0000049F
+NCO1CON                           0000049E
+NCO1IE                            00000002
+NCO1IF                            00000002
+NCO1INC                           0000049B
+NCO1INC0                          00000000
+NCO1INC1                          00000001
+NCO1INC10                         00000002
+NCO1INC11                         00000003
+NCO1INC12                         00000004
+NCO1INC13                         00000005
+NCO1INC14                         00000006
+NCO1INC15                         00000007
+NCO1INC2                          00000002
+NCO1INC3                          00000003
+NCO1INC4                          00000004
+NCO1INC5                          00000005
+NCO1INC6                          00000006
+NCO1INC7                          00000007
+NCO1INC8                          00000000
+NCO1INC9                          00000001
+NCO1INCH                          0000049C
+NCO1INCL                          0000049B
+NCO1INCU                          0000049D
+NCO1SEL                           00000000
+NCOSEL                            00000000
+NOT_BOR                           00000000
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RI                            00000002
+NOT_RMCLR                         00000003
+NOT_RWDT                          00000004
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_WPUEN                         00000007
+OERR                              00000001
+OPTION_REG                        00000095
+OSCCON                            00000099
+OSCSTAT                           0000009A
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000005
+P                                 00000004
+PCIE                              00000006
+PCL                               00000002
+PCLATH                            0000000A
+PCLATH_SHAD                       00000FE7
+PCON                              00000096
+PDIP                              20
+PEIE                              00000006
+PEN                               00000002
+PIE1                              00000091
+PIE2                              00000092
+PIE3                              00000093
+PIR1                              00000011
+PIR2                              00000012
+PIR3                              00000013
+PMADR                             00000191
+PMADRH                            00000192
+PMADRL                            00000191
+PMCON1                            00000195
+PMCON2                            00000196
+PMDAT                             00000193
+PMDATH                            00000194
+PMDATL                            00000193
+POL                               00000007
+PORTA                             0000000C
+PORTB                             0000000D
+PORTC                             0000000E
+PORT_ICDCLK                       00000006
+PORT_ICDDAT                       00000007
+PR2                               0000001B
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PWM1CON                           00000613
+PWM1CON0                          00000613
+PWM1DCH                           00000612
+PWM1DCH0                          00000000
+PWM1DCH1                          00000001
+PWM1DCH2                          00000002
+PWM1DCH3                          00000003
+PWM1DCH4                          00000004
+PWM1DCH5                          00000005
+PWM1DCH6                          00000006
+PWM1DCH7                          00000007
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PWM1DCL                           00000611
+PWM1DCL0                          00000006
+PWM1DCL1                          00000007
+PWM1EN                            00000007
+PWM1OE                            00000006
+PWM1OUT                           00000005
+PWM1POL                           00000004
+PWM2CON                           00000616
+PWM2CON0                          00000616
+PWM2DCH                           00000615
+PWM2DCH0                          00000000
+PWM2DCH1                          00000001
+PWM2DCH2                          00000002
+PWM2DCH3                          00000003
+PWM2DCH4                          00000004
+PWM2DCH5                          00000005
+PWM2DCH6                          00000006
+PWM2DCH7                          00000007
+PWM2DCL                           00000614
+PWM2DCL0                          00000006
+PWM2DCL1                          00000007
+PWM2EN                            00000007
+PWM2OE                            00000006
+PWM2OUT                           00000005
+PWM2POL                           00000004
+PWM3CON                           00000619
+PWM3CON0                          00000619
+PWM3DCH                           00000618
+PWM3DCH0                          00000000
+PWM3DCH1                          00000001
+PWM3DCH2                          00000002
+PWM3DCH3                          00000003
+PWM3DCH4                          00000004
+PWM3DCH5                          00000005
+PWM3DCH6                          00000006
+PWM3DCH7                          00000007
+PWM3DCL                           00000617
+PWM3DCL0                          00000006
+PWM3DCL1                          00000007
+PWM3EN                            00000007
+PWM3OE                            00000006
+PWM3OUT                           00000005
+PWM3POL                           00000004
+PWM4CON                           0000061C
+PWM4CON0                          0000061C
+PWM4DCH                           0000061B
+PWM4DCH0                          00000000
+PWM4DCH1                          00000001
+PWM4DCH2                          00000002
+PWM4DCH3                          00000003
+PWM4DCH4                          00000004
+PWM4DCH5                          00000005
+PWM4DCH6                          00000006
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PWM4DCH7                          00000007
+PWM4DCL                           0000061A
+PWM4DCL0                          00000006
+PWM4DCL1                          00000007
+PWM4EN                            00000007
+PWM4OE                            00000006
+PWM4OUT                           00000005
+PWM4POL                           00000004
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RCEN                              00000003
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             00000199
+RCSTA                             0000019D
+RD                                00000000
+RSEN                              00000001
+RSTVEC                            00000000
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+Receive                           00000FD1
+Reserved                          00000000
+Round                             
+RoundResult                       00004B1F
+S                                 00000003
+SBCDE                             00000002
+SBOREN                            00000007
+SCIE                              00000005
+SCKP                              00000004
+SCS0                              00000000
+SCS1                              00000001
+SDAHT                             00000003
+SEN                               00000000
+SENDB                             00000003
+SMP                               00000007
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SOSCR                             00000007
+SPBRGH                            0000019C
+SPBRGL                            0000019B
+SPEN                              00000007
+SREN                              00000005
+SSP1ADD                           00000212
+SSP1BUF                           00000211
+SSP1CON1                          00000215
+SSP1CON2                          00000216
+SSP1CON3                          00000217
+SSP1IE                            00000003
+SSP1IF                            00000003
+SSP1MSK                           00000213
+SSP1STAT                          00000214
+SSPADD                            00000212
+SSPBUF                            00000211
+SSPCON                            00000215
+SSPCON1                           00000215
+SSPCON2                           00000216
+SSPCON3                           00000217
+SSPEN                             00000005
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000213
+SSPOV                             00000006
+SSPSTAT                           00000214
+SSSEL                             00000004
+SSTEP                             00000005
+STATUS                            00000003
+STATUS_SHAD                       00000FE4
+STKOVF                            00000007
+STKPTR                            00000FED
+STKUNF                            00000006
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000018
+T1GCON                            00000019
+T1GGO_NOT_DONE                    00000003
+T1GPOL                            00000006
+T1GSEL                            00000003
+T1GSPM                            00000004
+T1GSS0                            00000000
+T1GSS1                            00000001
+T1GTM                             00000005
+T1GVAL                            00000002
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 24
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             0000001C
+T2OUTPS0                          00000003
+T2OUTPS1                          00000004
+T2OUTPS2                          00000005
+T2OUTPS3                          00000006
+TMR0                              00000015
+TMR0CS                            00000005
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR0SE                            00000004
+TMR1                              00000016
+TMR1CS0                           00000006
+TMR1CS1                           00000007
+TMR1GE                            00000007
+TMR1GIE                           00000007
+TMR1GIF                           00000007
+TMR1H                             00000017
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             00000016
+TMR1ON                            00000000
+TMR2                              0000001A
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOSH                              00000FEF
+TOSL                              00000FEE
+TRIGSEL0                          00000004
+TRIGSEL1                          00000005
+TRIGSEL2                          00000006
+TRIGSEL3                          00000007
+TRISA                             0000008C
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             0000008D
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             0000008E
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 25
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISC6                            00000006
+TRISC7                            00000007
+TRIS_ICDCLK                       00000002
+TRIS_ICDDAT                       00000003
+TRMT                              00000001
+TRP0HLTF                          00000006
+TRP1HLTF                          00000007
+TSEN                              00000005
+TSRNG                             00000004
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             0000019A
+TXSTA                             0000019E
+UA                                00000001
+USRHLTF                           00000001
+VREGCON                           00000197
+VREGPM                            00000001
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000097
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WDTPS4                            00000005
+WPUA                              0000020C
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA3                             00000003
+WPUA4                             00000004
+WPUA5                             00000005
+WPUB                              0000020D
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREG                              00000009
+WREG_SHAD                         00000FE5
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+Z                                 00000002
+Z_SHAD                            00000002
+_BOREN_NSLEEP                     0000FDFF
+_BOREN_OFF                        0000F9FF
+_BOREN_ON                         0000FFFF
+_BOREN_SBODEN                     0000FBFF
+_BORV_HI                          0000FBFF
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 26
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_BORV_LO                          0000FFFF
+_CLKOUTEN_OFF                     0000FFFF
+_CLKOUTEN_ON                      0000F7FF
+_CONFIG1                          00008007
+_CONFIG2                          00008008
+_CP_OFF                           0000FFFF
+_CP_ON                            0000FF7F
+_DEVID1                           00008006
+_FCMEN_OFF                        0000DFFF
+_FCMEN_ON                         0000FFFF
+_FOSC_ECH                         0000FFFF
+_FOSC_ECL                         0000FFFD
+_FOSC_ECM                         0000FFFE
+_FOSC_EXTRC                       0000FFFB
+_FOSC_HS                          0000FFFA
+_FOSC_INTOSC                      0000FFFC
+_FOSC_LP                          0000FFF8
+_FOSC_XT                          0000FFF9
+_IDLOC0                           00008000
+_IDLOC1                           00008001
+_IDLOC2                           00008002
+_IDLOC3                           00008003
+_IESO_OFF                         0000EFFF
+_IESO_ON                          0000FFFF
+_LPBOR_OFF                        0000FFFF
+_LPBOR_ON                         0000F7FF
+_LVP_OFF                          0000DFFF
+_LVP_ON                           0000FFFF
+_MCLRE_OFF                        0000FFBF
+_MCLRE_ON                         0000FFFF
+_PWRTE_OFF                        0000FFFF
+_PWRTE_ON                         0000FFDF
+_STVREN_OFF                       0000FDFF
+_STVREN_ON                        0000FFFF
+_WDTE_NSLEEP                      0000FFF7
+_WDTE_OFF                         0000FFE7
+_WDTE_ON                          0000FFFF
+_WDTE_SWDTEN                      0000FFEF
+_WRT_ALL                          0000FFFC
+_WRT_BOOT                         0000FFFE
+_WRT_HALF                         0000FFFD
+_WRT_OFF                          0000FFFF
+__16F1508                         00000001
+baud                              00004B00
+baud_real                         00004B1F
+cnt1                              0000007D
+cnt2                              0000007E
+cnt3                              0000007F
+crc                               0000007B
+errpercent                        00000000
+first_address                     max_flash-100
+i                                 0000007C
+mainl                             00000FB7
+MPASM  5.51  TINYBLD16F1508_16MHZ_INT_19200.A   6-9-2014  23:03:00         PAGE 27
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+max_flash                         0x1000
+rcvoct                            00000FBF
+rpt2                              00000FD3
+rpt3                              00000FD4
+rptc                              00000FD5
+spbrg_value                       00000033
+way_to_exit                       00000FE0
+wr_e                              00000FE5
+wr_w                              00000FE6
+xtal                              00F42400
+ziieroare                         00000FCA
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X--------------- ---------------- ---------------- ----------------
+0F80 : ---------------- ---------------- XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0FC0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXX- ----------------
+8000 : -------XX------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:    82
+Program Memory Words Free:  4014
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     2 reported,    16 suppressed
+
+

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <title>Tiny AVR/PIC Bootloader+ : Quickstart</title>
+  </head>
+  <body>
+    <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="text-align: center; vertical-align: top;">
+            <h1 style="color: rgb(0, 0, 153);">Tiny AVR/PIC
+              Bootloader+</h1>
+            <div style="text-align: left; color: rgb(0, 0, 153);">
+              <h2>Quickstart:</h2>
+              <hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><br>
+              </span></div>
+            <div style="text-align: left;">
+              <h3>Bootloader firmware:</h3>
+              You must transfert the
+              bootloader firmware in your AVR or PIC device with an external
+              programmer (i.e. ICD2, Pickit 3, etc...). <span style="text-decoration: underline;">This
+                must be done only
+                once</span>.<br>
+              <br>
+              If the bootloader firmware for your PIC device isn't
+              in "Tiny AVR/PIC Bootloader+" archive or you want to use a
+              different
+              Baud
+              Rate and/or UART port, you must modify a firmware from a device
+              close
+              to yours (read "[Firmwares:]
+              modify for xxxxx" web pages howto).
+              <h3>Connect PIC board to PC:</h3>
+              Now you can connect your AVR or PIC board to your PC (read
+              the "<a href="hardware_connection.html">Hardware
+                Connections</a>" web page).<br>
+              <br>
+              Minimal connections are:<br>
+              <ul>
+                <li>RX pin from PC -&gt; TX pin on AVR or PIC.</li>
+                <li>TX pin from PC -&gt; RX pin on AVR or PIC.</li>
+                <li>GND pin from PC -&gt; GND pin on AVR or VSS pin
+                  on PIC.</li>
+                <li>for optionnal auto-reset: !RTS pin from PC -&gt;
+                  !RESET pin on AVR or !MCLR pin on PIC</li>
+              </ul>
+              <span style="font-weight: bold; text-decoration: underline; color: red;">Note:</span><span
+
+                style="color: red;">
+                for the bootloader to work properly, the AVR or PIC&nbsp;must be
+                running
+                (device powered and quartz connected (or internal oscillator
+                correctly
+                configured))!!!</span>
+              <h3>Create your application ".hex" file:</h3>
+              Most of the time, you will develop your application firmware as
+              usual,
+              without having to modify something: neither your code, nor the
+              linker
+              script, nor remap reset/interrupts vectors to new locations, etc.<br>
+              <br>
+              The "Tested Compilers: xxxxx"
+              web page lists tested compilers for different AVR / PIC families
+              with
+              eventual tips to get your code working with "Tiny AVR/PIC
+              Bootloader+".<br>
+              <h3>Transfert your application to the Device:</h3>
+              The easiest way to use "Tiny AVR/PIC Bootloader+" is to leave all
+              options
+              as default and only change the PC's COM (select the one connected
+              to
+              the AVR or PIC board) and the Baud Rate (select it depending of
+              the
+              bootloader
+              firmware configuration, see "[Firmwares:]
+              modify for xxxxx" web pages).<br>
+              <h4>Check list:</h4>
+              - the AVR or PIC was&nbsp;programmed with the right bootloader
+              firmware?<br>
+              - the AVR or PIC is correctly connected to the PC?<br>
+              - the AVR or PIC is powered?<br>
+              - the right COM port is selected in "Tiny&nbsp;AVR/PIC
+              Bootloader+"?<br>
+              - the right Baud Rate is selected in "Tiny&nbsp;AVR/PIC
+              Bootloader+"?<br>
+              <h4>If previous checks are OK, then&nbsp;click on the
+                [Check Device] button: </h4>
+              They are two possibilities:<br>
+              <ul>
+                <li>"Found:&nbsp;xxxxx" is shown in the message tab.
+                  Everything is OK, then read "Transfert file" below.</li>
+                <li>"Error: No Device detected!!!" is shown in the
+                  message
+                  tab. It means that optionnal software reset isn't used (!RTS
+                  pin from PC isn't connected to !MCLR pin on PIC (see "<a href="hardware_connection.html">Hardware
+                    Connections</a>" web page)). &nbsp;Then click the
+                  [Check Device] button again and when "Check Device..." is
+                  shown in the
+                  message tab, manually reset your AVR or PIC device (it must be done
+                  before&nbsp;"Error:
+                  No Device detected!!!" appears, you have ~5 seconds):</li>
+                <ul>
+                  <li>"Found:&nbsp;xxxxx" is shown in the message
+                    tab. Everything is OK, then read "Transfert file" below.</li>
+                  <li>"Error: No Device detected!!!" is shown in the
+                    message
+                    tab. Then you have a problem... Double check everything! If
+                    it still
+                    doesn't work you can <a href="http://sourceforge.net/p/tinypicbootload/discussion/help/">ask
+for
+                      help in the forum</a>.</li>
+                </ul>
+              </ul>
+              <h4>Transfert file:</h4>
+              Click on the [Browse] button and select your
+              application's ".hex" file, then click on [Write Flash]. After a
+              few
+              messages, you
+              should have "Transfert successfull :-)".<br>
+              Well done!<br>
+              <br>
+            </div>          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

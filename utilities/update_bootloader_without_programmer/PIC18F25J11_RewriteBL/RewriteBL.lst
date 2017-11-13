@@ -1,0 +1,1470 @@
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001         LIST P=PIC18F25J11
+                      00002         #include "p18f25j11.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC18F25J11 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      01821         LIST
+                      00003 
+                      00004 #define bl_adr  0x7F00          ;Start address of the bootloader
+                      00005 #define EPSIZE  0x0400          ;The size of the erase page (bytes), See the User's Manual.
+                      00006 
+                      00007 ; !!!  Modified to fit the device above 4 lines  !!!
+                      00008 
+                      00009 
+                      00010 ;****************************************************************************************
+                      00011 ;*                                                                                      *
+                      00012 ;*      Note (Important)                                                                *
+                      00013 ;*                                                                                      *
+                      00014 ;*      Rewrite the bootloader of PIC18F J-Type in this demonstration program.          *
+                      00015 ;*                                                                                      *
+                      00016 ;*      TREATERM is required for use.                                                   *
+                      00017 ;*                                                                                      *
+                      00018 ;*      !!! Configure bits will be overwritten by the new bootloader. !!!               *
+                      00019 ;*                                                                                      *
+                      00020 ;*      How to use                                                                      *
+                      00021 ;*                                                                                      *
+                      00022 ;*              ‡@Write this program in Tiny PIC/AVR Bootloader+.                       *
+                      00023 ;*                                                                                      *
+                      00024 ;*              ‡ATurn off the power of the board, to start the Teraterm.               *
+                      00025 ;*                                                                                      *
+                      00026 ;*              ‡BTurn on the power of the board                                        *
+                      00027 ;*                                                                                      *
+                      00028 ;*              ‡CThe drag-and-drop to TREATERM the HEX file that you want to rewrite.  *
+                      00029 ;*                                                                                      *
+                      00030 ;*              ‡DComplete rewrite, "Rewrite Done" message is displayed.                *
+                      00031 ;*                                                                                      *
+                      00032 ;****************************************************************************************
+                      00033 
+                      00034 ; ********************************************************************
+                      00035 ;                       Registers (RAM) definition
+                      00036 ; ********************************************************************
+                      00037 
+  00000FE1            00038 LC      EQU     FSR1L           ;Loop counter
+  00000FD9            00039 SUM     EQU     FSR2L           ;Checksum
+  00000FF6            00040 temp    EQU     TBLPTRL         ;Temporary
+                      00041 
+                      00042 ;bank0---
+                      00043 ;buffer 1024bytes
+                      00044 
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00045 ; ********************************************************************
+                      00046 ;                       Codes
+                      00047 ; ********************************************************************
+                      00048 
+000000                00049         ORG     0x0000
+                      00050 
+000000 EF40 F000      00051         GOTO    INIT
+                      00052 
+                      00053 ; ********************************************************************
+                      00054 ;                       Data area
+                      00055 ; ********************************************************************
+                      00056 
+000008                00057         ORG     0x0008
+                      00058 
+000008                00059 MES001:                                 ;Opening message
+000008 0A0D           00060  DW     0x0A0D                          ;New line
+00000A 2A2A 202A 4220 00061  DW     "***  Bootloader Rewrite V1.00  ***"
+       6F6F 6C74 616F 
+       6564 2072 6552 
+       7277 7469 2065 
+       3156 302E 2030 
+       2A20 2A2A 
+00002C 0A0D           00062  DW     0x0A0D                          ;New line
+00002E 0A0D           00063  DW     0x0A0D                          ;New line
+000030 7244 6761 612D 00064  DW     "Drag-and-Drop Bootloader Hex >>"
+       646E 442D 6F72 
+       2070 6F42 746F 
+       6F6C 6461 7265 
+       4820 7865 3E20 
+       003E 
+000050 0000           00065  DW     0
+                      00066 
+000052                00067 MES002:                                 ;The completion of data reception
+000052 3E3E 5220 7663 00068  DW     ">> Rcv OK "
+       4F20 204B 
+00005C 0000           00069  DW     0
+                      00070 
+00005E                00071 MES003:                                 ;Data reception error
+00005E 2121 2021 6552 00072  DW     "!!! Read Error !!!"
+       6461 4520 7272 
+       726F 2120 2121 
+000070 0000           00073  DW     0
+                      00074 
+000072                00075 MES004:                                 ;Rewriting completion
+000072 6552 7277 7469 00076  DW     "Rewrite Done"
+       2065 6F44 656E 
+00007E 0000           00077  DW     0
+                      00078 
+                      00079 ; ********************************************************************
+                      00080 ;
+                      00081 ;                       Main
+                      00082 ;
+                      00083 ; ********************************************************************
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00084 
+000080                00085 INIT:
+                      00086 ;       bsf     OSCCON,IRCF2                    ;int clock 16MHz
+                      00087 ;       clrf    ANSELH                          ; setup digital I/O
+                      00088 ;       movlw   ((1<<TXEN) | (1<<BRGH))         ;init serial port
+                      00089 ;       movwf   TXSTA
+                      00090 ;       movlw   spbrg_value
+                      00091 ;       movwf   SPBRG
+000080 0E90           00092         movlw   ((1<<SPEN) | (1<<CREN))
+000082 6EAC           00093         movwf   RCSTA
+                      00094 
+000084                00095 clr_ram:                                ;buffer ram clear
+000084 6AEA           00096         clrf    FSR0H
+000086 6AE9           00097         clrf    FSR0L
+000088                00098 clr_loop:
+000088 0EFF           00099         movlw   0xFF
+00008A 6EEE           00100         movwf   POSTINC0
+00008C 0E04           00101         movlw   ((EPSIZE>>8) & 0xFF)
+00008E 62EA           00102         cpfseq  FSR0H
+000090 D7FB           00103         bra     clr_loop
+                      00104 
+000092                00105 STAMSG:
+000092 0E08           00106         movlw   MES001                  ;***  Bootloader Rewrite V1.00 ***
+000094 D852           00107         rcall   PUTM                    ;
+                      00108                                         ;Send Bootloader Hex >>
+000096                00109 Read:
+000096 D861           00110         rcall   GETC                    ;receive a ':' ?
+000098 0E3A           00111         movlw   ':'
+00009A 62AF           00112         cpfseq  RCREG
+00009C D7FC           00113         bra     Read
+                      00114 
+00009E 6AD9           00115         clrf    SUM                     ;SUM=0
+0000A0 D83D           00116         rcall   GET2SUM                 ;Get the number of data
+0000A2 6EE1           00117         movwf   LC
+0000A4 E017           00118         bz      Exit                    ;Loop_Counter=0 -> End code
+                      00119 
+0000A6 D83A           00120         rcall   GET2SUM                 ;Get the address high
+0000A8 6EF7           00121         movwf   TBLPTRH
+0000AA D838           00122         rcall   GET2SUM                 ;Get the address low
+0000AC 6EE9           00123         movwf   FSR0L
+                      00124 
+0000AE 0E7F           00125         movlw   ((bl_adr>>8) & 0xFF)    ;TBLPTRH-bl_adr(H)=0 ?
+0000B0 62F7           00126         cpfseq  TBLPTRH
+0000B2 D7F1           00127         bra     Read                    ;No get next line
+0000B4 0E00           00128         movlw   (bl_adr & 0xFF)         ;FSR0L-bl_adr(L)>=0 ?
+0000B6 5CE9           00129         subwf   FSR0L,w
+0000B8 E3EE           00130         bnc     Read                    ;No get next line
+                      00131 
+0000BA D830           00132         rcall   GET2SUM                 ;Get the separator '00'
+                      00133 
+0000BC 50F7           00134         movf    TBLPTRH,w
+0000BE 0B03           00135         andlw   b'00000011'
+0000C0 6EEA           00136         movwf   FSR0H
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00137 
+0000C2                00138 r_loop:
+0000C2 D82C           00139         rcall   GET2SUM                 ;Get the data
+0000C4 6EEE           00140         movwf   POSTINC0
+0000C6 2EE1           00141         decfsz  LC,f
+0000C8 D7FC           00142         bra     r_loop
+                      00143 
+0000CA D828           00144         rcall   GET2SUM                 ;Get checksum
+0000CC E0E4           00145         bz      Read
+0000CE                00146 Err:
+0000CE 0E5E           00147         movlw   MES003                  ;!!! Read Error !!!
+0000D0 D834           00148         rcall   PUTM
+0000D2 D7FF           00149         bra     $                       ;stop
+                      00150 
+                      00151 
+0000D4                00152 Exit:
+0000D4 0E52           00153         movlw   MES002                  ;>> Rcv OK
+0000D6 D831           00154         rcall   PUTM
+0000D8 D839           00155         rcall   CRLF
+0000DA D838           00156         rcall   CRLF
+                      00157 
+0000DC                00158 erase_botloader:                        ;erase bootloader
+0000DC D818           00159         rcall   set_tblptr              ;TBLPTR=bl_adr
+0000DE 0E14           00160         movlw   ((1<<FREE) | (1<<WREN)) ; Setup erase
+0000E0 D83F           00161         rcall   Write                   ;erase
+                      00162 
+0000E2                00163 write_bootloader:
+0000E2 D815           00164         rcall   set_tblptr              ;TBLPTR=bl_adr-1
+0000E4 0EFC           00165         movlw   b'11111100'
+0000E6 16F7           00166         andwf   TBLPTRH,f
+0000E8 000A           00167         TBLRD   *-
+0000EA 6AEA           00168         clrf    FSR0H                   ;FSR0=0x0000
+0000EC 6AE9           00169         clrf    FSR0L
+                      00170 
+0000EE                00171 write_bl:
+0000EE 8CE1           00172         bsf     LC,6                    ; 64bytes
+0000F0                00173 write_byte:
+0000F0 CFEE FFF5      00174         movff   POSTINC0,TABLAT         ; write latch
+0000F4 000F           00175         TBLWT+*
+0000F6 2EE1           00176         decfsz  LC,f
+0000F8 D7FB           00177         bra     write_byte
+                      00178         
+0000FA 0E04           00179         movlw   (1<<WREN)               ; Setup writes
+0000FC D831           00180         rcall   Write
+0000FE 0E04           00181         movlw   ((EPSIZE>>8) & 0xFF)
+000100 62EA           00182         cpfseq  FSR0H                   ; FSR=EPSIZE ?
+000102 D7F5           00183         bra     write_bl
+                      00184 
+000104 D823           00185         rcall   CRLF
+000106 0E72           00186         movlw   MES004                  ;Rewrite Done
+000108 D818           00187         rcall   PUTM
+00010A D820           00188         rcall   CRLF
+00010C D7FF           00189         bra     $                       ;stop
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00190 
+                      00191 ; --------------------------------------------------------------------
+                      00192 ;
+                      00193 ;               Set TBLPTR
+                      00194 ;
+                      00195 ; --------------------------------------------------------------------
+                      00196 
+00010E                00197 set_tblptr:
+00010E 0E00           00198         movlw   ((bl_adr>>16) & 0xFF)   ;TBLPTR=bl_adr
+000110 6EF8           00199         movwf   TBLPTRU
+000112 0E7F           00200         movlw   ((bl_adr>>8) & 0xFF)
+000114 6EF7           00201         movwf   TBLPTRH
+000116 0E00           00202         movlw   (bl_adr & 0xFF)
+000118 6EF6           00203         movwf   TBLPTRL
+00011A 0012           00204         return
+                      00205 
+                      00206 ; --------------------------------------------------------------------
+                      00207 ;
+                      00208 ;               Set to W received the letter HEX2, SUM addition
+                      00209 ;
+                      00210 ; --------------------------------------------------------------------
+                      00211 
+00011C                00212 GET2SUM:
+00011C D81E           00213         rcall   GETC
+00011E 0EC9           00214         movlw   0xC9
+000120 ACAF           00215         btfss   RCREG,6
+000122 0ED0           00216         movlw   0xD0
+000124 24AF           00217         addwf   RCREG,w
+000126 6EF6           00218         movwf   temp
+000128 D818           00219         rcall   GETC
+00012A 0EC9           00220         movlw   0xC9
+00012C ACAF           00221         btfss   RCREG,6
+00012E 0ED0           00222         movlw   0xD0
+000130 24AF           00223         addwf   RCREG,w
+000132 3AF6           00224         swapf   temp,f
+000134 24F6           00225         addwf   temp,w
+000136 26D9           00226         addwf   SUM,f
+000138 0012           00227         return
+                      00228 
+                      00229 ; --------------------------------------------------------------------
+                      00230 ;               Put Messages
+                      00231 ; --------------------------------------------------------------------
+                      00232 
+00013A                00233 PUTM:
+00013A 6EF6           00234         MOVWF   TBLPTRL                 ;set TBLPTR
+00013C 6AF7           00235         CLRF    TBLPTRH
+00013E 6AF8           00236         CLRF    TBLPTRU
+000140                00237 LOOP_P:
+000140 0009           00238         TBLRD*+                         ;read flash
+000142 50F5           00239         MOVF    TABLAT,W                ;W = TABLAT
+000144 B4D8           00240         BTFSC   STATUS,Z                ;W > 0
+000146 0012           00241         RETURN                          ;exit
+                      00242 
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000148 D804           00243         RCALL   PUTC                    ;put char
+00014A D7FA           00244         BRA     LOOP_P                  ;loop
+                      00245 
+                      00246 ; --------------------------------------------------------------------
+                      00247 ;               New line
+                      00248 ; --------------------------------------------------------------------
+                      00249 
+00014C                00250 CRLF:
+00014C 0E0D           00251         MOVLW   0x0D
+00014E D801           00252         RCALL   PUTC
+000150 0E0A           00253         MOVLW   0x0A
+                      00254 
+                      00255 ; --------------------------------------------------------------------
+                      00256 ;
+                      00257 ;               RS-232C Send 1byte
+                      00258 ;
+                      00259 ;               set W and Call
+                      00260 ;
+                      00261 ; --------------------------------------------------------------------
+                      00262 
+000152                00263 PUTC:
+000152 A2AD           00264         btfss   TXSTA,TRMT              ;ready check
+000154 D7FE           00265         bra     PUTC
+000156 6EAE           00266         movwf   TXREG                   ;set TXREG
+000158 0012           00267         return
+                      00268 
+                      00269 ; --------------------------------------------------------------------
+                      00270 ;
+                      00271 ;               RS-232C Recieve 1byte
+                      00272 ;
+                      00273 ; --------------------------------------------------------------------
+                      00274 
+00015A                00275 GETC:
+00015A AA9E           00276         btfss   PIR1,RCIF               ;ready check
+00015C D7FE           00277         bra     GETC
+00015E 0012           00278         return
+                      00279 
+                      00280 ; --------------------------------------------------------------------
+                      00281 ;
+                      00282 ;               write flash memory
+                      00283 ;
+                      00284 ;               Input: TBLPTRL, W
+                      00285 ;
+                      00286 ; --------------------------------------------------------------------
+                      00287 
+000160                00288 Write:
+000160 6EA6           00289         movwf   EECON1
+000162 0E55           00290         movlw   0x55
+000164 6EA7           00291         movwf   EECON2
+000166 0EAA           00292         movlw   0xaa
+000168 6EA7           00293         movwf   EECON2
+00016A 82A6           00294         bsf     EECON1,WR
+00016C 0000           00295         nop
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00016E 0000           00296         nop
+000170 0012           00297         return
+                      00298 
+                      00299         END
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+A                                 00000000
+ABDEN                             00000000
+ABDOVF                            00000007
+ACCESS                            00000000
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ACQT0                             00000003
+ACQT1                             00000004
+ACQT2                             00000005
+ADCAL                             00000006
+ADCON0                            00000FC2
+ADCON1                            00000FC1
+ADCS0                             00000000
+ADCS1                             00000001
+ADCS2                             00000002
+ADDEN                             00000003
+ADDEN1                            00000003
+ADDEN2                            00000003
+ADEN                              00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADIP                              00000006
+ADMSK1                            00000001
+ADMSK2                            00000002
+ADMSK3                            00000003
+ADMSK4                            00000004
+ADMSK5                            00000005
+ADON                              00000000
+ADRES                             00000FC3
+ADRESH                            00000FC4
+ADRESL                            00000FC3
+ALRMCFG                           00000F91
+ALRMEN                            00000007
+ALRMPTR0                          00000000
+ALRMPTR1                          00000001
+ALRMRPT                           00000F90
+ALRMVALH                          00000F8F
+ALRMVALL                          00000F8E
+AMASK0                            00000002
+AMASK1                            00000003
+AMASK2                            00000004
+AMASK3                            00000005
+AN0                               00000000
+AN1                               00000001
+AN10                              00000001
+AN11                              00000002
+AN12                              00000000
+AN2                               00000002
+AN3                               00000003
+AN4                               00000005
+AN8                               00000002
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+AN9                               00000003
+ANCON0                            00000F48
+ANCON1                            00000F49
+ARPT0                             00000000
+ARPT1                             00000001
+ARPT2                             00000002
+ARPT3                             00000003
+ARPT4                             00000004
+ARPT5                             00000005
+ARPT6                             00000006
+ARPT7                             00000007
+BANKED                            00000001
+BAUDCON                           00000F7E
+BAUDCON1                          00000F7E
+BAUDCON2                          00000F7C
+BAUDCTL                           00000F7E
+BCL1IE                            00000003
+BCL1IF                            00000003
+BCL1IP                            00000003
+BCL2IE                            00000006
+BCL2IF                            00000006
+BCL2IP                            00000006
+BCLIE                             00000003
+BCLIF                             00000003
+BCLIP                             00000003
+BF                                00000000
+BGVST                             00000006
+BOR                               00000000
+BRG16                             00000003
+BRGH                              00000002
+BRGH1                             00000002
+BRGH2                             00000002
+BSR                               00000FE0
+C                                 00000000
+C1INA                             00000000
+C1INB                             00000003
+C2INA                             00000001
+C2INB                             00000002
+CAL0                              00000000
+CAL1                              00000001
+CAL2                              00000002
+CAL3                              00000003
+CAL4                              00000004
+CAL5                              00000005
+CAL6                              00000006
+CAL7                              00000007
+CCH0                              00000000
+CCH1                              00000001
+CCP1CON                           00000FBA
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1IP                            00000002
+CCP1M0                            00000000
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           00000FB4
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2IP                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000FBB
+CCPR1H                            00000FBC
+CCPR1L                            00000FBB
+CCPR2                             00000FB5
+CCPR2H                            00000FB6
+CCPR2L                            00000FB5
+CHIME                             00000006
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CK1                               00000006
+CKE                               00000006
+CKP                               00000004
+CLKI                              00000007
+CLKO                              00000006
+CM                                00000005
+CM1CON                            00000FD2
+CM1CON1                           00000FD2
+CM1IE                             00000005
+CM1IF                             00000005
+CM1IP                             00000005
+CM2CON                            00000FD1
+CM2CON1                           00000FD1
+CM2IE                             00000006
+CM2IF                             00000006
+CM2IP                             00000006
+CMPL0                             00000006
+CMPL1                             00000007
+CMSTAT                            00000F70
+CMSTATUS                          00000F70
+COE                               00000006
+CON                               00000007
+COUT1                             00000000
+COUT2                             00000001
+CPOL                              00000005
+CREF                              00000002
+CREN                              00000004
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CREN1                             00000004
+CREN2                             00000004
+CRLF                              0000014C
+CSRC                              00000007
+CSRC1                             00000007
+CSRC2                             00000007
+CTEDG1                            00000002
+CTEDG2                            00000003
+CTMUCONH                          00000FB3
+CTMUCONL                          00000FB2
+CTMUEN                            00000007
+CTMUICON                          00000FB1
+CTMUIE                            00000002
+CTMUIF                            00000002
+CTMUIP                            00000002
+CTMUSIDL                          00000005
+CTPLS                             00000002
+CTTRIG                            00000000
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            00000F53
+CVREF_MINUS                       00000002
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+CVRSS                             00000004
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DC2B0                             00000004
+DC2B1                             00000005
+DDRA                              TRISA
+DDRB                              TRISB
+DDRC                              TRISC
+DDRD                              TRISD
+DDRE                              TRISE
+DLYCYC0                           00000004
+DLYCYC1                           00000005
+DLYCYC2                           00000006
+DLYCYC3                           00000007
+DLYINTEN                          00000001
+DMABCH                            00000F66
+DMABCL                            00000F67
+DMACON1                           00000F88
+DMACON2                           00000F86
+DMAEN                             00000000
+DONE                              00000001
+DS                                00000003
+DSBOR                             00000001
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+DSCONH                            00000F4D
+DSCONL                            00000F4C
+DSEN                              00000007
+DSFLT                             00000007
+DSGPR0                            00000F4E
+DSGPR1                            00000F4F
+DSINT0                            00000000
+DSMCLR                            00000002
+DSPOR                             00000000
+DSRTC                             00000003
+DSULP                             00000005
+DSULPEN                           00000001
+DSWAKEH                           00000F4B
+DSWAKEL                           00000F4A
+DSWDT                             00000004
+DT1                               00000007
+DUPLEX0                           00000002
+DUPLEX1                           00000003
+D_A                               00000005
+D_NOT_A                           00000005
+ECCP1AS                           00000FBE
+ECCP1AS0                          00000004
+ECCP1AS1                          00000005
+ECCP1AS2                          00000006
+ECCP1ASE                          00000007
+ECCP1CON                          00000FBA
+ECCP1DEL                          00000FBD
+ECCP1OD                           00000000
+ECCP2AS                           00000FB8
+ECCP2AS0                          00000004
+ECCP2AS1                          00000005
+ECCP2AS2                          00000006
+ECCP2ASE                          00000007
+ECCP2CON                          00000FB4
+ECCP2DEL                          00000FB7
+ECCP2OD                           00000001
+EDG1POL                           00000004
+EDG1SEL0                          00000002
+EDG1SEL1                          00000003
+EDG1STAT                          00000000
+EDG2POL                           00000007
+EDG2SEL0                          00000005
+EDG2SEL1                          00000006
+EDG2STAT                          00000001
+EDGEN                             00000003
+EDGSEQEN                          00000002
+EECON1                            00000FA6
+EECON2                            00000FA7
+EPSIZE                            0x0400
+EVPOL0                            00000003
+EVPOL1                            00000004
+Err                               000000CE
+Exit                              000000D4
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+FAST                              00000001
+FERR                              00000002
+FERR1                             00000002
+FERR2                             00000002
+FREE                              00000004
+FSR0                              00000000
+FSR0H                             00000FEA
+FSR0L                             00000FE9
+FSR1                              00000001
+FSR1H                             00000FE2
+FSR1L                             00000FE1
+FSR2                              00000002
+FSR2H                             00000FDA
+FSR2L                             00000FD9
+GCEN                              00000007
+GET2SUM                           0000011C
+GETC                              0000015A
+GIE                               00000007
+GIEH                              00000007
+GIEL                              00000006
+GIE_GIEH                          00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HALFSEC                           00000003
+HLVDCON                           00000F85
+HLVDEN                            00000004
+HLVDIN                            00000005
+HLVDL0                            00000000
+HLVDL1                            00000001
+HLVDL2                            00000002
+HLVDL3                            00000003
+I2C_DAT                           00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IDISSEN                           00000001
+IDLEN                             00000007
+INDF0                             00000FEF
+INDF1                             00000FE7
+INDF2                             00000FDF
+INIT                              00000080
+INT0                              00000000
+INT0E                             00000004
+INT0F                             00000001
+INT0IE                            00000004
+INT0IF                            00000001
+INT1E                             00000003
+INT1F                             00000000
+INT1IE                            00000003
+INT1IF                            00000000
+INT1IP                            00000006
+INT1P                             00000006
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+INT2E                             00000004
+INT2F                             00000001
+INT2IE                            00000004
+INT2IF                            00000001
+INT2IP                            00000007
+INT2P                             00000007
+INT3E                             00000005
+INT3F                             00000002
+INT3IE                            00000005
+INT3IF                            00000002
+INT3IP                            00000001
+INT3P                             00000001
+INTCON                            00000FF2
+INTCON2                           00000FF1
+INTCON3                           00000FF0
+INTEDG0                           00000006
+INTEDG1                           00000005
+INTEDG2                           00000004
+INTEDG3                           00000003
+INTLVL0                           00000000
+INTLVL1                           00000001
+INTLVL2                           00000002
+INTLVL3                           00000003
+INTSRC                            00000007
+IOLOCK                            00000000
+IPEN                              00000007
+IPR1                              00000F9F
+IPR2                              00000FA2
+IPR3                              00000FA5
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRNG0                             00000000
+IRNG1                             00000001
+IRVST                             00000005
+ITRIM0                            00000002
+ITRIM1                            00000003
+ITRIM2                            00000004
+ITRIM3                            00000005
+ITRIM4                            00000006
+ITRIM5                            00000007
+KBI0                              00000004
+KBI1                              00000005
+KBI2                              00000006
+KBI3                              00000007
+LATA                              00000F89
+LATA0                             00000000
+LATA1                             00000001
+LATA2                             00000002
+LATA3                             00000003
+LATA5                             00000005
+LATA6                             00000006
+LATA7                             00000007
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+LATB                              00000F8A
+LATB0                             00000000
+LATB1                             00000001
+LATB2                             00000002
+LATB3                             00000003
+LATB4                             00000004
+LATB5                             00000005
+LATB6                             00000006
+LATB7                             00000007
+LATC                              00000F8B
+LATC0                             00000000
+LATC1                             00000001
+LATC2                             00000002
+LATC3                             00000003
+LATC4                             00000004
+LATC5                             00000005
+LATC6                             00000006
+LATC7                             00000007
+LC                                00000FE1
+LOOP_P                            00000140
+LVDIE                             00000002
+LVDIF                             00000002
+LVDIP                             00000002
+LVDSTAT                           00000006
+MES001                            00000008
+MES002                            00000052
+MES003                            0000005E
+MES004                            00000072
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+N                                 00000004
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BOR                           00000000
+NOT_CM                            00000005
+NOT_DONE                          00000001
+NOT_PD                            00000002
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_RI                            00000004
+NOT_SS1                           00000005
+NOT_TO                            00000003
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+ODCON1                            00000F42
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ODCON2                            00000F41
+ODCON3                            00000F40
+OERR                              00000001
+OERR1                             00000001
+OERR2                             00000001
+OSC1                              00000007
+OSC2                              00000006
+OSCCON                            00000FD3
+OSCFIE                            00000007
+OSCFIF                            00000007
+OSCFIP                            00000007
+OSCTUNE                           00000F9B
+OSTS                              00000003
+OV                                00000003
+P                                 00000004
+P1DC0                             00000000
+P1DC1                             00000001
+P1DC2                             00000002
+P1DC3                             00000003
+P1DC4                             00000004
+P1DC5                             00000005
+P1DC6                             00000006
+P1M0                              00000006
+P1M1                              00000007
+P1RSEN                            00000007
+P2DC0                             00000000
+P2DC1                             00000001
+P2DC2                             00000002
+P2DC3                             00000003
+P2DC4                             00000004
+P2DC5                             00000005
+P2DC6                             00000006
+P2M0                              00000006
+P2M1                              00000007
+P2RSEN                            00000007
+PADCFG1                           00000F3C
+PC                                00000FF9
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG10                            00000002
+PCFG11                            00000003
+PCFG12                            00000004
+PCFG2                             00000002
+PCFG3                             00000003
+PCFG4                             00000004
+PCFG8                             00000000
+PCFG9                             00000001
+PCL                               00000FF9
+PCLATH                            00000FFA
+PCLATU                            00000FFB
+PD                                00000002
+PEIE                              00000006
+PEIE_GIEL                         00000006
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PEN                               00000002
+PGC                               00000006
+PGD                               00000007
+PIE1                              00000F9D
+PIE2                              00000FA0
+PIE3                              00000FA3
+PIR1                              00000F9E
+PIR2                              00000FA1
+PIR3                              00000FA4
+PLLEN                             00000006
+PLUSW0                            00000FEB
+PLUSW1                            00000FE3
+PLUSW2                            00000FDB
+PMPTTL                            00000000
+POR                               00000001
+PORTA                             00000F80
+PORTB                             00000F81
+PORTC                             00000F82
+POSTDEC0                          00000FED
+POSTDEC1                          00000FE5
+POSTDEC2                          00000FDD
+POSTINC0                          00000FEE
+POSTINC1                          00000FE6
+POSTINC2                          00000FDE
+PPSCON                            00000EFF
+PR2                               00000FCB
+PR4                               00000F77
+PREINC0                           00000FEC
+PREINC1                           00000FE4
+PREINC2                           00000FDC
+PROD                              00000FF3
+PRODH                             00000FF4
+PRODL                             00000FF3
+PSA                               00000003
+PSS1AC0                           00000002
+PSS1AC1                           00000003
+PSS1BD0                           00000000
+PSS1BD1                           00000001
+PSS2AC0                           00000002
+PSS2AC1                           00000003
+PSS2BD0                           00000000
+PSS2BD1                           00000001
+PSTR1CON                          00000FBF
+PSTR2CON                          00000FB9
+PUTC                              00000152
+PUTM                              0000013A
+PWM1CON                           00000FBD
+PWM2CON                           00000FB7
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RBIP                              00000000
+RBPU                              00000007
+RC0                               00000000
+RC1                               00000001
+RC1IE                             00000005
+RC1IF                             00000005
+RC1IP                             00000005
+RC2                               00000002
+RC2IE                             00000005
+RC2IF                             00000005
+RC2IP                             00000005
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCIP                              00000005
+RCON                              00000FD0
+RCREG                             00000FAF
+RCREG1                            00000FAF
+RCREG2                            00000FAA
+RCSTA                             00000FAC
+RCSTA1                            00000FAC
+RCSTA2                            00000F9C
+RD16                              00000001
+READ_WRITE                        00000002
+REFO                              00000002
+REFOCON                           00000F3D
+REGSLP                            00000007
+RELEASE                           00000000
+RI                                00000004
+RODIV0                            00000000
+RODIV1                            00000001
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RODIV2                            00000002
+RODIV3                            00000003
+ROON                              00000007
+ROSEL                             00000004
+ROSSLP                            00000005
+RP0                               00000000
+RP1                               00000001
+RP10                              00000007
+RP11                              00000000
+RP12                              00000001
+RP13                              00000002
+RP14                              00000003
+RP15                              00000004
+RP16                              00000005
+RP17                              00000006
+RP18                              00000007
+RP2                               00000005
+RP3                               00000000
+RP4                               00000001
+RP5                               00000002
+RP6                               00000003
+RP7                               00000004
+RP8                               00000005
+RP9                               00000006
+RPINR1                            00000EE7
+RPINR12                           00000EF2
+RPINR13                           00000EF3
+RPINR16                           00000EF6
+RPINR17                           00000EF7
+RPINR2                            00000EE8
+RPINR21                           00000EFB
+RPINR22                           00000EFC
+RPINR23                           00000EFD
+RPINR24                           00000EFE
+RPINR3                            00000EE9
+RPINR4                            00000EEA
+RPINR6                            00000EEC
+RPINR7                            00000EED
+RPINR8                            00000EEE
+RPOR0                             00000EC6
+RPOR1                             00000EC7
+RPOR10                            00000ED0
+RPOR11                            00000ED1
+RPOR12                            00000ED2
+RPOR13                            00000ED3
+RPOR14                            00000ED4
+RPOR15                            00000ED5
+RPOR16                            00000ED6
+RPOR17                            00000ED7
+RPOR18                            00000ED8
+RPOR2                             00000EC8
+RPOR3                             00000EC9
+RPOR4                             00000ECA
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RPOR5                             00000ECB
+RPOR6                             00000ECC
+RPOR7                             00000ECD
+RPOR8                             00000ECE
+RPOR9                             00000ECF
+RSEN                              00000001
+RTCC                              00000001
+RTCCAL                            00000F3E
+RTCCFG                            00000F3F
+RTCCIE                            00000000
+RTCCIF                            00000000
+RTCCIP                            00000000
+RTCEN                             00000007
+RTCOE                             00000002
+RTCPTR0                           00000000
+RTCPTR1                           00000001
+RTCSYNC                           00000004
+RTCVALH                           00000F99
+RTCVALL                           00000F98
+RTCWDIS                           00000000
+RTCWREN                           00000005
+RTSECSEL0                         00000001
+RTSECSEL1                         00000002
+RX1                               00000007
+RX9                               00000006
+RX91                              00000006
+RX92                              00000006
+RX9D                              00000000
+RX9D1                             00000000
+RX9D2                             00000000
+RXADDRH                           00000F68
+RXADDRL                           00000F69
+RXDTP                             00000005
+RXINC                             00000004
+R_NOT_W                           00000002
+R_W                               00000002
+Read                              00000096
+S                                 00000003
+SCK1                              00000003
+SCL1                              00000003
+SCS0                              00000000
+SCS1                              00000001
+SDI1                              00000004
+SDO1                              00000005
+SEN                               00000000
+SENDB                             00000003
+SENDB1                            00000003
+SENDB2                            00000003
+SMP                               00000007
+SP0                               00000000
+SP1                               00000001
+SP2                               00000002
+SP3                               00000003
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SP4                               00000004
+SPBRG                             00000FB0
+SPBRG1                            00000FB0
+SPBRG2                            00000FAB
+SPBRGH                            00000F7F
+SPBRGH1                           00000F7F
+SPBRGH2                           00000F7D
+SPEN                              00000007
+SPEN1                             00000007
+SPEN2                             00000007
+SPI1OD                            00000000
+SPI2OD                            00000001
+SREN                              00000005
+SREN1                             00000005
+SREN2                             00000005
+SSCON0                            00000006
+SSCON1                            00000007
+SSP1ADD                           00000FC8
+SSP1BUF                           00000FC9
+SSP1CON1                          00000FC6
+SSP1CON2                          00000FC5
+SSP1IE                            00000003
+SSP1IF                            00000003
+SSP1IP                            00000003
+SSP1STAT                          00000FC7
+SSP2ADD                           00000F74
+SSP2BUF                           00000F75
+SSP2CON1                          00000F72
+SSP2CON2                          00000F71
+SSP2IE                            00000007
+SSP2IF                            00000007
+SSP2IP                            00000007
+SSP2STAT                          00000F73
+SSPADD                            00000FC8
+SSPBUF                            00000FC9
+SSPCON1                           00000FC6
+SSPCON2                           00000FC5
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPIP                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000FC7
+STAMSG                            00000092
+STATUS                            00000FD8
+STKFUL                            00000007
+STKOVF                            00000007
+STKPTR                            00000FFC
+STKUNF                            00000006
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SUM                               00000FD9
+SWDTE                             00000000
+SWDTEN                            00000000
+SYNC                              00000004
+SYNC1                             00000004
+SYNC2                             00000004
+T08BIT                            00000006
+T0CON                             00000FD5
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0IP                              00000002
+T0PS0                             00000000
+T0PS1                             00000001
+T0PS2                             00000002
+T0SE                              00000004
+T1CKI                             00000000
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000FCD
+T1DONE                            00000003
+T1GCON                            00000F9A
+T1GGO                             00000003
+T1GGO_T1DONE                      00000003
+T1GPOL                            00000006
+T1GSPM                            00000004
+T1GSS0                            00000000
+T1GSS1                            00000001
+T1GTM                             00000005
+T1GVAL                            00000002
+T1OSCEN                           00000003
+T1OSI                             00000001
+T1OSO                             00000000
+T1RUN                             00000004
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000FCA
+T2OUTPS0                          00000003
+T2OUTPS1                          00000004
+T2OUTPS2                          00000005
+T2OUTPS3                          00000006
+T3CCP1                            00000000
+T3CCP2                            00000001
+T3CKPS0                           00000004
+T3CKPS1                           00000005
+T3CON                             00000F79
+T3DONE                            00000003
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T3GCON                            00000F97
+T3GGO                             00000003
+T3GGO_T3DONE                      00000003
+T3GPOL                            00000006
+T3GSPM                            00000004
+T3GSS0                            00000000
+T3GSS1                            00000001
+T3GTM                             00000005
+T3GVAL                            00000002
+T3SYNC                            00000002
+T4CKPS0                           00000000
+T4CKPS1                           00000001
+T4CON                             00000F76
+T4OUTPS0                          00000003
+T4OUTPS1                          00000004
+T4OUTPS2                          00000005
+T4OUTPS3                          00000006
+TABLAT                            00000FF5
+TBLPTR                            00000FF6
+TBLPTRH                           00000FF7
+TBLPTRL                           00000FF6
+TBLPTRU                           00000FF8
+TCLKCON                           00000F52
+TGEN                              00000004
+TMR0                              00000FD6
+TMR0H                             00000FD7
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR0IP                            00000002
+TMR0L                             00000FD6
+TMR0ON                            00000007
+TMR1                              00000FCE
+TMR1CS0                           00000006
+TMR1CS1                           00000007
+TMR1GE                            00000007
+TMR1H                             00000FCF
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1IP                            00000000
+TMR1L                             00000FCE
+TMR1ON                            00000000
+TMR2                              00000FCC
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2IP                            00000001
+TMR2ON                            00000002
+TMR3                              00000F7A
+TMR3CS0                           00000006
+TMR3CS1                           00000007
+TMR3GE                            00000007
+TMR3GIE                           00000001
+TMR3GIF                           00000001
+TMR3GIP                           00000001
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 24
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TMR3H                             00000F7B
+TMR3IE                            00000001
+TMR3IF                            00000001
+TMR3IP                            00000001
+TMR3L                             00000F7A
+TMR3ON                            00000000
+TMR4                              00000F78
+TMR4IE                            00000003
+TMR4IF                            00000003
+TMR4IP                            00000003
+TMR4ON                            00000002
+TO                                00000003
+TOS                               00000FFD
+TOSH                              00000FFE
+TOSL                              00000FFD
+TOSU                              00000FFF
+TRISA                             00000F92
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000F93
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000F94
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRMT                              00000001
+TRMT1                             00000001
+TRMT2                             00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TUN5                              00000005
+TX1                               00000006
+TX1IE                             00000004
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 25
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TX1IF                             00000004
+TX1IP                             00000004
+TX2IE                             00000004
+TX2IF                             00000004
+TX2IP                             00000004
+TX8_9                             00000006
+TX9                               00000006
+TX91                              00000006
+TX92                              00000006
+TX9D                              00000000
+TX9D1                             00000000
+TX9D2                             00000000
+TXADDRH                           00000F6A
+TXADDRL                           00000F6B
+TXCKP                             00000004
+TXD8                              00000000
+TXEN                              00000005
+TXEN1                             00000005
+TXEN2                             00000005
+TXIE                              00000004
+TXIF                              00000004
+TXINC                             00000005
+TXIP                              00000004
+TXREG                             00000FAE
+TXREG1                            00000FAE
+TXREG2                            00000FA9
+TXSTA                             00000FAD
+TXSTA1                            00000FAD
+TXSTA2                            00000FA8
+U1OD                              00000000
+U2OD                              00000001
+UA                                00000001
+ULPEN                             00000002
+ULPLVL                            00000005
+ULPSINK                           00000001
+ULPWDIS                           00000002
+ULPWU                             00000000
+VBG2EN                            00000006
+VBGEN                             00000007
+VCFG0                             00000006
+VCFG1                             00000007
+VDIRMAG                           00000007
+VREF_MINUS                        00000002
+VREF_PLUS                         00000003
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000FC0
+WPROG                             00000005
+WR                                00000001
+WREG                              00000FE8
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+MPASM  5.51                     REWRITEBL.ASM   11-25-2013  23:57:10         PAGE 26
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+Write                             00000160
+Z                                 00000002
+_DEVID1                           003FFFFE
+_DEVID2                           003FFFFF
+__18F25J11                        00000001
+__DEBUG                           1
+bl_adr                            0x7F00
+clr_loop                          00000088
+clr_ram                           00000084
+erase_botloader                   000000DC
+r_loop                            000000C2
+set_tblptr                        0000010E
+temp                              00000FF6
+write_bl                          000000EE
+write_bootloader                  000000E2
+write_byte                        000000F0
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XXXX----XXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0140 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XX--------------
+
+All other memory blocks unused.
+
+Program Memory Bytes Used:   366
+Program Memory Bytes Free: 32394
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+

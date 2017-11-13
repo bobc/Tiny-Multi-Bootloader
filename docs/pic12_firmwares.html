@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    
+    <title>Tiny Multi Bootloader+ : Modify PIC12 family firmwares</title><style type="text/css">
+<!--
+.style1 {color: rgb(0, 0, 153)}
+-->
+    </style></head>
+<body>
+    <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="text-align: center; vertical-align: top;">
+            <h1 style="color: rgb(0, 0, 153);">Tiny Multi
+              Bootloader+</h1>
+            <div style="text-align: left; color: rgb(0, 0, 153);">
+              <h2>PIC12 family firmwares:</h2>
+              <hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><br>
+              </span></div>
+            <div style="text-align: left;">
+              <h3><span style="color: rgb(0, 0, 153);">Principle</span></h3>
+              <p>Example given for a PIC16F1847, but it's exactly the same principle for PIC12 device family. </p>
+              <p>&nbsp;</p>
+              <p><img src="pic16_operation.jpg" height="445" width="834"></p>
+              <h3><span class="style1">Description of the data tranfert </span></h3>
+              <p>Represents the character of one byte [] below.</p>
+              <p>&#9312; Flash transfer format:<br>
+                [AddressH][AddressL][2*N][DataL(1)][DataH(1)]....[DataL(N)][DataH(N)][SUM]</p>
+              <p>[AddressH]&nbsp;Start address of the flash page to override the data. (upper)<br>
+                [AddressL]&nbsp;Start address of the flash page to override the data. (lower)<br>
+                [2*N]&nbsp;Number of transfers of data as described in piccode.ini. (byte notation)<br>
+                [DataL/H(n)]&nbsp;Rewrite data (2*N)bytes.<br>
+                [SUM]&nbsp;Checksum.</p>
+              <p>&#9313; EEPROM transfer format:<br>
+                [EEAddressH][EEAddressL][2][EEData][0][SUM]</p>
+              <p>[EEAddressH]&nbsp;Address of the EEPROM to override the data | 0x40 (upper)<br>
+                [EEAddressL]&nbsp;Address of the EEPROM to override the data. (lower) EEAddressH:EEAddressL &gt;= 0x4000<br>
+                [2]&nbsp;Number of data transfers. (Always 2)<br>
+                [EEData]&nbsp;EEPROM 8-bit data to be rewritten.<br>
+                [0]&nbsp;Always 0.<br>
+                [SUM]&nbsp;Checksum.</p>
+              <h3><span class="style1">Modify existing fimwares for a new device</span></h3>
+              <p>###todo</p><p>Before you compile your new bootloader verify that your compiler will <span style="font-weight: bold;">generate absolute code</span> (and not relocatable code)!<br>To do so, in MPLAB IDE go to "Project" &gt; "Build Options..." &gt; "Project"<br>Your "MPASM/C17/C18" tab must look like the following:</p><p><img style="width: 446px; height: 544px;" alt="" src="../../Tiny_Avr-Pic_Bootloader+%20%28v0.9.x%29/docs/build_options_8bits.jpg"></p><p></p><h3><span class="style1">Loading firmware from PC app, wo/ changing RESET vector</span></h3>How to bypass activation of the bootloader.<br><br>To provide a jumper switch pin which is not used for communication.<br><br>Program modifications example: &lt;tinybld12F617_8MHz_int_9600.asm&gt;<br><br><span style="font-family: monospace;">;0000000000000000000000000 RESET 00000000000000000000000000</span><br style="font-family: monospace;"><span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; org&nbsp;&nbsp;&nbsp;&nbsp; 0x0000</span><br style="font-family: monospace;"><span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; pagesel IntrareBootloader</span><br style="font-family: monospace;"><span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto&nbsp;&nbsp;&nbsp; IntrareBootloader</span><br style="font-family: monospace;"><br style="font-family: monospace;"><span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+;view with TabSize=4</span><br style="font-family: monospace;"><span style="font-family: monospace;">;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;
+START
+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;</span><br style="font-family: monospace;"><span style="font-family: monospace;">;---------------------- Bootloader ----------------------</span><br style="font-family: monospace;"><span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; org&nbsp;&nbsp;&nbsp;&nbsp; first_address</span><br style="font-family: monospace;"><span style="font-family: monospace;">; nop</span><br style="font-family: monospace;"><span style="font-family: monospace;">; nop</span><br style="font-family: monospace;"><span style="font-family: monospace;">; nop</span><br style="font-family: monospace;"><span style="font-family: monospace;">; nop</span><br style="font-family: monospace;"><span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; org&nbsp;&nbsp;&nbsp;&nbsp; first_address+4</span><br style="font-family: monospace;"><span style="font-family: monospace;">IntrareBootloader:</span><br style="font-family: monospace;"><span style="font-family: monospace;">;* add these lines to your source file **</span><br style="font-family: monospace;"><span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; btfss&nbsp;&nbsp; GPIO,0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;check Jumper pin</span><br style="font-family: monospace;"><span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; goto&nbsp;&nbsp;&nbsp; first_address</span><br style="font-family: monospace;"><span style="font-family: monospace;">;**********</span><br style="font-family: monospace;"><span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+;init int clock &amp; serial port</span><br style="font-family: monospace;"><span style="font-family: monospace;">#ifdef Direct_TX</span><br style="font-family: monospace;"><span style="font-family: monospace;">bcf GPIO,TX</span><br style="font-family: monospace;"><span style="font-family: monospace;">#else</span><br style="font-family: monospace;"><span style="font-family: monospace;">bsf GPIO,TX</span><br style="font-family: monospace;"><span style="font-family: monospace;">#endif</span><br><br>How to use:<br><ul><li>First start,</li><ul><li>Writing a program to remove the jumper pin.</li></ul><li>Second and subsequent,</li><ul><li>Program run time, You plug the jumper pin</li><li>Program rewriting, You remove the jumper pin.</li></ul></ul><img style="width: 640px; height: 400px;" alt="" src="../../Tiny_Avr-Pic_Bootloader+%20%28v0.9.x%29/docs/bypass_activation_of_the_bootloader_pic12f617.jpg"><p></p>
+            </div>          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </body></html>

@@ -1,0 +1,2 @@
+@ECHO OFF
+"C:\Program Files\Atmel\AVR Tools\AvrAssembler2\avrasm2.exe" -S "C:\avrasm1\New Folder\bootloader_861A_r3\labels.tmp" -fI -W+ie -C V2 -o "C:\avrasm1\New Folder\bootloader_861A_r3\bootloader_861A.hex" -d "C:\avrasm1\New Folder\bootloader_861A_r3\bootloader_861A.obj" -e "C:\avrasm1\New Folder\bootloader_861A_r3\bootloader_861A.eep" -m "C:\avrasm1\New Folder\bootloader_861A_r3\bootloader_861A.map" -l "C:\avrasm1\New Folder\bootloader_861A_r3\bootloader_861A.lst" "C:\avrasm1\New Folder\bootloader_861A_r3\bootloader_861A.asm"

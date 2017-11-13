@@ -1,0 +1,1171 @@
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 
+                      00002         LIST P=PIC12F617
+                      00003         #INCLUDE <P12F617.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC12F617 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00562         LIST
+                      00004 
+                      00005 ;       #define EE                      ;PMADR/PMDAT/PMCON not exist
+                      00006         #define EPSIZE  0x10            ;Erase Page size(16/32)(word)
+                      00007         #define bl_adr  0x07A0          ;Start address of the bootloader
+                      00008 
+                      00009         #define TXP     1               ; PIC TX Data port (1:A,2:B,3:C), Please refer to the table belo
+                            w
+                      00010         #define RXP     1               ; PIC RX Data port (1:A,2:B,3:C), Please refer to the table belo
+                            w
+                      00011         #define TX      4               ; PIC TX Data output pin (Port pin No.)
+                      00012         #define RX      5               ; PIC RX Data input pin (Port pin No.)
+                      00013 ;        #define Direct_TX               ; RS-232C TX Direct Connection(No use MAX232)
+                      00014 ;        #define Direct_RX               ; RS-232C RX Direct Connection(No use MAX232)
+                      00015 
+                      00016 ; !!!  Modified to fit the device above 5 lines  !!!
+                      00017 
+                      00018 ; +--------+------------+-----------+-------+------+-------+
+                      00019 ; | Device | Erase_Page | max_flash | PORT  | PDIP | EE/PM |
+                      00020 ; +--------+------------+-----------+-------+------+-------+
+                      00021 ; | 12F617 |  16 words  |  0x0800   | A     |   8  |  PM   |
+                      00022 ; +--------+------------+-----------+-------+------+-------+
+                      00023 ; | 12F752 |  16 words  |  0x0400   | A     |   8  |  PM   |
+                      00024 ; +--------+------------+-----------+-------+------+-------+
+                      00025 ; | 16F753 |  16 words  |  0x0800   | A   C |  14  |  PM   |
+                      00026 ; +--------+------------+-----------+-------+------+-------+
+                      00027 ; | 16F818 |  32 words  |  0x0400   | A B   |  18  |  EE   |
+                      00028 ; +--------+------------+-----------+-------+------+-------+
+                      00029 ; | 16F819 |  32 words  |  0x0800   | A B   |  18  |  EE   |
+                      00030 ; +--------+------------+-----------+-------+------+-------+
+                      00031 ; |12F1501 |  16 words  |  0x0400   | A     |   8  |  PM   |
+                      00032 ; +--------+------------+-----------+-------+------+-------+
+                      00033 ; |16F1503 |  16 words  |  0x0800   | A   C |  14  |  PM   |
+                      00034 ; +--------+------------+-----------+-------+------+-------+
+                      00035 ; |16F1507 |  16 words  |  0x0800   | A B C |  20  |  PM   |
+                      00036 ; +--------+------------+-----------+-------+------+-------+
+                      00037 
+                      00038 #ifdef  EE
+                      00039 PMADRH  equ     EEADRH
+                      00040 PMADRL  equ     EEADR
+                      00041 PMDATH  equ     EEDATH
+                      00042 PMDATL  equ     EEDAT
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00043 PMCON1  equ     EECON1
+                      00044 PMCON2  equ     EECON2
+                      00045 #endif
+                      00046 
+                      00047 #if (TXP==1)
+  00000005            00048 TXPORT  equ     PORTA
+                      00049 #endif
+                      00050 #if (TXP==2)
+                      00051 TXPORT  equ     PORTB
+                      00052 #endif
+                      00053 #if (TXP==3)
+                      00054 TXPORT  equ     PORTC
+                      00055 #endif
+                      00056 
+                      00057 #if (RXP==1)
+  00000005            00058 RXPORT  equ     PORTA
+                      00059 #endif
+                      00060 #if (RXP==2)
+                      00061 RXPORT  equ     PORTB
+                      00062 #endif
+                      00063 #if (RXP==3)
+                      00064 RXPORT  equ     PORTC
+                      00065 #endif
+                      00066 
+                      00067 ;****************************************************************************************
+                      00068 ;*                                                                                      *
+                      00069 ;*      Note (Important)                                                                *
+                      00070 ;*                                                                                      *
+                      00071 ;*      Rewrite the bootloader of PIC12F/16F without UART in this demonstration program.*
+                      00072 ;*                                                                                      *
+                      00073 ;*      TREATERM is required for use.                                                   *
+                      00074 ;*                                                                                      *
+                      00075 ;*      How to use                                                                      *
+                      00076 ;*                                                                                      *
+                      00077 ;*              ‡@Write this program in Tiny PIC/AVR Bootloader+.                       *
+                      00078 ;*                                                                                      *
+                      00079 ;*              ‡ATurn off the power of the board, to start the Teraterm.               *
+                      00080 ;*                                                                                      *
+                      00081 ;*              ‡BTurn on the power of the board                                        *
+                      00082 ;*                                                                                      *
+                      00083 ;*              ‡CThe drag-and-drop to TREATERM the HEX file that you want to rewrite.  *
+                      00084 ;*                                                                                      *
+                      00085 ;*              ‡DComplete rewrite, "Rewrite Done" message is displayed.                *
+                      00086 ;*                                                                                      *
+                      00087 ;****************************************************************************************
+                      00088 
+                      00089 ; ********************************************************************
+                      00090 ;                       Registers (RAM) definition
+                      00091 ; ********************************************************************
+                      00092 
+  00000070            00093 LC      EQU     0x70            ;Loop counter
+  00000071            00094 ADRH    EQU     0x71            ;Flash address (H) temporary
+  00000072            00095 SUM     EQU     0x72            ;Checksum
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  00000073            00096 temp    EQU     0x73            ;Temporary
+  00000074            00097 rxd     EQU     0x74            ;Data buffer
+                      00098 
+                      00099 ; ********************************************************************
+                      00100 ;                       Codes
+                      00101 ; ********************************************************************
+                      00102 
+0000                  00103         ORG     0x0000
+0000   018A           00104         CLRF    PCLATH
+0001   2A00           00105         GOTO    INIT
+                      00106 
+                      00107 ; ********************************************************************
+                      00108 ;                       Data area
+                      00109 ; ********************************************************************
+                      00110 
+0004                  00111         ORG     0x0004
+                      00112 
+0004                  00113 MES001:                                 ;Opening message
+0004   068A           00114  DW     0x0D*0x80+0x0A                  ;New line
+0005   152A           00115  DW     '*'*0x80+'*'                    ;***  Bootloader Rewrite V1.00 ***
+0006   1520           00116  DW     '*'*0x80+' '                    ;
+0007   1042           00117  DW     ' '*0x80+'B'                    ;
+0008   37EF           00118  DW     'o'*0x80+'o'                    ;
+0009   3A6C           00119  DW     't'*0x80+'l'                    ;
+000A   37E1           00120  DW     'o'*0x80+'a'                    ;
+000B   3265           00121  DW     'd'*0x80+'e'                    ;
+000C   3920           00122  DW     'r'*0x80+' '                    ;
+000D   2965           00123  DW     'R'*0x80+'e'                    ;
+000E   3BF2           00124  DW     'w'*0x80+'r'                    ;
+000F   34F4           00125  DW     'i'*0x80+'t'                    ;
+0010   32A0           00126  DW     'e'*0x80+' '                    ;
+0011   2B31           00127  DW     'V'*0x80+'1'                    ;
+0012   1730           00128  DW     '.'*0x80+'0'                    ;
+0013   1820           00129  DW     '0'*0x80+' '                    ;
+0014   102A           00130  DW     ' '*0x80+'*'                    ;
+0015   152A           00131  DW     '*'*0x80+'*'                    ;
+0016   068A           00132  DW     0x0D*0x80+0x0A                  ;New line
+0017   068A           00133  DW     0x0D*0x80+0x0A                  ;New line
+0018   2272           00134  DW     'D'*0x80+'r'                    ;Drag-and-Drop Bootloader Hex >>
+0019   30E7           00135  DW     'a'*0x80+'g'                    ;
+001A   16E1           00136  DW     '-'*0x80+'a'                    ;
+001B   3764           00137  DW     'n'*0x80+'d'                    ;
+001C   16C4           00138  DW     '-'*0x80+'D'                    ;
+001D   396F           00139  DW     'r'*0x80+'o'                    ;
+001E   3820           00140  DW     'p'*0x80+' '                    ;
+001F   216F           00141  DW     'B'*0x80+'o'                    ;
+0020   37F4           00142  DW     'o'*0x80+'t'                    ;
+0021   366F           00143  DW     'l'*0x80+'o'                    ;
+0022   30E4           00144  DW     'a'*0x80+'d'                    ;
+0023   32F2           00145  DW     'e'*0x80+'r'                    ;
+0024   1048           00146  DW     ' '*0x80+'H'                    ;
+0025   32F8           00147  DW     'e'*0x80+'x'                    ;
+0026   103E           00148  DW     ' '*0x80+'>'                    ;
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0027   1F00           00149  DW     '>'*0x80                        ;
+                      00150 
+0028                  00151 MES002:                                 ;The completion of data reception
+0028   1F3E           00152  DW     '>'*0x80+'>'                    ;>> Rcv OK
+0029   1052           00153  DW     ' '*0x80+'R'                    ;
+002A   31F6           00154  DW     'c'*0x80+'v'                    ;
+002B   104F           00155  DW     ' '*0x80+'O'                    ;
+002C   2580           00156  DW     'K'*0x80                        ;
+                      00157 
+002D                  00158 MES003:                                 ;Data reception error
+002D   10A1           00159  DW     '!'*0x80+'!'                    ;!!! Read Error !!!
+002E   10A0           00160  DW     '!'*0x80+' '                    ;
+002F   2965           00161  DW     'R'*0x80+'e'                    ;
+0030   30E4           00162  DW     'a'*0x80+'d'                    ;
+0031   1045           00163  DW     ' '*0x80+'E'                    ;
+0032   3972           00164  DW     'r'*0x80+'r'                    ;
+0033   37F2           00165  DW     'o'*0x80+'r'                    ;
+0034   1021           00166  DW     ' '*0x80+'!'                    ;
+0035   10A1           00167  DW     '!'*0x80+'!'                    ;
+0036   0000           00168  DW     0
+                      00169 
+0037                  00170 MES004:                                 ;Rewriting completion
+0037   2965           00171  DW     'R'*0x80+'e'                    ;Rewrite Done
+0038   3BF2           00172  DW     'w'*0x80+'r'                    ;
+0039   34F4           00173  DW     'i'*0x80+'t'                    ;
+003A   32A0           00174  DW     'e'*0x80+' '                    ;
+003B   226F           00175  DW     'D'*0x80+'o'                    ;
+003C   3765           00176  DW     'n'*0x80+'e'                    ;
+003D   0000           00177  DW     0
+                      00178 
+0100                  00179         org     0x0100
+                      00180 
+0100   3FFF 3FFF 3FFF 00181  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+0110   3FFF 3FFF 3FFF 00182  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+0120   3FFF 3FFF 3FFF 00183  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0130   3FFF 3FFF 3FFF 00184  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+0140   3FFF 3FFF 3FFF 00185  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+0150   3FFF 3FFF 3FFF 00186  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+0160   3FFF 3FFF 3FFF 00187  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+0170   3FFF 3FFF 3FFF 00188  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+0180   3FFF 3FFF 3FFF 00189  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+0190   3FFF 3FFF 3FFF 00190  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+01A0   3FFF 3FFF 3FFF 00191  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+01B0   3FFF 3FFF 3FFF 00192  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+01C0   3FFF 3FFF 3FFF 00193  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+01D0   3FFF 3FFF 3FFF 00194  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+01E0   3FFF 3FFF 3FFF 00195  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+01F0   3FFF 3FFF 3FFF 00196  DW 0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x3FFF,0x
+                            3FFF,0x3FFF
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 3FFF 3FFF 
+       3FFF 
+                      00197 
+                      00198 ; ********************************************************************
+                      00199 ;
+                      00200 ;                       Main
+                      00201 ;
+                      00202 ; ********************************************************************
+                      00203 
+0200                  00204         org     0x0200
+                      00205 
+0200                  00206 INIT:
+0200   3004           00207         MOVLW   MES001                  ;***  Bootloader Rewrite V1.00 ***
+0201   228C           00208         CALL    PUT2                    ;
+                      00209                                         ;Send Bootloader Hex >>
+0202                  00210 Read_HEX:
+0202   22B5           00211         call    GETC                    ;receive a ':' ?
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0203   303A           00212         movlw   ':'
+0204   0274           00213         subwf   rxd,w
+0205   1D03           00214         skpz
+0206   2A02           00215         goto    Read_HEX
+                      00216 
+0207   01F2           00217         clrf    SUM                     ;SUM=0
+0208   227D           00218         call    GET2SUM                 ;Get the number of data
+0209   00F0           00219         movwf   LC
+020A   1903           00220         skpnz
+020B   2A4E           00221         goto    Exit                    ;Loop_Counter=0 -> End code
+                      00222 
+020C   227D           00223         call    GET2SUM                 ;Get the address high
+020D   00F1           00224         movwf   ADRH
+020E   227D           00225         call    GET2SUM                 ;Get the address low
+020F   1683           00226        BANKSEL  PMADRL                   ;bank XX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0210   009A           00227         movwf   PMADRL
+0211   1283           00228        BANKSEL  PIR1                     ;bank 0
+                      00229 
+0212   1683           00230        BANKSEL  PMADRH                   ;bank XX
+0213   1003           00231         bcf     STATUS,C                ;Set the address
+0214   0C71           00232         rrf     ADRH,w
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0215   009B           00233         movwf   PMADRH
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0216   0C9A           00234         rrf     PMADRL,f
+0217   1283           00235        BANKSEL  PIR1                     ;bank 0
+0218   3C07           00236         sublw   ((bl_adr>>8) & 0xFF)    ;bl_adr(H)-PMADRH=0 ?
+0219   1D03           00237         skpz
+021A   2A02           00238         goto    Read_HEX                ;No get next line
+                      00239 
+021B   1683           00240        BANKSEL  PMADRL                   ;bank XX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+021C   081A           00241         movf    PMADRL,w
+021D   00F3           00242         movwf   temp
+021E   1283           00243        BANKSEL  PIR1                     ;bank 0
+021F   30A0           00244         movlw   (bl_adr & 0xFF)         ;PMADRL-bl_adr(L)>=0 ?
+0220   0273           00245         subwf   temp,w
+0221   1C03           00246         skpc
+0222   2A02           00247         goto    Read_HEX                ;No get next line
+                      00248 
+0223   227D           00249         call    GET2SUM                 ;Get the separator '00'
+                      00250 
+0224   1683           00251        BANKSEL  PMADRH                   ;bank XX
+0225   3001           00252         movlw   0x01                    ;PMADRH=0x01
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0226   009B           00253         movwf   PMADRH
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0227   039A           00254         decf    PMADRL,f                ;PMADRL=PMADRL-1
+0228   1283           00255        BANKSEL  PIR1                     ;bank 0
+                      00256 
+0229                  00257 r_loop:
+0229   227D           00258         call    GET2SUM                 ;Get the data (L)
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+022A   1683           00259        BANKSEL  PMADRL                   ;bank XX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+022B   0A9A           00260         incf    PMADRL,f                ;PMADRL=PMADRL+1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+022C   009C           00261         movwf   PMDATL
+022D   1283           00262        BANKSEL  PIR1                     ;bank 0
+022E   03F0           00263         decf    LC,f                    ;LC=LC-1
+022F   227D           00264         call    GET2SUM                 ;Get the data (H)
+0230   1683           00265        BANKSEL  PMADRH                   ;bank XX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0231   009D           00266         movwf   PMDATH
+0232   1283           00267        BANKSEL  PIR1                     ;bank 0
+0233   3084           00268         movlw   ((1<<7) | (1<<WREN))
+0234   22C2           00269         call    Write                   ;write
+0235   0BF0           00270         decfsz  LC,f
+0236   2A29           00271         goto    r_loop
+                      00272 
+0237   1683           00273        BANKSEL  PMADRH                   ;bank XX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0238   081A           00274         movf    PMADRL,w
+0239   00F3           00275         movwf   temp
+023A   1283           00276        BANKSEL  PIR1                     ;bank 0
+                      00277 
+023B                  00278 Processing_of_the_end:
+023B   0873           00279         movf    temp,w
+023C   3E01           00280         addlw   0x01
+023D   1883           00281         skpndc
+023E   2A4A           00282         goto    chk_sum
+                      00283 
+023F   1683           00284        BANKSEL  PMADRH                   ;bank XX
+0240   303F           00285         movlw   0x3F
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0241   009D           00286         movwf   PMDATH
+0242   30FF           00287         movlw   0xFF
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0243   009C           00288         movwf   PMDATL
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0244   0A9A           00289         incf    PMADRL,f                ;PMADRL=PMADRL+1
+0245   1283           00290        BANKSEL  PIR1                     ;bank 0
+0246   3084           00291         movlw   ((1<<7) | (1<<WREN))
+0247   22C2           00292         call    Write                   ;write
+0248   0AF3           00293         incf    temp,f
+0249   2A3B           00294         goto    Processing_of_the_end
+                      00295 
+024A                  00296 chk_sum:
+024A   227D           00297         call    GET2SUM                 ;Get checksum
+024B   1D03           00298         skpz
+024C   2A74           00299         goto    Err
+                      00300 
+024D   2A02           00301         goto    Read_HEX
+                      00302 
+                      00303 
+024E                  00304 Exit:
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+024E   3028           00305         MOVLW   MES002          ;>> Rcv OK
+024F   228C           00306         CALL    PUT2
+0250   229F           00307         CALL    CRLF
+0251   229F           00308         CALL    CRLF
+                      00309 
+0252                  00310 er_bl:                          ;erase bootloader
+0252   2277           00311         CALL    set_pmadr
+0253   3010           00312         MOVLW   .256/EPSIZE
+0254   00F0           00313         MOVWF   LC
+0255                  00314 er:
+0255   3094           00315         movlw   ((1<<7) | (1<<4) | (1<<WREN))
+0256   22C2           00316         CALL    Write
+0257   1683           00317        BANKSEL  PMADRL           ;bank XX
+0258   3010           00318         MOVLW   EPSIZE
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0259   079A           00319         ADDWF   PMADRL,F
+025A   1283           00320        BANKSEL  PIR1             ;bank 0
+025B   0BF0           00321         DECFSZ  LC,f
+025C   2A55           00322         GOTO    er
+                      00323 
+025D                  00324 cp_bl:                          ;copy
+025D   2277           00325         CALL    set_pmadr
+025E   01F0           00326         clrf    LC
+025F                  00327 cp:
+025F   1683           00328        BANKSEL  PMADRH           ;bank XX
+0260   3001           00329         movlw   0x01
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0261   009B           00330         movwf   PMADRH          ;PMADRH=0x01
+0262   1283           00331        BANKSEL  PIR1             ;bank 0
+0263   22CE           00332         call    Read
+0264   1683           00333        BANKSEL  PMADRH           ;bank XX
+0265   3007           00334         movlw   ((bl_adr>>8) & 0xFF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0266   009B           00335         movwf   PMADRH          ;PMADRH=rxd
+0267   1283           00336        BANKSEL  PIR1             ;bank 0
+0268   3084           00337         movlw   ((1<<7) | (1<<WREN))
+0269   22C2           00338         CALL    Write
+026A   1683           00339        BANKSEL  PMADRL           ;bank XX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+026B   0A9A           00340         incf    PMADRL,f        ;PMADRL = PMADRL + 1
+026C   1283           00341        BANKSEL  PIR1             ;bank 0
+026D   0BF0           00342         DECFSZ  LC,f
+026E   2A5F           00343         GOTO    cp
+                      00344 
+026F   229F           00345         CALL    CRLF
+0270   3037           00346         MOVLW   MES004          ;Rewrite Done
+0271   228C           00347         CALL    PUT2
+0272   229F           00348         CALL    CRLF
+0273   2A73           00349         GOTO    $               ;stop
+                      00350 
+                      00351 
+0274                  00352 Err:
+0274   302D           00353         MOVLW   MES003          ;!!! Read Error !!!
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0275   228C           00354         CALL    PUT2
+0276   2A76           00355         GOTO    $               ;stop
+                      00356 
+                      00357 ; --------------------------------------------------------------------
+                      00358 ;
+                      00359 ;               Set PMADR and LC
+                      00360 ;
+                      00361 ; --------------------------------------------------------------------
+                      00362 
+0277                  00363 set_pmadr:
+0277   1683           00364        BANKSEL  PMADRH           ;bank XX
+0278   3007           00365         MOVLW   ((bl_adr>>8) & 0xFF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0279   009B           00366         MOVWF   PMADRH
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+027A   019A           00367         CLRF    PMADRL
+027B   1283           00368        BANKSEL  PIR1             ;bank 0
+027C   0008           00369         RETURN
+                      00370 
+                      00371 ; --------------------------------------------------------------------
+                      00372 ;
+                      00373 ;               Set to W received the letter HEX2, SUM addition
+                      00374 ;
+                      00375 ; --------------------------------------------------------------------
+                      00376 
+027D                  00377 GET2SUM:
+027D   22B5           00378         call    GETC
+027E   30C9           00379         movlw   0xC9
+027F   1F74           00380         btfss   rxd,6
+0280   30D0           00381         movlw   0xD0
+0281   0774           00382         addwf   rxd,w
+0282   00F3           00383         movwf   temp
+0283   22B5           00384         call    GETC
+0284   30C9           00385         movlw   0xC9
+0285   1F74           00386         btfss   rxd,6
+0286   30D0           00387         movlw   0xD0
+0287   0774           00388         addwf   rxd,w
+0288   0EF3           00389         swapf   temp,f
+0289   0773           00390         addwf   temp,w
+028A   07F2           00391         addwf   SUM,f
+028B   0008           00392         return
+                      00393 
+                      00394 ; --------------------------------------------------------------------
+                      00395 ;
+                      00396 ;               It displays a message written to the flash
+                      00397 ;
+                      00398 ;               Input:W (Start address(L) of the message)
+                      00399 ;
+                      00400 ; --------------------------------------------------------------------
+                      00401 
+028C                  00402 PUT2:
+028C   1683           00403        BANKSEL  PMADRL                   ;bank XX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+028D   009A           00404         MOVWF   PMADRL                  ;Set PMADR
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+028E   019B           00405         CLRF    PMADRH
+028F   1283           00406        BANKSEL  PIR1                     ;bank 0
+0290                  00407 LOOP_P:
+0290   22CE           00408         call    Read
+0291   1683           00409        BANKSEL  PMADRL                   ;bank XX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0292   0A9A           00410         INCF    PMADRL,F                ;PMADRL = PMADRL + 1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0293   0D9C           00411         RLF     PMDATL,F                ;Carry=a, PMDATL=bcdefghX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0294   0D1D           00412         RLF     PMDATH,W                ;Carry=0, W=0ABCDEFa
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0295   0C9C           00413         RRF     PMDATL,F                ;Carry=X, PMDATL=0bcdefgh
+0296   1283           00414        BANKSEL  PIR1                     ;bank 0
+0297   22A2           00415         CALL    PUTC                    ;display the first char
+0298   1683           00416        BANKSEL  PMDATL                   ;bank XX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0299   081C           00417         MOVF    PMDATL,W                ;W=PMDATL
+029A   1283           00418        BANKSEL  PIR1                     ;bank 0
+029B   1903           00419         skpnz                           ;W>0
+029C   0008           00420         RETURN
+                      00421 
+029D   22A2           00422         CALL    PUTC                    ;display next char
+029E   2A90           00423         GOTO    LOOP_P                  ;loop
+                      00424 
+                      00425 ; --------------------------------------------------------------------
+                      00426 ;               New line
+                      00427 ; --------------------------------------------------------------------
+                      00428 
+029F                  00429 CRLF:
+029F   300D           00430         MOVLW   0x0D
+02A0   22A2           00431         CALL    PUTC
+02A1   300A           00432         MOVLW   0x0A
+                      00433 
+                      00434 ; ********************************************************************
+                      00435 ;
+                      00436 ;               RS-232C Send 1byte
+                      00437 ;
+                      00438 ;               Set W and Call (Return:W=0x80,Carry=1,Zero=1)
+                      00439 ;
+                      00440 ; ********************************************************************
+                      00441 
+02A2                  00442 PUTC:
+02A2   00F4           00443                 movwf   rxd             ;rxd=W
+                      00444 
+                      00445         #ifdef  Direct_TX
+                      00446                 bsf     TXPORT,TX       ;Send START bit:TX=1
+                      00447                 call    bwait           ;Wait 1bit and Set Carry=1
+                      00448                 rrf     rxd,f           ;Bit Output
+                      00449                 btfss   STATUS,C        ;rxd_0=B'ABCDEFGH'
+                      00450                 bsf     TXPORT,TX       ;rxd_1=B'1ABCDEFG'>1
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00451                 btfsc   STATUS,C        ;rxd_2=B'01ABCDEF'>1
+                      00452                 bcf     TXPORT,TX       ;rxd_8=B'00000001'=1
+                      00453                 call    bwait           ;Wait 1bit
+                      00454                 bcf     STATUS,C        ;Carry=0
+                      00455                 decfsz  rxd,W           ;Send 8bits?
+                      00456                 goto    $-8             ;loop
+                      00457                 bcf     TXPORT,TX       ;Send STOP bit:TX=0
+                      00458         #else
+02A3   1205           00459                 bcf     TXPORT,TX       ;Send START bit:TX=0
+02A4   22AF           00460                 call    bwait           ;Wait 1bit and Set Carry=1
+02A5   0CF4           00461                 rrf     rxd,f           ;Bit Output
+02A6   1C03           00462                 btfss   STATUS,C        ;rxd_0=B'ABCDEFGH'
+02A7   1205           00463                 bcf     TXPORT,TX       ;rxd_1=B'1ABCDEFG'>1
+02A8   1803           00464                 btfsc   STATUS,C        ;rxd_2=B'01ABCDEF'>1
+02A9   1605           00465                 bsf     TXPORT,TX       ;rxd_8=B'00000001'=1
+02AA   22AF           00466                 call    bwait           ;Wait 1bit
+02AB   1003           00467                 bcf     STATUS,C        ;Carry=0
+02AC   0B74           00468                 decfsz  rxd,W           ;Send 8bits?
+02AD   2AA5           00469                 goto    $-8             ;loop
+02AE   1605           00470                 bsf     TXPORT,TX       ;Send STOP bit:TX=1
+                      00471         #endif
+                      00472 
+02AF                  00473 bwait:                                  ; wait 1 bit
+02AF   22B0           00474                 call    bwait2          ; 1 us  total:1+49+49=99 us
+02B0                  00475 bwait2:                                 ; wait 1/2bit and Set Carry=1
+02B0   30E8           00476                 movlw   .256-.24        ; 0.5 us
+02B1   3E01           00477                 addlw   0x01            ; 0.5 us
+02B2   1D03           00478                 btfss   STATUS,Z        ; 0.5 us
+02B3   2AB1           00479                 goto    $-2             ; 1 us
+02B4   3480           00480                 retlw   0x80            ; 1 us  total:0.5+(0.5+0.5+1)*24-0.5+1=49 us
+                      00481 
+                      00482 ; ********************************************************************
+                      00483 ;
+                      00484 ;               RS-232C Recieve 1byte
+                      00485 ;
+                      00486 ;               Return in W
+                      00487 ;
+                      00488 ; ********************************************************************
+                      00489 
+02B5                  00490 GETC:
+                      00491         #ifdef  Direct_RX
+                      00492                 btfss   RXPORT,RX
+                      00493         #else
+02B5   1A85           00494                 btfsc   RXPORT,RX
+                      00495         #endif
+02B6   2AB5           00496                 goto    $-1             ; wait Start bit
+                      00497 
+02B7   22B0           00498                 call    bwait2          ; wait 1/2 bit and W=B'10000000'
+02B8   00F4           00499                 movwf   rxd             ; rxd = B'10000000'
+                      00500 
+02B9   22AF           00501                 call    bwait           ; wait 1 bit and set Carry=1
+                      00502         #ifdef  Direct_RX               ; set Carry
+                      00503                 btfsc   RXPORT,RX
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00504         #else
+02BA   1E85           00505                 btfss   RXPORT,RX
+                      00506         #endif
+02BB   1003           00507                 bcf     STATUS,C
+02BC   0CF4           00508                 rrf     rxd,f           ; get bit data
+02BD   1C03           00509                 skpc                    ; Carry=1 skip
+02BE   2AB9           00510                 goto    $-5             ; Carry=0 loop
+02BF   22AF           00511                 call    bwait           ; wait 1 bit
+02C0   0874           00512                 movf    rxd,w           ; return in w
+02C1   0008           00513                 return
+                      00514 
+                      00515 ; ********************************************************************
+                      00516 ;
+                      00517 ;               Program Flash
+                      00518 ;
+                      00519 ;               Set PMADRH:PMADRHL,PMDATH:PMDATL and Call
+                      00520 ;
+                      00521 ; ********************************************************************
+                      00522 
+02C2                  00523 Write:                          ; write byte
+02C2   1683           00524        BANKSEL  PMCON1           ;bank XX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+02C3   0098           00525         movwf   PMCON1
+02C4   3055           00526         movlw   0x55
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+02C5   0099           00527         movwf   PMCON2
+02C6   30AA           00528         movlw   0xaa
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+02C7   0099           00529         movwf   PMCON2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+02C8   1498           00530         bsf     PMCON1,WR
+02C9   0000           00531         nop
+02CA   0000           00532         nop
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+02CB   0198           00533         clrf    PMCON1
+02CC   1283           00534        BANKSEL  PIR1             ;bank 0
+02CD   0008           00535         return
+                      00536 
+02CE                  00537 Read:
+02CE   1683           00538        BANKSEL  PMCON1           ;bank XX
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+02CF   1798           00539         bsf     PMCON1,7
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+02D0   1418           00540         bsf     PMCON1,RD
+02D1   0000           00541         nop
+02D2   0000           00542         nop
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+02D3   0198           00543         clrf    PMCON1
+02D4   1283           00544        BANKSEL  PIR1             ;bank 0
+02D5   0008           00545         return
+                      00546 
+                      00547         END
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ADRH                              00000071
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANSEL                             0000009F
+APFCON                            00000093
+C                                 00000000
+C1CH                              00000000
+C1HYS                             00000003
+C1IE                              00000003
+C1IF                              00000003
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1SYNC                            00000000
+C1VREN                            00000007
+CCP1CON                           00000015
+CCP1IE                            00000005
+CCP1IF                            00000005
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPIE                             00000005
+CCPIF                             00000005
+CCPR1                             00000013
+CCPR1H                            00000014
+CCPR1L                            00000013
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CMCH                              00000000
+CMCON0                            0000001A
+CMCON1                            0000001C
+CMHYS                             00000003
+CMIE                              00000003
+CMIF                              00000003
+CMOE                              00000005
+CMON                              00000007
+CMPOL                             00000004
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CMR                               00000002
+CMSYNC                            00000000
+CMVREN                            00000007
+COUT                              00000006
+CRLF                              0000029F
+DC                                00000001
+DCB0                              00000004
+DCB1                              00000005
+ECCPAS                            00000017
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+ECCPIE                            00000005
+ECCPIF                            00000005
+EPSIZE                            0x10
+Err                               00000274
+Exit                              0000024E
+F                                 00000001
+FSR                               00000004
+FVREN                             00000004
+GET2SUM                           0000027D
+GETC                              000002B5
+GIE                               00000007
+GO_NOT_DONE                       00000001
+GP0                               00000000
+GP1                               00000001
+GP2                               00000002
+GP3                               00000003
+GP4                               00000004
+GP5                               00000005
+GPIE                              00000003
+GPIF                              00000000
+GPIO                              00000005
+GPIO0                             00000000
+GPIO1                             00000001
+GPIO2                             00000002
+GPIO3                             00000003
+GPIO4                             00000004
+GPIO5                             00000005
+INDF                              00000000
+INIT                              00000200
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IOCA                              00000096
+IOCA0                             00000000
+IOCA1                             00000001
+IOCA2                             00000002
+IOCA3                             00000003
+IOCA4                             00000004
+IOCA5                             00000005
+IRP                               00000007
+LC                                00000070
+LOOP_P                            00000290
+MES001                            00000004
+MES002                            00000028
+MES003                            0000002D
+MES004                            00000037
+NOT_BOR                           00000000
+NOT_GPPU                          00000007
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OSCTUNE                           00000090
+P1ASEL                            00000000
+P1BSEL                            00000001
+P1M                               00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PMADRH                            0000009B
+PMADRH0                           00000000
+PMADRH1                           00000001
+PMADRH2                           00000002
+PMADRL                            0000009A
+PMADRL0                           00000000
+PMADRL1                           00000001
+PMADRL2                           00000002
+PMADRL3                           00000003
+PMADRL4                           00000004
+PMADRL5                           00000005
+PMADRL6                           00000006
+PMADRL7                           00000007
+PMCON1                            00000098
+PMCON2                            00000099
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PMDATH                            0000009D
+PMDATL                            0000009C
+PMDATL0                           00000000
+PMDATL1                           00000001
+PMDATL2                           00000002
+PMDATL3                           00000003
+PMDATL4                           00000004
+PMDATL5                           00000005
+PMDATL6                           00000006
+PMDATL7                           00000007
+PORTA                             00000005
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PUT2                              0000028C
+PUTC                              000002A2
+PWM1CON                           00000016
+Processing_of_the_end             0000023B
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+RX                                5
+RXP                               1
+RXPORT                            00000005
+Read                              000002CE
+Read_HEX                          00000202
+STATUS                            00000003
+SUM                               00000072
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1ACS                             00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GSEL                            00000004
+T1GSS                             00000001
+T1OSCEN                           00000003
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISIO                            00000085
+TRISIO0                           00000000
+TRISIO1                           00000001
+TRISIO2                           00000002
+TRISIO3                           00000003
+TRISIO4                           00000004
+TRISIO5                           00000005
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX                                4
+TXP                               1
+TXPORT                            00000005
+VCFG                              00000006
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000019
+VRR                               00000005
+W                                 00000000
+WPU                               00000095
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WPUA                              00000095
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA4                             00000004
+WPUA5                             00000005
+WR                                00000001
+WREN                              00000002
+Write                             000002C2
+Z                                 00000002
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_CONFIG                           00002007
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTOSCCLK                   00003FFD
+_FOSC_INTOSCIO                    00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_IOSCFS_4MHZ                      00003F7F
+_IOSCFS_8MHZ                      00003FFF
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+MPASM  5.51                     REWRITEBL.ASM   11-27-2013  23:51:50         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WDT_ON                           00003FFF
+_WRT_ALL                          000033FF
+_WRT_BOOT                         00003BFF
+_WRT_HALF                         000037FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FF9
+__12F617                          00000001
+__DEBUG                           1
+bl_adr                            0x07A0
+bwait                             000002AF
+bwait2                            000002B0
+chk_sum                           0000024A
+cp                                0000025F
+cp_bl                             0000025D
+er                                00000255
+er_bl                             00000252
+r_loop                            00000229
+rxd                               00000074
+set_pmadr                         00000277
+temp                              00000073
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XX--XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXX--
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0140 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0180 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+01C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0200 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0240 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0280 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+02C0 : XXXXXXXXXXXXXXXX XXXXXX---------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   530
+Program Memory Words Free:  1518
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :    34 reported,     0 suppressed
+
+

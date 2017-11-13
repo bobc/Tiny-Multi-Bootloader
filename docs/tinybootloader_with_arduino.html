@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <title>Tiny AVR/PIC Bootloader+ : Modify ATtiny family firmwares</title>
+  </head>
+  <body>
+    <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="text-align: center; vertical-align: top;">
+            <h1 style="color: rgb(0, 0, 153);">Tiny AVR/PIC
+              Bootloader+</h1>
+            <div style="text-align: left; color: rgb(0, 0, 153);">
+              <h2>Use TinyBootloader+ with Arduino:</h2>
+              <hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><br>
+              </span></div>
+            <div style="text-align: left;">
+              <div>
+                <p><em>Last edit: Dan 2014-04-21</em></p>
+                <p>Hi, all</p>
+                <p>Because I managed to use the tiny bootloader from Arduino, and reports.</p>
+                <p>I can write without using ISP ATTINY. As ATMEGA.</p>
+                <p>Way of thinking:</p>
+                <p>1. Arduino writing of the program by starting avrdude.<br>
+                  2. If you make a avrdude_wrapper, writing any program can be launched from the Arduino.</p>
+                <p>Procedure:</p>
+                <p>1. Install arduino-tiny.<br>
+                  <a href="http://code.google.com/p/arduino-tiny/downloads/detail?name=arduino-tiny-0150-0020.zip" rel="nofollow">http://code.google.com/p/arduino-tiny/downloads/detail?name=arduino-tiny-0150-0020.zip</a></p>
+                <p>2. Move avrdude.exe of Arduino-IDE included.<br>
+                  From C:\Program Files\arduino\hardwear\tools\avr\bin\avrdude.exe<br>
+                  To C:\Program Files\arduino\hardwear\tools\avr\etc\</p>
+                <p>3. Make a avrdude_wrapper and rename to avrdude.exe</p>
+                <p>4. Copy avrdude.exe to C:\Program Files\arduino\hardwear\tools\avr\bin\</p>
+                <p>5. Edit "Prospective Boards.txt" within arduino-tiny.</p>
+                <p>6. Case attiny13,Add the following lines: 856=1024-2*84(bytes)</p>
+                <p>attiny13-8.name=ATtiny13 (internal 9.6 MHz clock)<br>
+                  attiny13-8.upload.protocol=arduino<br>
+                  attiny13-8.upload.speed=9600<br>
+                  attiny13-8.bootloader.low_fuses=0x7a<br>
+                  attiny13-8.bootloader.high_fuses=0xef<br>
+                  attiny13-8.upload.maximum_size=856<br>
+                  attiny13-8.build.mcu=attiny13<br>
+                  attiny13-8.build.f_cpu=9600000L<br>
+                  attiny13-8.build.core=arduino<br>
+                  attiny13-8.build.variant=tiny8</p>
+                <p>How to use: (Case attiny13)<br>
+                  &#9312; write a Tiny Avr/Pic Bootloader+ firmware to ATtiny13A,<br>
+                  Setting of the fuse bits: High = 0xEF, Low = 0x7A</p>
+                <p>&#9313; Connection of ATtiny13A(VDD,VSS,TX,RX,RESET)<br>
+                  Case bootloader_13A_84w_r4 within Tiny_Avr-Pic_Bootloader+ (v0.8.3.1)<br>
+                  Serial RXD(Signal level after conversion) == ATtiny13A_softserial_TX=PORTB,4<br>
+                  Serial TXD(Signal level after conversion) == ATtiny13A_softserial_RX=PORTB,3<br>
+                  Serial DTR(Signal level after conversion) == ATtiny13A_RESET=PORTB,5 (0.1uF)</p>
+                <p>&#9314; Starting the Arduino</p>
+                <p>&#9315; Tools-board, Select ATtiny13(internal 9.6MHz clock).</p>
+                <p>&#9316; Tools-Serial Port, Select COM port.</p>
+                <p>&#9317; Load Sketch of attiny.</p>
+                <p>&#9318; File-Upload<br>
+                  &#12288;Bootloader was written in ATtiny13A is reset automatically to ATtiny13A at this time to start.<br>
+                  &#12288;Tiny Avr / Pic Bootloader + host program starts automatically ATtiny13A to HEX file transfer.</p>
+                <p>&#9319; Sketch Once all files have been successfully uploaded, the application starts automatically after about one second.</p>
+                <p><img src="test_Sketch.jpg" alt="" width="500" height="600"></p>
+              </div>
+                </div>          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </body>
+</html>

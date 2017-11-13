@@ -1,0 +1,40 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.42</VERSION>
+ <DEVICE>ATmega328P</DEVICE>
+ <WORKING_DIR>C:\avrasm1\bootloader_M328P_r1</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes\m328Pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.map</FILE>
+  <FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.lst</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <IntrareBootloader><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>100</LINE></IntrareBootloader>
+  <Receive><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>227</LINE></Receive>
+  <way_to_exit><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>243</LINE></way_to_exit>
+  <rs1tx><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>200</LINE></rs1tx>
+  <MainLoop><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>114</LINE></MainLoop>
+  <mainl><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>116</LINE></mainl>
+  <rcvoct><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>131</LINE></rcvoct>
+  <ctrl_flash><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>184</LINE></ctrl_flash>
+  <ziieroare><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>157</LINE></ziieroare>
+  <eeprom><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>154</LINE></eeprom>
+  <flash><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>148</LINE></flash>
+  <w_eeprom><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>169</LINE></w_eeprom>
+  <rs1rx><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>214</LINE></rs1rx>
+  <r1rx11><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>217</LINE></r1rx11>
+  <rpt2><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>229</LINE></rpt2>
+  <rptc><FILE>C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm</FILE><LINE>232</LINE></rptc>
+ </LABELS>
+</ASSEMBLER_INFO>

@@ -1,0 +1,16 @@
+PC driver intallation:
+
+In "USB version\_Virtual_COM_Install" folder you'll find two other folders: "PC Driver" and "Virtual_COM_Install_Firmware". 
+As Tiny AVR/PIC Bootloader+ firmwares are waiting for PC connection only for 1 second before launching the application's firmware, you won't have the time to install the virtual COM driver on you PC! So, you must follow the PC driver's installation procedure given below:
+ * put "PIC32MXxxxF512L_Virtual_COM_Install_Firmware.hex", from "Virtual_COM_Install_Firmware" folder, in your device.
+ * connect your device to an USB port.
+ * when Windows ask for a driver, point to the "PC Driver" folder and install it.
+
+Now, you'll have a new COM on your computer. Note it's number (for example: COM7).
+So, you can put the real PIC32 USB Tiny Bootloader firmware (i.e. "tinyboot_PIC32MXxxxF512L_USB-CDC.hex") in your PIC32 device.
+
+In "Tiny AVR/PIC Bootloader+" PC software, write the name of the new COM port (for example: COM7), in "Selected COM:" text zone.
+
+Notes:
+Beware, with USB firmware, automatic RTS Reset is ineffective. So you'll have to reset your device manually, either by powering it Off then On or by puting /MCLR to ground via a switch. Once reseted, you'll just have a little second to clic on "Write Device" or "Check Device" button!
+With USB firmware, you can use any baudrate, it will work.

@@ -1,0 +1,42 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.42</VERSION>
+ <DEVICE>ATtiny85</DEVICE>
+ <WORKING_DIR>C:\avrasm1\New Folder\bootloader_85_r3</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes\tn85def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.map</FILE>
+  <FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.lst</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <IntrareBootloader><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>80</LINE></IntrareBootloader>
+  <Receive><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>221</LINE></Receive>
+  <way_to_exit><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>241</LINE></way_to_exit>
+  <SendL><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>181</LINE></SendL>
+  <MainLoop><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>91</LINE></MainLoop>
+  <mainl><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>93</LINE></mainl>
+  <rcvoct><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>112</LINE></rcvoct>
+  <ctrl_flash><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>168</LINE></ctrl_flash>
+  <ziieroare><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>139</LINE></ziieroare>
+  <eeprom><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>136</LINE></eeprom>
+  <flash><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>130</LINE></flash>
+  <w_eeprom><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>151</LINE></w_eeprom>
+  <bwait><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>206</LINE></bwait>
+  <bwait2><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>208</LINE></bwait2>
+  <rpt2><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>223</LINE></rpt2>
+  <rptc><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>226</LINE></rptc>
+  <RcvL1><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>259</LINE></RcvL1>
+  <RcvL><FILE>C:\avrasm1\New Folder\bootloader_85_r3\bootloader_85.asm</FILE><LINE>252</LINE></RcvL>
+ </LABELS>
+</ASSEMBLER_INFO>

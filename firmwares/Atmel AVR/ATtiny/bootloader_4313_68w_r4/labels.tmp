@@ -1,0 +1,35 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.42</VERSION>
+ <DEVICE>ATtiny4313</DEVICE>
+ <WORKING_DIR>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes\tn4313def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.map</FILE>
+  <FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.lst</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <IntrareBootloader><FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</FILE><LINE>66</LINE></IntrareBootloader>
+  <Receive><FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</FILE><LINE>144</LINE></Receive>
+  <way_to_exit><FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</FILE><LINE>160</LINE></way_to_exit>
+  <MainLoop><FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</FILE><LINE>79</LINE></MainLoop>
+  <mainl><FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</FILE><LINE>81</LINE></mainl>
+  <rcvoct><FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</FILE><LINE>97</LINE></rcvoct>
+  <Flash_Sequence><FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</FILE><LINE>133</LINE></Flash_Sequence>
+  <ziieroare><FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</FILE><LINE>110</LINE></ziieroare>
+  <eeprom><FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</FILE><LINE>121</LINE></eeprom>
+  <flash><FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</FILE><LINE>116</LINE></flash>
+  <rptc><FILE>C:\picasm1\tinybld198\picsource\2014.05.31\bootloader_4313_68w_r4\bootloader_4313.asm</FILE><LINE>149</LINE></rptc>
+ </LABELS>
+</ASSEMBLER_INFO>

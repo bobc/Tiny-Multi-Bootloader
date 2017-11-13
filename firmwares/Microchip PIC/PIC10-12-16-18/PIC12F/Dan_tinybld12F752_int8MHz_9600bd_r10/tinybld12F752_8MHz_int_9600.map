@@ -1,0 +1,71 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Jun 10 15:39:45 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x00039c    program   0x000000
+                   .org_3       code   0x0003a0    program   0x0000be
+.config_2007_TINYBLD12F752_8MHZ_INT_9600.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x0003a0    0x0003fe      
+                            0x002007    0x002007      
+            97 out of 1030 program addresses used, program memory utilization is 9%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x0003a0    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                 MainLoop   0x0003ac    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     RcvL   0x0003d7    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                    RcvL1   0x0003d9    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                  Receive   0x0003c6    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                    SendL   0x0003ed    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     bout   0x0003f5    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                    bwait   0x0003f9    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                   bwait2   0x0003fa    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                    mainl   0x0003ad    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     rpt2   0x0003c9    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     rpt3   0x0003c9    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     rptc   0x0003c9    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+               set_PMdata   0x0003c0    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+              way_to_exit   0x0003d6    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     wr_d   0x0003e3    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                    write   0x0003e4    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                ziieroare   0x0003bb    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x0003a0    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                 MainLoop   0x0003ac    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                    mainl   0x0003ad    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                ziieroare   0x0003bb    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+               set_PMdata   0x0003c0    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                  Receive   0x0003c6    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     rpt2   0x0003c9    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     rpt3   0x0003c9    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     rptc   0x0003c9    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+              way_to_exit   0x0003d6    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     RcvL   0x0003d7    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                    RcvL1   0x0003d9    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     wr_d   0x0003e3    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                    write   0x0003e4    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                    SendL   0x0003ed    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                     bout   0x0003f5    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                    bwait   0x0003f9    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+                   bwait2   0x0003fa    program     static C:\picasm1\tinybld198\picsource\2014.06.10\Dan_tinybld12F752_int8MHz_9600bd_r10\tinybld12F752_8MHz_int_9600.asm
+
+

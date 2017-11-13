@@ -1,0 +1,2 @@
+@ECHO OFF
+"C:\Program Files\Atmel\AVR Tools\AvrAssembler2\avrasm2.exe" -S "C:\avrasm1\bootloader_M48\labels.tmp" -fI -W+ie -C V2E -o "C:\avrasm1\bootloader_M48\bootloader_M48.hex" -d "C:\avrasm1\bootloader_M48\bootloader_M48.obj" -e "C:\avrasm1\bootloader_M48\bootloader_M48.eep" -m "C:\avrasm1\bootloader_M48\bootloader_M48.map" -l "C:\avrasm1\bootloader_M48\bootloader_M48.lst" "C:\avrasm1\bootloader_M48\bootloader_M48.asm"

@@ -1,0 +1,82 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Mon Nov 25 23:12:01 2013
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000004
+                   .org_2       code   0x000008    program   0x00016a
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000003      
+                            0x000008    0x000171      
+            366 out of 16664 program addresses used, program memory utilization is 2%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CRLF   0x00014c    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                      Err   0x0000c8    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     Exit   0x0000ce    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                  GET2SUM   0x00011c    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     GETC   0x00015a    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     INIT   0x000080    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   LOOP_P   0x000140    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   MES001   0x000008    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   MES002   0x000052    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   MES003   0x00005e    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   MES004   0x000072    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     PUTC   0x000152    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     PUTM   0x00013a    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     Read   0x000094    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   STAMSG   0x000090    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                    Write   0x000160    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                 clr_loop   0x00008a    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                  clr_ram   0x000084    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+          erase_botloader   0x0000d6    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+               erase_loop   0x0000dc    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   r_loop   0x0000bc    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+               set_tblptr   0x00010e    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                 write_bl   0x0000f0    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+         write_bootloader   0x0000e8    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+               write_byte   0x0000f2    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   MES001   0x000008    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   MES002   0x000052    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   MES003   0x00005e    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   MES004   0x000072    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     INIT   0x000080    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                  clr_ram   0x000084    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                 clr_loop   0x00008a    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   STAMSG   0x000090    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     Read   0x000094    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   r_loop   0x0000bc    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                      Err   0x0000c8    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     Exit   0x0000ce    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+          erase_botloader   0x0000d6    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+               erase_loop   0x0000dc    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+         write_bootloader   0x0000e8    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                 write_bl   0x0000f0    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+               write_byte   0x0000f2    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+               set_tblptr   0x00010e    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                  GET2SUM   0x00011c    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     PUTM   0x00013a    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                   LOOP_P   0x000140    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     CRLF   0x00014c    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     PUTC   0x000152    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                     GETC   0x00015a    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+                    Write   0x000160    program     static C:\picasm1\RewriteBL\PIC18F14k50_RewriteBL\RewriteBL.asm
+
+

@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <title>Tiny AVR/PIC Bootloader+ : Hardware Connections</title>
+  </head>
+  <body>
+    <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="text-align: center; vertical-align: top;">
+            <h1 style="color: rgb(0, 0, 153);">Tiny AVR/PIC Bootloader+</h1>
+            <div style="text-align: left; color: rgb(0, 0, 153);">
+              <h2>Hardware Connections:</h2>
+              <hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><br>
+              </span></div>
+            <div style="text-align: left;">
+              <h3 style="color: rgb(0, 0, 153);">Introduction</h3>
+              "Tiny PIC Bootloader +" is <span style="font-weight: bold;">only</span>
+              able to transfert data to the PIC
+              devives via a <span style="font-weight: bold;">serial
+                connection</span> (it's called UART (or USART) on a
+              microcontroller and, in the past,&nbsp;it was called RS232 on a
+              PC).<br>
+              <h3 style="color: rgb(0, 0, 153);">Prerequisite</h3>
+              Before you can use the bootloader with your PIC, you must
+              transfert the
+              corresponding bootloader firmware in the PIC device with an
+              external
+              programmer (i.e. ICD2, Pickit 3, etc...). <span style="text-decoration: underline;">This
+                must be done only
+                once</span>.<br>
+              If the specific bootloader firmware for your PIC is not included
+              in the
+              "Tiny PIC Bootloader +" archive or you want to use a different
+              Baud
+              Rate and/or UART port, you must read &nbsp;"[Firmwares:]
+              modify for PICxx" page to adapt an approching one.<br>
+              <h3><span style="color: rgb(0, 0, 153);">How
+                  to get serial data from the computer?</span></h3>
+              They are several possibilities:<br>
+              <h4 style="margin-left: 40px;">You have an RS232
+                port on your computeur:</h4>
+              <div style="margin-left: 40px;"><span style="text-decoration: underline;">The
+                  simpliest way is
+                  to use a MAX232 level converter:</span><br>
+                Here is a schematic and a board you can use:<br>
+                <img style="width: 708px; height: 351px;" alt="" src="TinyBoot-ProgRS232_sch.jpg"><br>
+                <img src="TinyBoot-ProgRS232_brd.jpg" style="width: 320px; height: 194px;"
+
+                  alt=""><br>
+                <br>
+                <a href="TinyBoot-ProgRS232%28revA%29.zip">Download
+                  the EagleCAD project (PDF files included).</a><br>
+                <br>
+                <span style="text-decoration: underline;">Or you can
+                  use this "Auto Powered RS232" board:</span><br>
+                <img style="width: 596px; height: 647px;" alt="" src="AutoPowered_RS232.jpg"><br>
+              </div>
+              <h4 style="margin-left: 40px;">You only have USB
+                ports on your computeur:</h4>
+              <div style="margin-left: 40px;">
+                <ul>
+                  <li>You can use a simple USB to RS232 cable adapter with
+                    the boards given above.</li>
+                </ul>
+                <ul>
+                  <li>Or, you can use a specific USB to RS232 card adapter
+                    (like a <a href="http://www.pololu.com/catalog/product/391">Pololu
+USB-to-Serial
+                      adapter</a>).</li>
+                </ul>
+                <ul>
+                  <li>Or, here is a schematic and a board (based on a
+                    FT232R chip) you can use:</li>
+                </ul>
+                <img src="TinyBoot-ProgUSB_sch.jpg" style="width: 749px; height: 339px;"
+
+                  alt=""><br>
+                <img src="TinyBoot-ProgUSB_brd.jpg" style="width: 374px; height: 171px;"
+
+                  alt=""><br>
+                <br>
+                <a href="TinyBoot-ProgUSB%28revA%29.zip">Download
+                  the EagleCAD project (PDF files included).</a><br>
+              </div>
+              <h3 style="color: rgb(0, 0, 153);">How to connect to
+                the PIC?</h3>
+              <h4 style="margin-left: 40px;">Connections:</h4>
+              <div style="margin-left: 40px;">
+                <ul>
+                  <li>RX pin from PC -&gt; TX pin on PIC.</li>
+                  <li>TX pin from PC -&gt; RX pin on PIC.</li>
+                  <li>GND pin from PC -&gt; VSS pin on PIC.</li>
+                </ul>
+                With MAX232:<br>
+                <ul>
+                  <li>RS232 board must be powered by VCC (VDD) from the PIC
+                    board.</li>
+                </ul>
+                With "Auto Powered RS232" board:<br>
+                <ul>
+                  <li>VCC from the "Auto Powered RS232" board can be
+                    connected to VCC (VDD) from the PIC board.</li>
+                </ul>
+                With USB to RS232 adapter/card:<br>
+                <ul>
+                  <li>V<small><small>USB</small></small>
+                    can&nbsp;can be connected to VCC (VDD) from the PIC board.
+                    If it's
+                    already powered by an other source, there is no need to
+                    connect V<small><small>USB</small></small>&nbsp;to
+                    the PIC board.</li>
+                </ul>
+                Optional (exept for "Auto Powered RS232" board as it is alway in
+                <span style="font-style: italic;">software reset</span>
+                mode):<br>
+                <ul>
+                  <li>!RTS
+                    pin from PC -&gt; !MCLR pin on PIC. Whis this connection,
+                    "Tiny PIC
+                    Bootloader +" PC software can reset automaticaly the PIC to
+                    put it in
+                    the "wait for bootload state" (<span style="font-style: italic;">software
+                      reset</span>).</li>
+                </ul>
+              </div>
+              <br>
+              <h4 style="margin-left: 40px;">Example:</h4>
+              <div style="margin-left: 40px;">Here is an example
+                with a PIC16F876A connected to the PC via a MAX232. <br>
+                But it will be very similar with an other PIC or with an USB to
+                RS232
+                adapter/card.<br>
+                <img style="width: 728px; height: 594px;" alt="" src="TinyBoot-ProgRS232toPICsch.jpg"><br>
+                <span style="text-decoration: underline;">Note about
+                  D1 diode:</span> it seems that PIC devices dislike to be
+                directly
+                pull to VCC. <br>
+                With
+                this diode, when !RTS is set to 5V then !MCLR is set to 5V via
+                R1. And
+                when RTS is set to GND then D1 diode permits !MCLR to be put to
+                GND.<br>
+                Nevertheless, it could work with !RTS directly attached to
+                !MCLR. </div>
+               
+              <h3 style="color: rgb(0, 0, 153);">Software Reset on
+                a PIC without !MCLR pin (and without "Auto Powered RS232"
+                board):</h3>
+              <h4 style="margin-left: 40px;"><span style="font-weight: normal;">WARNING:
+                  this solution hasn't
+                  been tested!</span></h4>
+              <div style="margin-left: 40px;">&nbsp;<img style="width: 360px; height: 288px;"
+
+                  alt="" src="TinyBoot-Reset_without_MCLR.jpg"></div>
+            </div>          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </body>
+</html>

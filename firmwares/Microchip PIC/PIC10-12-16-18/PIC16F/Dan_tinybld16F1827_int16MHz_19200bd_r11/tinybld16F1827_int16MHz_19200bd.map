@@ -1,0 +1,64 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Nov 24 16:03:46 2015
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x000f9c    program   0x000000
+                   .org_3       code   0x000fa0    program   0x0000ae
+.config_8007_TINYBLD16F1827_INT16MHZ_19200BD.       code   0x008007    program   0x000002
+.config_8008_TINYBLD16F1827_INT16MHZ_19200BD.       code   0x008008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x000fa0    0x000ff6      
+                            0x008007    0x008008      
+            90 out of 4359 program addresses used, program memory utilization is 2%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                FSReceive   0x000fd5    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+        IntrareBootloader   0x000fa0    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                 MainLoop   0x000fb6    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                  Receive   0x000fd7    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                    mainl   0x000fb7    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                   rcvoct   0x000fc1    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                     rpt2   0x000fd9    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                     rpt3   0x000fda    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                     rptc   0x000fdb    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+              way_to_exit   0x000fe6    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                     wr_e   0x000fea    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                     wr_w   0x000feb    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                writeloop   0x000fc9    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                ziieroare   0x000fc6    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x000fa0    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                 MainLoop   0x000fb6    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                    mainl   0x000fb7    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                   rcvoct   0x000fc1    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                ziieroare   0x000fc6    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                writeloop   0x000fc9    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                FSReceive   0x000fd5    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                  Receive   0x000fd7    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                     rpt2   0x000fd9    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                     rpt3   0x000fda    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                     rptc   0x000fdb    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+              way_to_exit   0x000fe6    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                     wr_e   0x000fea    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+                     wr_w   0x000feb    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F1827_int16MHz_19200bd_r11\tinybld16F1827_int16MHz_19200bd.asm
+
+

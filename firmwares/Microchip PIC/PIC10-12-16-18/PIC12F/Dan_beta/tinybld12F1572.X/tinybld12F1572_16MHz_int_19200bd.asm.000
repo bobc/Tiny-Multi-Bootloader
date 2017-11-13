@@ -1,0 +1,204 @@
+	radix 	DEC
+        
+	; change these lines accordingly to your application	
+
+	#include "p12f1572_1.inc"
+IdTypePIC = 0x1A		; Please refer to the table below, must exists in "piccodes.ini"	
+#define max_flash  0x800	; in WORDS, not bytes!!! (= 'max flash memory' from "piccodes.ini" divided by 2), Please refer to the table below
+
+	
+xtal 	EQU 	16000000	; you may also want to change: _HS_OSC _XT_OSC
+baud 	EQU 	19200		; standard TinyBld baud rates: 115200 or 19200
+
+;	#define	CHANGE_TX	;TX Bit Change from default, Please refer to the table below
+;	#define	CHANGE_RX	;RX Bit Change from default, Please refer to the table below
+
+;   The above 7 lines can be changed and buid a bootloader for the desired frequency (and PIC type)
+
+; +---------+--------+------------+-------------+-------------+-----------+-----------+-----------+--------+------+
+; |IdTypePIC| Device | Erase_Page |   TX bit    :   RX bit    |  TXCKSEL  |  RXDTSEL  | max_flash | EEPROM | PDIP |
+; |         |        |            | default(Pin)/changed(Pin) |           |           |           |        |      |
+; +---------+--------+------------+-------------+-------------+-----------+-----------+-----------+--------+------+
+; |   0x1A  |12F1572 |  16 words  | A0(7)/A4(3) | A1(6)/A5(2) | APFCON ,2 | APFCON ,7 |   0x0800  |    0   |   8  |
+; +---------+--------+------------+-------------+-------------+-----------+-----------+-----------+--------+------+
+
+; +----------+------+----------+------+ +----------+------------+
+; | register | BANK | register | BANK | |subroutine|    BANK    |
+; +----------+------+----------+------+ +----------+------------+
+; | PMCON1/2 |  3   |PMADRL/DAT|  3   | | Receive  |->1->0->1->3|
+; +----------+------+----------+------+ +----------+------------+
+; | ANSELA   |  3   |  WDTCON  |  1   |
+; +----------+------+----------+------+
+
+        ;********************************************************************
+	;	Tiny Bootloader		12F1572	 		Size=84words
+        ;       claudiu.chiculita@ugal.ro
+        ;       http://www.etc.ugal.ro/cchiculita/software/picbootloader.htm
+	;
+	;	This program is only available in Tiny AVR/PIC Bootloader +.
+	;
+	;	Tiny AVR/PIC Bootloader +
+	;	https://sourceforge.net/projects/tinypicbootload/
+	;
+	;	$1A, B, 12F 1572(84W), 		$1000, 0, 168, 32,
+	;
+        ;********************************************************************
+
+	#include "spbrgselect.inc"
+
+	#define first_address max_flash-84 ; 84 word in size
+
+	   __CONFIG    _CONFIG1, _FOSC_INTOSC & _WDTE_SWDTEN & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _BOREN_OFF
+	   __CONFIG    _CONFIG2, _WRT_OFF & _PLLEN_ON &_STVREN_OFF & _BORV_LO & _LPBOREN_OFF & _LVP_OFF
+
+
+	errorlevel 1, -305		; suppress warning msg that takes f as default
+
+	
+	cblock 0x7D
+	crc
+	endc
+	
+
+;0000000000000000000000000 RESET 00000000000000000000000000
+
+	org	0x0000
+;	pagesel	IntrareBootloader
+;	goto	IntrareBootloader
+	DW	0x33AF		;bra $-0x50
+
+;view with TabSize=4
+;&&&&&&&&&&&&&&&&&&&&&&&   START     &&&&&&&&&&&&&&&&&
+;----------------------  Bootloader  ----------------------
+;
+;PC_flash:    C1h          AddrH  AddrL  nr  ...(DataLo DataHi)...  crc
+;PIC_response:   id   K                                                 K
+
+	org 	first_address
+;	nop
+;	nop
+;	nop
+;	nop
+
+	org 	first_address+4
+IntrareBootloader:
+
+	btfss	STATUS,NOT_TO
+        bra     way_to_exit2		;timeout
+
+	movlp	(max_flash>>8)-1	;set PAGE
+					;init int clock & serial port
+	movlb	0x01			;BANK1
+	bsf	OSCCON,6		;internal clock 16MHz
+
+	movlb	0x02			;BANK2					;init int clock & serial port
+ #ifdef CHANGE_TX
+	bsf	APFCON0,2
+ #else
+	bcf	APFCON0,2
+ #endif
+
+ #ifdef CHANGE_RX
+	bsf	APFCON0,RXDTSEL
+ #else
+	bcf	APFCON0,RXDTSEL
+ #endif
+
+	movlb	0x03			;BANK3
+	clrf	ANSELA
+	movlw	b'00100100'
+	movwf	TXSTA
+	movlw	spbrg_value
+	movwf	SPBRG
+	movlw	b'10010000'
+	movwf	RCSTA
+					;wait for computer
+	call	Receive
+	sublw	0xC1			;Expect C1
+	skpz
+	bra	way_to_exit
+	movlw 	IdTypePIC		;PIC type
+	movwf	TXREG
+;	SendL	IdSoftVer		;firmware ver x
+
+MainLoop:
+	movlw 	'B'
+mainl:
+	movwf	TXREG
+	clrf	crc
+	call	Receive			;H
+	movwf	PMADRH
+	call	Receive			;L
+	movwf	PMADRL
+	call	Receive			;count (Receive Only)
+
+rcvoct:
+	call	Receive			;data L
+	movwf	PMDATL
+	call	Receive			;data H
+	movwf	PMDATH
+	call	wr_l			;write Latches (Return w=0x01)
+	addwf	PMADRL,f
+	skpdc				;skip if PMADRL=B'XXXX0000'
+	bra	rcvoct
+
+	call	Receive			;get SUM
+ziieroare:
+	movlw 	'N'
+	skpz 				;check SUM
+	bra	mainl
+
+	decf	PMADRL,f		;PMADRL=PMADRL-1
+	call	wr_e 			;erase operation
+	call	wr_w			;write operation
+	bra	MainLoop
+
+way_to_exit:				;communication error; must be BANK3
+	bcf	RCSTA,SPEN		;deactivate UART
+
+way_to_exit2:				;time out	    ; must be BANK0
+	movlb	0x00			;BANK0
+	movlp	0x00			;PAGE0
+	bra	first_address		;PAGE=0, Please do not change the GOTO instruction.
+
+
+Receive:
+	movlb	0x01			;BANK1
+	bsf	WDTCON,SWDTEN		;start WDT
+
+	movlb	0x00			;BANK0
+	btfss	PIR1,RCIF		;recive done ?
+	bra 	$-1			;not recive
+
+	movlb	0x01			;BANK1
+	bcf	WDTCON,SWDTEN		;stop WDT and clear
+
+	movlb	0x03			;BANK3
+	movf 	RCREG,w			;return in w
+	addwf 	crc,f			;compute checksum
+	return
+
+
+wr_e:
+	bsf 	PMCON1,FREE
+wr_l:
+	bsf 	PMCON1,LWLO
+wr_w:
+;	bcf 	PMCON1,CFGS 		;Deselect Config space
+	bsf	PMCON1,WREN
+	movlw	0x55
+	movwf	PMCON2
+	movlw	0xaa
+	movwf	PMCON2	
+	bsf	PMCON1,WR
+	nop
+	nop
+	clrf	PMCON1
+	retlw	0x01
+
+;*************************************************************
+; After reset
+; Do not expect the memory to be zero,
+; Do not expect registers to be initialised like in catalog.
+
+         end

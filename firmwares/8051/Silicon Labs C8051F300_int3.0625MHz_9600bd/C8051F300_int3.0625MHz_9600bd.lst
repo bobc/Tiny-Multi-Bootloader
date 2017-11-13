@@ -1,0 +1,525 @@
+C8051F300_int3.0625MHz_9600bd                                                                                           PAGE 1
+                         1             ; change these lines accordingly to your application
+                         2
+  0035                   3     FamilyC8501     equ     0x35            ; C8501 Family="5"
+  0051                   4     IdTypeC8501     equ     0x51            ; must exists in "piccodes.ini"
+  1E00                   5     max_flash       equ     0x1E00          ; in bytes not Words!!! (= 'max flash memory' from "piccodes
+  77A1                   6     xtal            equ     3062500/100     ; 24500000/8(Hz)
+  0060                   7     baud            equ     9600/100        ; standard TinyBld baud rates: 115200 or 19200
+                         8
+  0004                   9     TX              equ     4               ; C8501 TX Data output pin (i.e. 2 = P0.2)
+  0005                  10     RX              equ     5               ; C8501 RX Data input  pin (i.e. 3 = P0.3)
+                        11     ;Direct_TX       set    0               ; RS-232C TX Direct Connection(No use MAX232)
+                        12     ;Direct_RX       set    0               ; RS-232C RX Direct Connection(No use MAX232)
+                        13
+                        14     ;   The above 9 lines can be changed and buid a bootloader for the desired frequency
+                        15
+                        16     ; +---------+---------+------------+------------+------------+-----------+
+                        17     ; |  Family |  IdType |   Device   | Erase_Page | Write_Page | max_flash |
+                        18     ; +---------+---------+------------+------------+------------+-----------+
+                        19     ; |   0x35  |   0x11  |  C8051F300 |  512 bytes |  256 bytes |  0x01E00  |
+                        20     ; +---------+---------+------------+------------+------------+-----------+
+                        21
+                        22     ;buffer_map(Bootloader)
+                        23     ;0x00                        0x07(SP)  0x40           0xFF
+                        24     ;[R0][R1][R2][R3][R4][R5][R6][R7]......[buffer0]......[buffer191]
+                        25     ;
+                        26     ;buffer_map(UserProgram)
+                        27     ;0x00                        0x07(SP)  0xE0           0xFF
+                        28     ;[R0][R1][R2][R3][R4][R5][R6][R7]......[buffer0]......[buffer31]
+                        29
+                        30     ;max_flash-1024 +---------------+                           +---------------+     +---------------+
+                        31     ;               |               |  1.Copy Bootloader to RAM |               |     |               |
+                        32     ;               |               |  2.Erase upper Flash Page |     0xFF      |     |     0xFF      |
+                        33     ;               |               |  3.Copy RAM to Flash      |               |     |               |
+                        34     ;               | User Program1 |  4.Move PC to upper Flash |               |     |               |
+                        35     ;               |               |  5.Erase lower Flash Page |               |     |               |
+                        36     ;               |               |  6.Copy RAM to Flash      |               |     |               |
+                        37     ;max_flash-704  |               |  7.Move PC to lower Flash +---------------+     +---------------+
+                        38     ;               |               |  8.Erase Page 0 to last-1 |   Bootloader  |<-PC |   Bootloader  |
+                        39     ;max_flash-512  +---------------+  9.Write User Program     +---------------+     +---------------+
+                        40     ;               |               |    and User Vector        |               |     |               |
+                        41     ;               | User Program2 |                           | User Program2 |     |     0xFF      |
+                        42     ;               |               | <RAM>                     |               |     |               |
+                        43     ;max_flash-196  +---------------+ 0x000 +---------------+   +---------------+     |               |
+                        44     ;               |    Vector     |       |               |   |    Vector     |     |               |
+                        45     ;max_flash-192  +---------------+ 0x020 +---------------+   +---------------+     +---------------+
+                        46     ;               |   Bootloader  |       |   Bootloader  |   |   Bootloader  | PC->|   Bootloader  |
+                        47     ;max_flash      +---------------+ 0x100 +---------------+   +---------------+     +---------------+
+                        48
+                        49
+                        50             ;********************************************************************
+                        51             ;       Tiny Bootloader            C8051F300            Size=196bytes
+                        52             ;
+                        53             ;       (2014.08.11 Revision 2)
+                        54             ;
+                        55             ;       This program is only available in Tiny PIC Bootloader +.
+                        56             ;
+                        57             ;       Tiny PIC Bootloader +
+                        58             ;       https://sourceforge.net/projects/tinypicbootload/
+                        59             ;
+                        60             ;       Please add the following line to piccodes.ini
+                        61             ;
+                        62             ;       $51, 5, C8051 F300,             $1E00, 0, 196, 32,
+                        63             ;
+                        64             ;********************************************************************
+                        65
+                        66
+  1D3C                  67     first_address   equ     max_flash - 196 ; 196 bytes in size
+                        68
+                        69     ;crc            equ     R1
+                        70     ;cnt1           equ     R2
+                        71     ;cnt2           equ     R3
+                        72     ;cnt3           equ     R4
+                        73     ;cn             equ     R2
+                        74     ;rs             equ     R3
+                        75
+  008F                  76     PSCTL           equ     0x8F
+  00A4                  77     P0MDOUT         equ     0xA4
+  00B7                  78     FLKEY           equ     0xB7
+  00D9                  79     PCA0MD          equ     0xD9
+  00E1                  80     XBR0            equ     0xE1
+  00E2                  81     XBR1            equ     0xE2
+  00E3                  82     XBR2            equ     0xE3
+                        83
+                        84     ;-----------------------------------------------------------------------------
+                        85     ; RESET and INTERRUPT VECTORS
+                        86     ;-----------------------------------------------------------------------------
+                        87
+                        88                     ORG     0x0000
+0000 021D40             89                     LJMP    IntrareBootloader       ; Locate a jump to the start of code at the reset vec
+                        90     ;
+                        91     ;&&&&&&&&&&&&&&&&&&&&&&&   START     &&&&&&&&&&&&&&&&&
+                        92     ;----------------------  Bootloader  ----------------------
+                        93     ;
+                        94     ;PC_flash:      C1h          AddrH  AddrL  nr  ...(DataLo DataHi)...  crc
+                        95     ;PIC_response:  id   K
+                        96
+                        97     ;-----------------------------------------------------------------------------
+                        98     ; CODE SEGMENT
+                        99     ;-----------------------------------------------------------------------------
+                       100
+                       101                     ORG     first_address
+1D3C 00                102                     NOP
+1D3D 00                103                     NOP
+1D3E 00                104                     NOP
+1D3F 00                105                     NOP
+                       106
+                       107                     ORG     first_address+4
+                       108     IntrareBootloader:
+1D40 75D900            109                     MOV     PCA0MD,#0                       ; disable Watchdog
+                       110
+1D43 75E130            111                     MOV     XBR0,#((1 SHL TX)|(1 SHL RX))   ; skip TX,RX pin in crossbar
+1D46 75E340            112                     MOV     XBR2,#0x40                      ; assignments
+1D49 75A410            113                     MOV     P0MDOUT,#(1 SHL TX)             ; make TX pin output push-pull
+                       114
+1D4C B1AF              115                     ACALL   Receive                         ; wait for computer
+1D4E B4C1EB            116                     CJNE    A,#0xC1,first_address           ; connection errer or timeout
+                       117
+1D51 7840              118                     MOV     R0,#LOW(IntrareBootloader)      ; R0 = buffer top
+1D53 901D00            119                     MOV     DPTR,#(max_flash-256)           ; DPTR = IntrareBootloader - 0x20
+                       120     copy_flash_to_RAM:
+1D56 E8                121                     MOV     A,R0
+1D57 93                122                     MOVC    A,@A+DPTR
+1D58 F6                123                     MOV     @R0,A
+1D59 08                124                     INC     R0
+1D5A B800F9            125                     CJNE    R0,#0x00,copy_flash_to_RAM      ; loop
+                       126
+                       127     wr_BL1:
+1D5D 901B40            128                     MOV     DPTR,#(IntrareBootloader-512)   ; erase previous page
+1D60 B1E8              129                     ACALL   esequence                       ; erase page
+                       130     write_BL:
+1D62 B1ED              131                     ACALL   wsequence                       ; write bootloader
+1D64 A3                132                     INC     DPTR
+1D65 B8FFFA            133                     CJNE    R0,#0xFF,write_BL               ; loop
+1D68 616A              134                     AJMP    wr_BL2-512                      ; goto previous page
+                       135
+                       136     wr_BL2:
+1D6A 901D40            137                     MOV     DPTR,#IntrareBootloader         ; erase last page
+1D6D 71E8              138                     ACALL   esequence-512                   ; erase page
+                       139     rewrite_BL:
+1D6F 71ED              140                     ACALL   wsequence-512                   ; rewrite bootloader
+1D71 A3                141                     INC     DPTR
+1D72 B8FFFA            142                     CJNE    R0,#0xFF,rewrite_BL             ; loop
+1D75 A177              143                     AJMP    erase_all_flash                 ; goto last page, DPL = 0x00
+                       144
+                       145     erase_all_flash:
+1D77 781A              146                     MOV     R0,#HIGH(max_flash-1024)        ; R0 = High(max_flash-1024)
+                       147     e_loop:
+1D79 8883              148                     MOV     DPH,R0                          ; set DPTR
+1D7B B1E8              149                     ACALL   esequence                       ; erase page
+1D7D 18                150                     DEC     R0                              ; R0 = R0 -2
+1D7E D8F9              151                     DJNZ    R0,e_loop                       ; loop
+1D80 B1E8              152                     ACALL   esequence                       ; erase page 0
+                       153
+                       154     send_IdType:
+1D82 7451              155                     MOV     A,#IdTypeC8501          ; send IdType
+1D84 B1CD              156                     ACALL   SendL
+                       157
+                       158     MainLoop:
+1D86 7435              159                     MOV     A,#FamilyC8501          ; send Family ID
+                       160     mainl:
+1D88 B1CD              161                     ACALL   SendL
+1D8A 7900              162                     MOV     R1,#0                   ; clear Checksum
+1D8C B1AF              163                     ACALL   Receive                 ; get ADR_H
+1D8E F583              164                     MOV     DPH,A
+1D90 B1AF              165                     ACALL   Receive                 ; get ADR_L
+1D92 F582              166                     MOV     DPL,A
+                       167     ;               MOV     R0,#0xE0
+1D94 B1AD              168                     ACALL   FSReceive               ; get count (Only Receive)
+                       169     rcvoct:
+1D96 B1AF              170                     ACALL   Receive                 ; get Data
+1D98 F6                171                     MOV     @R0,A                   ; set Data
+1D99 08                172                     INC     R0
+1D9A B800F9            173                     CJNE    R0,#0x00,rcvoct         ; loop
+                       174
+                       175     ;               MOV     R0,#0xE0
+1D9D B1AD              176                     ACALL   FSReceive               ; get Checksum
+                       177     ziieroare:
+1D9F 744E              178                     MOV     A,#'N'                  ; send "N"
+1DA1 B900E4            179                     CJNE    R1,#0x00,mainl          ; retry
+                       180     write_flash:
+1DA4 B1EF              181                     ACALL   wsequence1
+1DA6 A3                182                     INC     DPTR
+1DA7 08                183                     INC     R0
+1DA8 B800F9            184                     CJNE    R0,#0x00,write_flash
+1DAB 80D9              185                     SJMP    MainLoop
+                       186
+                       187
+                       188
+                       189     FSReceive:
+1DAD 78E0              190                     MOV     R0,#0xE0
+                       191
+                       192     ; ********************************************************************
+                       193     ;
+                       194     ;               RS-232C Recieve 1byte with Timeout and Check Sum
+                       195     ;
+                       196     ; ********************************************************************
+                       197
+                       198     Receive:
+1DAF 7A08              199                     MOV     R2,#(xtal/(500000/100)+2)       ; for 20MHz => 11 => 1second
+                       200     rpt2:
+                       201     ;               MOV     R3,#0
+                       202     rpt3:
+                       203     ;               MOV     R4,#0
+                       204     rptc:
+                       205                                             ; check Start bit
+                       206             IFDEF  Direct_RX
+                       207                     JNB     P0.RX,no_data
+                       208             ELSE
+1DB1 208511            209                     JB      P0.RX,no_data
+                       210             ENDIF
+                       211
+1DB4 B1E2              212                     ACALL   bwait2          ; wait 1/2 bit
+1DB6 7A09              213                     MOV     R2,#(1+8)       ; 9-bit Data
+                       214
+1DB8 13                215                     RRC     A               ; set Data                      [1] 1+6N+20+2+3=6N+26
+1DB9 B1E0              216                     ACALL   bwait           ; wait 1 bit and Carry='1'      [6N+20]
+1DBB A285              217                     MOV     C,P0.RX         ;                               [2]
+1DBD DAF9              218                     DJNZ    R2,$-5          ;                               [3]
+                       219
+                       220             IFDEF  Direct_RX
+                       221                     CPL     A
+                       222             ELSE
+1DBF 00                223                     NOP
+                       224             ENDIF
+1DC0 FA                225                     MOV     R2,A            ; A = Data
+1DC1 29                226                     ADD     A,R1            ; compute checksum
+1DC2 F9                227                     MOV     R1,A
+1DC3 EA                228                     MOV     A,R2
+1DC4 22                229                     RET
+                       230
+                       231     no_data:
+1DC5 DCEA              232                     DJNZ    R4,rptc
+1DC7 DBE8              233                     DJNZ    R3,rpt3
+1DC9 DAE6              234                     DJNZ    R2,rpt2
+                       235     way_to_exit:
+1DCB A13C              236                     AJMP    first_address   ; timeout:exit in all other cases
+                       237
+                       238     ; ********************************************************************
+                       239     ;
+                       240     ;               RS-232C Transmit 1byte
+                       241     ;
+                       242     ; ********************************************************************
+                       243
+                       244     SendL:
+                       245             IFDEF  Direct_TX
+                       246                     CLR     P0.TX
+                       247             ELSE
+1DCD D284              248                     SETB    P0.TX
+                       249             ENDIF
+                       250
+1DCF AA0A              251                     MOV     R2,(1+8+1)      ; 10-bit Data
+1DD1 8007              252                     SJMP    $+9             ; Start bit
+                       253
+1DD3 13                254                     RRC     A               ; Rotate Right through Carry    [1] 1+7+6N+20+3=6N+31
+                       255             IFDEF  Direct_TX
+                       256                     JNC     $+4
+                       257                     CLR     P0.TX           ; set TX='0' if Carry='1'
+                       258                     JC      $+4
+                       259                     SETB    P0.TX           ; set TX='1' if Carry='0'
+                       260             ELSE
+1DD4 5002              261                     JNC     $+4
+1DD6 D284              262                     SETB    P0.TX           ; set TX='1' if Carry='1'
+1DD8 4002              263                     JC      $+4
+1DDA C284              264                     CLR     P0.TX           ; set TX='0' if Carry='0'
+                       265             ENDIF
+1DDC B1E0              266                     ACALL   bwait           ; wait 1 bit and Carry='1'      [3+3+3N+7+3N+7]
+1DDE DAF3              267                     DJNZ    R2,$-11         ;                               [3]
+                       268     bwait:                                  ; wait 1 bit
+1DE0 B1E2              269                     ACALL   bwait2
+                       270     bwait2:                                 ; wait 1/2bit
+1DE2 7B30              271                     MOV     R3,#(xtal/baud-29)/6            ;[2] 2+3*N-1+1+5=3N+7
+1DE4 DBFE              272                     DJNZ    R3,$                            ;[3/2]
+1DE6 D3                273                     SETB    C                               ;[1]
+1DE7 22                274                     RET                                     ;[5]
+                       275
+                       276     ; ********************************************************************
+                       277     ;
+                       278     ;               Write Flash Write sequence
+                       279     ;
+                       280     ; ********************************************************************
+                       281
+                       282     esequence:
+1DE8 758F03            283                     MOV     PSCTL,#3
+1DEB 8006              284                     SJMP    sequence
+                       285
+                       286     wsequence:
+1DED A882              287                     MOV     R0,DPL
+                       288     wsequence1:
+1DEF E6                289                     MOV     A,@R0
+1DF0 758F01            290                     MOV     PSCTL,#1
+                       291     sequence:
+1DF3 75B7A5            292                     MOV     FLKEY,#0xA5
+1DF6 75B7F1            293                     MOV     FLKEY,#0xF1
+1DF9 F0                294                     MOVX    @DPTR,A
+1DFA 22                295                     RET
+                       296
+                       297                     END
+ASSEMBLY COMPLETE, NO ERRORS FOUND, NO WARNINGS
+
+
+SYMBOL TABLE:
+??MCU_8051_IDE . . . . . . . . . . .  N  NUMB  8051H  NOT USED
+??VERSION. . . . . . . . . . . . . .  N  NUMB  0147H  NOT USED
+AC . . . . . . . . . . . . . . . . .  B  ADDR  00D6H  NOT USED
+ACC. . . . . . . . . . . . . . . . .  D  ADDR  00E0H  NOT USED
+ACSR . . . . . . . . . . . . . . . .  D  ADDR  0097H  NOT USED
+ADCF . . . . . . . . . . . . . . . .  D  ADDR  00F6H  NOT USED
+ADCLK. . . . . . . . . . . . . . . .  D  ADDR  00F2H  NOT USED
+ADCON. . . . . . . . . . . . . . . .  D  ADDR  00F3H  NOT USED
+ADDH . . . . . . . . . . . . . . . .  D  ADDR  00F5H  NOT USED
+ADDL . . . . . . . . . . . . . . . .  D  ADDR  00F4H  NOT USED
+AUXR . . . . . . . . . . . . . . . .  D  ADDR  008EH  NOT USED
+AUXR1. . . . . . . . . . . . . . . .  D  ADDR  00A2H  NOT USED
+B. . . . . . . . . . . . . . . . . .  D  ADDR  00F0H  NOT USED
+BAUD . . . . . . . . . . . . . . . .  N  NUMB  0060H
+BDRCON . . . . . . . . . . . . . . .  D  ADDR  009BH  NOT USED
+BDRCON_1 . . . . . . . . . . . . . .  D  ADDR  009CH  NOT USED
+BRL. . . . . . . . . . . . . . . . .  D  ADDR  009AH  NOT USED
+BWAIT. . . . . . . . . . . . . . . .  C  ADDR  1DE0H
+BWAIT2 . . . . . . . . . . . . . . .  C  ADDR  1DE2H
+CCAP0H . . . . . . . . . . . . . . .  D  ADDR  00FAH  NOT USED
+CCAP0L . . . . . . . . . . . . . . .  D  ADDR  00EAH  NOT USED
+CCAP1H . . . . . . . . . . . . . . .  D  ADDR  00FBH  NOT USED
+CCAP1L . . . . . . . . . . . . . . .  D  ADDR  00EBH  NOT USED
+CCAP2H . . . . . . . . . . . . . . .  D  ADDR  00FCH  NOT USED
+CCAP3H . . . . . . . . . . . . . . .  D  ADDR  00FDH  NOT USED
+CCAP4H . . . . . . . . . . . . . . .  D  ADDR  00FEH  NOT USED
+CCAPL2H. . . . . . . . . . . . . . .  D  ADDR  00FCH  NOT USED
+CCAPL2L. . . . . . . . . . . . . . .  D  ADDR  00ECH  NOT USED
+CCAPL3H. . . . . . . . . . . . . . .  D  ADDR  00FDH  NOT USED
+CCAPL3L. . . . . . . . . . . . . . .  D  ADDR  00EDH  NOT USED
+CCAPL4H. . . . . . . . . . . . . . .  D  ADDR  00FEH  NOT USED
+CCAPL4L. . . . . . . . . . . . . . .  D  ADDR  00EEH  NOT USED
+CCAPM0 . . . . . . . . . . . . . . .  D  ADDR  00DAH  NOT USED
+CCAPM1 . . . . . . . . . . . . . . .  D  ADDR  00DBH  NOT USED
+CCAPM2 . . . . . . . . . . . . . . .  D  ADDR  00DCH  NOT USED
+CCAPM3 . . . . . . . . . . . . . . .  D  ADDR  00DDH  NOT USED
+CCAPM4 . . . . . . . . . . . . . . .  D  ADDR  00DEH  NOT USED
+CCF0 . . . . . . . . . . . . . . . .  B  ADDR  00D8H  NOT USED
+CCF1 . . . . . . . . . . . . . . . .  B  ADDR  00D9H  NOT USED
+CCF2 . . . . . . . . . . . . . . . .  B  ADDR  00DAH  NOT USED
+CCF3 . . . . . . . . . . . . . . . .  B  ADDR  00DBH  NOT USED
+CCF4 . . . . . . . . . . . . . . . .  B  ADDR  00DCH  NOT USED
+CCON . . . . . . . . . . . . . . . .  D  ADDR  00D8H  NOT USED
+CFINT. . . . . . . . . . . . . . . .  C  ADDR  0033H  NOT USED
+CH . . . . . . . . . . . . . . . . .  D  ADDR  00F9H  NOT USED
+CKCON. . . . . . . . . . . . . . . .  D  ADDR  008FH  NOT USED
+CKCON0 . . . . . . . . . . . . . . .  D  ADDR  008FH  NOT USED
+CKRL . . . . . . . . . . . . . . . .  D  ADDR  0097H  NOT USED
+CKSEL. . . . . . . . . . . . . . . .  D  ADDR  0085H  NOT USED
+CL . . . . . . . . . . . . . . . . .  D  ADDR  00E9H  NOT USED
+CLKREG . . . . . . . . . . . . . . .  D  ADDR  008FH  NOT USED
+CMOD . . . . . . . . . . . . . . . .  D  ADDR  00D9H  NOT USED
+COPY_FLASH_TO_RAM. . . . . . . . . .  C  ADDR  1D56H
+CPRL2. . . . . . . . . . . . . . . .  B  ADDR  00C8H  NOT USED
+CR . . . . . . . . . . . . . . . . .  B  ADDR  00DEH  NOT USED
+CT2. . . . . . . . . . . . . . . . .  B  ADDR  00C9H  NOT USED
+CY . . . . . . . . . . . . . . . . .  B  ADDR  00D7H  NOT USED
+DP0H . . . . . . . . . . . . . . . .  D  ADDR  0083H  NOT USED
+DP0L . . . . . . . . . . . . . . . .  D  ADDR  0082H  NOT USED
+DP1H . . . . . . . . . . . . . . . .  D  ADDR  0085H  NOT USED
+DP1L . . . . . . . . . . . . . . . .  D  ADDR  0084H  NOT USED
+DPH. . . . . . . . . . . . . . . . .  D  ADDR  0083H
+DPL. . . . . . . . . . . . . . . . .  D  ADDR  0082H
+EA . . . . . . . . . . . . . . . . .  B  ADDR  00AFH  NOT USED
+EC . . . . . . . . . . . . . . . . .  B  ADDR  00AEH  NOT USED
+EECON. . . . . . . . . . . . . . . .  D  ADDR  0096H  NOT USED
+ERASE_ALL_FLASH. . . . . . . . . . .  C  ADDR  1D77H
+ES . . . . . . . . . . . . . . . . .  B  ADDR  00ACH  NOT USED
+ESEQUENCE. . . . . . . . . . . . . .  C  ADDR  1DE8H
+ET0. . . . . . . . . . . . . . . . .  B  ADDR  00A9H  NOT USED
+ET1. . . . . . . . . . . . . . . . .  B  ADDR  00ABH  NOT USED
+ET2. . . . . . . . . . . . . . . . .  B  ADDR  00ADH  NOT USED
+EX0. . . . . . . . . . . . . . . . .  B  ADDR  00A8H  NOT USED
+EX1. . . . . . . . . . . . . . . . .  B  ADDR  00AAH  NOT USED
+EXEN2. . . . . . . . . . . . . . . .  B  ADDR  00CBH  NOT USED
+EXF2 . . . . . . . . . . . . . . . .  B  ADDR  00CEH  NOT USED
+EXTI0. . . . . . . . . . . . . . . .  C  ADDR  0003H  NOT USED
+EXTI1. . . . . . . . . . . . . . . .  C  ADDR  0013H  NOT USED
+E_LOOP . . . . . . . . . . . . . . .  C  ADDR  1D79H
+F0 . . . . . . . . . . . . . . . . .  B  ADDR  00D5H  NOT USED
+FAMILYC8501. . . . . . . . . . . . .  N  NUMB  0035H
+FE . . . . . . . . . . . . . . . . .  B  ADDR  009FH  NOT USED
+FIRST_ADDRESS. . . . . . . . . . . .  N  NUMB  1D3CH
+FLKEY. . . . . . . . . . . . . . . .  N  NUMB  00B7H
+FSRECEIVE. . . . . . . . . . . . . .  C  ADDR  1DADH
+IDTYPEC8501. . . . . . . . . . . . .  N  NUMB  0051H
+IE . . . . . . . . . . . . . . . . .  D  ADDR  00A8H  NOT USED
+IE0. . . . . . . . . . . . . . . . .  B  ADDR  0089H  NOT USED
+IE1. . . . . . . . . . . . . . . . .  B  ADDR  008BH  NOT USED
+INT0 . . . . . . . . . . . . . . . .  B  ADDR  00B2H  NOT USED
+INT1 . . . . . . . . . . . . . . . .  B  ADDR  00B3H  NOT USED
+INTRAREBOOTLOADER. . . . . . . . . .  C  ADDR  1D40H
+IP . . . . . . . . . . . . . . . . .  D  ADDR  00B8H  NOT USED
+IPH. . . . . . . . . . . . . . . . .  D  ADDR  00B7H  NOT USED
+IPH0 . . . . . . . . . . . . . . . .  D  ADDR  00B7H  NOT USED
+IPH1 . . . . . . . . . . . . . . . .  D  ADDR  00B3H  NOT USED
+IPL0 . . . . . . . . . . . . . . . .  D  ADDR  00B8H  NOT USED
+IPL1 . . . . . . . . . . . . . . . .  D  ADDR  00B2H  NOT USED
+IT0. . . . . . . . . . . . . . . . .  B  ADDR  0088H  NOT USED
+IT1. . . . . . . . . . . . . . . . .  B  ADDR  008AH  NOT USED
+KBE. . . . . . . . . . . . . . . . .  D  ADDR  009DH  NOT USED
+KBF. . . . . . . . . . . . . . . . .  D  ADDR  009EH  NOT USED
+KBLS . . . . . . . . . . . . . . . .  D  ADDR  009CH  NOT USED
+MAINL. . . . . . . . . . . . . . . .  C  ADDR  1D88H
+MAINLOOP . . . . . . . . . . . . . .  C  ADDR  1D86H
+MAX_FLASH. . . . . . . . . . . . . .  N  NUMB  1E00H
+NO_DATA. . . . . . . . . . . . . . .  C  ADDR  1DC5H
+OSCCON . . . . . . . . . . . . . . .  D  ADDR  0086H  NOT USED
+OV . . . . . . . . . . . . . . . . .  B  ADDR  00D2H  NOT USED
+P. . . . . . . . . . . . . . . . . .  B  ADDR  00D0H  NOT USED
+P0 . . . . . . . . . . . . . . . . .  D  ADDR  0080H
+P0MDOUT. . . . . . . . . . . . . . .  N  NUMB  00A4H
+P1 . . . . . . . . . . . . . . . . .  D  ADDR  0090H  NOT USED
+P1M1 . . . . . . . . . . . . . . . .  D  ADDR  00D4H  NOT USED
+P1M2 . . . . . . . . . . . . . . . .  D  ADDR  00E2H  NOT USED
+P2 . . . . . . . . . . . . . . . . .  D  ADDR  00A0H  NOT USED
+P3 . . . . . . . . . . . . . . . . .  D  ADDR  00B0H  NOT USED
+P3M1 . . . . . . . . . . . . . . . .  D  ADDR  00D5H  NOT USED
+P3M2 . . . . . . . . . . . . . . . .  D  ADDR  00E3H  NOT USED
+P4 . . . . . . . . . . . . . . . . .  D  ADDR  00C0H  NOT USED
+P4M1 . . . . . . . . . . . . . . . .  D  ADDR  00D6H  NOT USED
+P4M2 . . . . . . . . . . . . . . . .  D  ADDR  00E4H  NOT USED
+P5 . . . . . . . . . . . . . . . . .  D  ADDR  00E8H  NOT USED
+PC . . . . . . . . . . . . . . . . .  B  ADDR  00BEH  NOT USED
+PCA0MD . . . . . . . . . . . . . . .  N  NUMB  00D9H
+PCON . . . . . . . . . . . . . . . .  D  ADDR  0087H  NOT USED
+PPCL . . . . . . . . . . . . . . . .  B  ADDR  00BEH  NOT USED
+PS . . . . . . . . . . . . . . . . .  B  ADDR  00BCH  NOT USED
+PSCTL. . . . . . . . . . . . . . . .  N  NUMB  008FH
+PSL. . . . . . . . . . . . . . . . .  B  ADDR  00BCH  NOT USED
+PSW. . . . . . . . . . . . . . . . .  D  ADDR  00D0H  NOT USED
+PT0. . . . . . . . . . . . . . . . .  B  ADDR  00B9H  NOT USED
+PT0L . . . . . . . . . . . . . . . .  B  ADDR  00B9H  NOT USED
+PT1. . . . . . . . . . . . . . . . .  B  ADDR  00BBH  NOT USED
+PT1L . . . . . . . . . . . . . . . .  B  ADDR  00BBH  NOT USED
+PT2. . . . . . . . . . . . . . . . .  B  ADDR  00BDH  NOT USED
+PT2L . . . . . . . . . . . . . . . .  B  ADDR  00BDH  NOT USED
+PX0. . . . . . . . . . . . . . . . .  B  ADDR  00B8H  NOT USED
+PX0L . . . . . . . . . . . . . . . .  B  ADDR  00B8H  NOT USED
+PX1. . . . . . . . . . . . . . . . .  B  ADDR  00BAH  NOT USED
+PX1L . . . . . . . . . . . . . . . .  B  ADDR  00BAH  NOT USED
+RB8. . . . . . . . . . . . . . . . .  B  ADDR  009AH  NOT USED
+RCAP2H . . . . . . . . . . . . . . .  D  ADDR  00CBH  NOT USED
+RCAP2L . . . . . . . . . . . . . . .  D  ADDR  00CAH  NOT USED
+RCLK . . . . . . . . . . . . . . . .  B  ADDR  00CDH  NOT USED
+RCVOCT . . . . . . . . . . . . . . .  C  ADDR  1D96H
+RD . . . . . . . . . . . . . . . . .  B  ADDR  00B7H  NOT USED
+RECEIVE. . . . . . . . . . . . . . .  C  ADDR  1DAFH
+REN. . . . . . . . . . . . . . . . .  B  ADDR  009CH  NOT USED
+RESET. . . . . . . . . . . . . . . .  C  ADDR  0000H  NOT USED
+REWRITE_BL . . . . . . . . . . . . .  C  ADDR  1D6FH
+RI . . . . . . . . . . . . . . . . .  B  ADDR  0098H  NOT USED
+RPT2 . . . . . . . . . . . . . . . .  C  ADDR  1DB1H
+RPT3 . . . . . . . . . . . . . . . .  C  ADDR  1DB1H
+RPTC . . . . . . . . . . . . . . . .  C  ADDR  1DB1H
+RS0. . . . . . . . . . . . . . . . .  B  ADDR  00D3H  NOT USED
+RS1. . . . . . . . . . . . . . . . .  B  ADDR  00D4H  NOT USED
+RX . . . . . . . . . . . . . . . . .  N  NUMB  0005H
+RXD. . . . . . . . . . . . . . . . .  B  ADDR  00B0H  NOT USED
+SADDR. . . . . . . . . . . . . . . .  D  ADDR  00A9H  NOT USED
+SADDR_0. . . . . . . . . . . . . . .  D  ADDR  00A9H  NOT USED
+SADDR_1. . . . . . . . . . . . . . .  D  ADDR  00AAH  NOT USED
+SADEN. . . . . . . . . . . . . . . .  D  ADDR  00B9H  NOT USED
+SADEN_0. . . . . . . . . . . . . . .  D  ADDR  00B9H  NOT USED
+SADEN_1. . . . . . . . . . . . . . .  D  ADDR  00BAH  NOT USED
+SBUF . . . . . . . . . . . . . . . .  D  ADDR  0099H  NOT USED
+SCON . . . . . . . . . . . . . . . .  D  ADDR  0098H  NOT USED
+SENDL. . . . . . . . . . . . . . . .  C  ADDR  1DCDH
+SEND_IDTYPE. . . . . . . . . . . . .  C  ADDR  1D82H  NOT USED
+SEQUENCE . . . . . . . . . . . . . .  C  ADDR  1DF3H
+SINT . . . . . . . . . . . . . . . .  C  ADDR  0023H  NOT USED
+SM0. . . . . . . . . . . . . . . . .  B  ADDR  009FH  NOT USED
+SM1. . . . . . . . . . . . . . . . .  B  ADDR  009EH  NOT USED
+SM2. . . . . . . . . . . . . . . . .  B  ADDR  009DH  NOT USED
+SP . . . . . . . . . . . . . . . . .  D  ADDR  0081H  NOT USED
+SPCON. . . . . . . . . . . . . . . .  D  ADDR  00C3H  NOT USED
+SPCR . . . . . . . . . . . . . . . .  D  ADDR  00D5H  NOT USED
+SPDAT. . . . . . . . . . . . . . . .  D  ADDR  00C5H  NOT USED
+SPDR . . . . . . . . . . . . . . . .  D  ADDR  0086H  NOT USED
+SPSR . . . . . . . . . . . . . . . .  D  ADDR  00AAH  NOT USED
+SPSTA. . . . . . . . . . . . . . . .  D  ADDR  00C4H  NOT USED
+T0 . . . . . . . . . . . . . . . . .  B  ADDR  00B4H  NOT USED
+T1 . . . . . . . . . . . . . . . . .  B  ADDR  00B5H  NOT USED
+T2CON. . . . . . . . . . . . . . . .  D  ADDR  00C8H  NOT USED
+T2MOD. . . . . . . . . . . . . . . .  D  ADDR  00C9H  NOT USED
+TB8. . . . . . . . . . . . . . . . .  B  ADDR  009BH  NOT USED
+TCLK . . . . . . . . . . . . . . . .  B  ADDR  00CCH  NOT USED
+TCON . . . . . . . . . . . . . . . .  D  ADDR  0088H  NOT USED
+TF0. . . . . . . . . . . . . . . . .  B  ADDR  008DH  NOT USED
+TF1. . . . . . . . . . . . . . . . .  B  ADDR  008FH  NOT USED
+TF2. . . . . . . . . . . . . . . . .  B  ADDR  00CFH  NOT USED
+TH0. . . . . . . . . . . . . . . . .  D  ADDR  008CH  NOT USED
+TH1. . . . . . . . . . . . . . . . .  D  ADDR  008DH  NOT USED
+TH2. . . . . . . . . . . . . . . . .  D  ADDR  00CDH  NOT USED
+TI . . . . . . . . . . . . . . . . .  B  ADDR  0099H  NOT USED
+TIMER0 . . . . . . . . . . . . . . .  C  ADDR  000BH  NOT USED
+TIMER1 . . . . . . . . . . . . . . .  C  ADDR  001BH  NOT USED
+TIMER2 . . . . . . . . . . . . . . .  C  ADDR  002BH  NOT USED
+TL0. . . . . . . . . . . . . . . . .  D  ADDR  008AH  NOT USED
+TL1. . . . . . . . . . . . . . . . .  D  ADDR  008BH  NOT USED
+TL2. . . . . . . . . . . . . . . . .  D  ADDR  00CCH  NOT USED
+TMOD . . . . . . . . . . . . . . . .  D  ADDR  0089H  NOT USED
+TR0. . . . . . . . . . . . . . . . .  B  ADDR  008CH  NOT USED
+TR1. . . . . . . . . . . . . . . . .  B  ADDR  008EH  NOT USED
+TR2. . . . . . . . . . . . . . . . .  B  ADDR  00CAH  NOT USED
+TX . . . . . . . . . . . . . . . . .  N  NUMB  0004H
+TXD. . . . . . . . . . . . . . . . .  B  ADDR  00B1H  NOT USED
+WAY_TO_EXIT. . . . . . . . . . . . .  C  ADDR  1DCBH  NOT USED
+WDTCON . . . . . . . . . . . . . . .  D  ADDR  00A7H  NOT USED
+WDTPRG . . . . . . . . . . . . . . .  D  ADDR  00A7H  NOT USED
+WDTRST . . . . . . . . . . . . . . .  D  ADDR  00A6H  NOT USED
+WR . . . . . . . . . . . . . . . . .  B  ADDR  00B6H  NOT USED
+WRITE_BL . . . . . . . . . . . . . .  C  ADDR  1D62H
+WRITE_FLASH. . . . . . . . . . . . .  C  ADDR  1DA4H
+WR_BL1 . . . . . . . . . . . . . . .  C  ADDR  1D5DH  NOT USED
+WR_BL2 . . . . . . . . . . . . . . .  C  ADDR  1D6AH
+WSEQUENCE. . . . . . . . . . . . . .  C  ADDR  1DEDH
+WSEQUENCE1 . . . . . . . . . . . . .  C  ADDR  1DEFH
+XBR0 . . . . . . . . . . . . . . . .  N  NUMB  00E1H
+XBR1 . . . . . . . . . . . . . . . .  N  NUMB  00E2H  NOT USED
+XBR2 . . . . . . . . . . . . . . . .  N  NUMB  00E3H
+XTAL . . . . . . . . . . . . . . . .  N  NUMB  77A1H
+ZIIEROARE. . . . . . . . . . . . . .  C  ADDR  1D9FH  NOT USED

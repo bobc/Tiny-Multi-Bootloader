@@ -1,0 +1,60 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Tue Nov 24 16:06:55 2015
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x0007ac    program   0x000000
+                   .org_3       code   0x0007b0    program   0x0000a0
+.config_8007_TINYBLD12F1822_16MHZ_INT_19200.O       code   0x008007    program   0x000002
+.config_8008_TINYBLD12F1822_16MHZ_INT_19200.O       code   0x008008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x0007b0    0x0007ff      
+                            0x008007    0x008008      
+            83 out of 2311 program addresses used, program memory utilization is 3%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x0007b0    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                 MainLoop   0x0007c4    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                  Receive   0x0007e2    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                    mainl   0x0007c5    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                   rcvoct   0x0007ce    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                     rpt2   0x0007e4    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                     rpt3   0x0007e4    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                     rptc   0x0007e4    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+              way_to_exit   0x0007f1    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                     wr_e   0x0007f6    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                     wr_w   0x0007f7    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                ziieroare   0x0007d9    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x0007b0    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                 MainLoop   0x0007c4    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                    mainl   0x0007c5    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                   rcvoct   0x0007ce    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                ziieroare   0x0007d9    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                  Receive   0x0007e2    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                     rpt2   0x0007e4    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                     rpt3   0x0007e4    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                     rptc   0x0007e4    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+              way_to_exit   0x0007f1    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                     wr_e   0x0007f6    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+                     wr_w   0x0007f7    program     static C:\picasm1\tinybld198\picsource\12f\Dan_tinybld12F1822_int16MHz_19200bd_84w_r12\tinybld12F1822_16MHz_int_19200.asm
+
+

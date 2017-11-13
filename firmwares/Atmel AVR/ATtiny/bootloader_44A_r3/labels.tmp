@@ -1,0 +1,42 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.42</VERSION>
+ <DEVICE>ATtiny44A</DEVICE>
+ <WORKING_DIR>C:\avrasm1\New Folder\bootloader_44A_r3</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes\tn44adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.map</FILE>
+  <FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.lst</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <IntrareBootloader><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>97</LINE></IntrareBootloader>
+  <Receive><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>238</LINE></Receive>
+  <way_to_exit><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>258</LINE></way_to_exit>
+  <SendL><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>198</LINE></SendL>
+  <MainLoop><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>108</LINE></MainLoop>
+  <mainl><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>110</LINE></mainl>
+  <rcvoct><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>129</LINE></rcvoct>
+  <ctrl_flash><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>185</LINE></ctrl_flash>
+  <ziieroare><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>156</LINE></ziieroare>
+  <eeprom><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>153</LINE></eeprom>
+  <flash><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>147</LINE></flash>
+  <w_eeprom><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>168</LINE></w_eeprom>
+  <bwait><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>223</LINE></bwait>
+  <bwait2><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>225</LINE></bwait2>
+  <rpt2><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>240</LINE></rpt2>
+  <rptc><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>243</LINE></rptc>
+  <RcvL1><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>276</LINE></RcvL1>
+  <RcvL><FILE>C:\avrasm1\New Folder\bootloader_44A_r3\bootloader_44A.asm</FILE><LINE>269</LINE></RcvL>
+ </LABELS>
+</ASSEMBLER_INFO>

@@ -1,0 +1,93 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Sat Nov 23 20:22:33 2013
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000004
+                   .org_2       code   0x000004    program   0x0000ce
+                   .org_3       code   0x000080    program   0x000100
+                   .org_4       code   0x000100    program   0x0000e6
+ .config_2007_REWRITEBL.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000001      
+                            0x000004    0x00006a      
+                            0x000080    0x000172      
+                            0x002007    0x002007      
+            349 out of 518 program addresses used, program memory utilization is 67%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     CRLF   0x000143    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                      Err   0x00011d    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     Exit   0x000100    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                  GET2SUM   0x000127    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     GETC   0x000159    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     INIT   0x00003e    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   LOOP_P   0x000138    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   MES001   0x000004    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   MES002   0x000028    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   MES003   0x00002d    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   MES004   0x000037    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     PUT2   0x000136    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     PUTC   0x000146    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     Read   0x000040    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   STAMSG   0x00003e    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                    bwait   0x000153    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   bwait2   0x000154    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                      cp1   0x00010c    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                      cp2   0x00010e    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                    cp_bl   0x00010a    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                       er   0x000105    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                    er_bl   0x000104    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   r_loop   0x00005d    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                       rd   0x00016e    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                set_pmadr   0x000120    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     wr_e   0x000166    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     wr_l   0x000167    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     wr_w   0x000168    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   MES001   0x000004    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   MES002   0x000028    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   MES003   0x00002d    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   MES004   0x000037    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     INIT   0x00003e    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   STAMSG   0x00003e    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     Read   0x000040    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   r_loop   0x00005d    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     Exit   0x000100    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                    er_bl   0x000104    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                       er   0x000105    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                    cp_bl   0x00010a    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                      cp1   0x00010c    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                      cp2   0x00010e    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                      Err   0x00011d    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                set_pmadr   0x000120    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                  GET2SUM   0x000127    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     PUT2   0x000136    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   LOOP_P   0x000138    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     CRLF   0x000143    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     PUTC   0x000146    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                    bwait   0x000153    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                   bwait2   0x000154    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     GETC   0x000159    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     wr_e   0x000166    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     wr_l   0x000167    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                     wr_w   0x000168    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+                       rd   0x00016e    program     static C:\picasm1\10F322_test_board\RewriteBL\RewriteBL_en\RewriteBL.asm
+
+

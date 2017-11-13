@@ -1,0 +1,2074 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Tiny Multi Bootloader+ : Tested PIC Devices</title>
+
+<style type="text/css">
+<!--
+.style1 {color: #000000}
+-->
+</style></head>
+<body>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="0">
+<tbody>
+<tr>
+<td style="text-align: center; vertical-align: top;">
+<h1 style="color: rgb(0, 0, 153);">Tiny Multi
+Bootloader+</h1>
+<div style="text-align: left; color: rgb(0, 0, 153);">
+<h2>Tested PIC Devices:</h2>
+<hr style="width: 100%; height: 2px;"><span style="color: black;"><span style="font-weight: bold; color: rgb(0, 153, 0);">In green</span>:
+devices working and tested for a long&nbsp;time.<br>
+<span style="color: rgb(51, 51, 255); font-weight: bold;">In
+blue</span>: devices working.<br>
+<span style="font-weight: bold;">In black</span>:
+devices not tested.<br>
+<span style="font-weight: bold; color: red;">In red</span>:
+devices not working.<br>
+<br>
+</span></div>
+<div style="text-align: left;"> (
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+<tbody>
+<tr>
+<td style="text-align: center; font-weight: bold;">PIC
+Family</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Device</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Source / Firmware<br>
+in archive</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">MPLAB Project<br>
+in archive</td>
+<td style="text-align: center;" valign="undefined"><span style="font-weight: bold;">Can Write</span><br style="font-weight: bold;">
+<span style="font-weight: bold;">Config Bytes?</span></td>
+<td style="text-align: center;" valign="undefined"><span style="font-weight: bold;">Tips - Remarks</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="1" rowspan="83" valign="undefined">PIC16</td>
+<td style="color: rgb(51, 51, 255); text-align: center;" valign="undefined"><span class="style1">PIC16F87</span></td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="color: rgb(51, 51, 255); text-align: center;" valign="undefined"><span class="style1">PIC16F88
+(Dan version) </span></td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="text-align: center;">yes
+/ no</span></td>
+<td style="color: black; text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="color: rgb(51, 51, 255); text-align: center;" valign="undefined">PIC16F88</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td>
+<td style="color: black; text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader&nbsp;<span style="color: red;">(<a href="tested_devices_pic.html#Note_1">1</a>)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F720</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F721</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F753</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F818</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center; color: rgb(51, 51, 255);" valign="undefined">PIC16F819</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F870
+(Dan version) </td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F870</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader&nbsp;<span style="color: red;">(<a href="tested_devices_pic.html#Note_1">1</a>)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F871
+</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F872
+</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F873
+(Dan version) </td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F873</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader&nbsp;<span style="color: red;">(<a href="tested_devices_pic.html#Note_1">1</a>)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F873A
+(Dan version) </td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F873A</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader&nbsp;<span style="color: red;">(<a href="tested_devices_pic.html#Note_1">1</a>)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F874
+(Dan version) </td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="color: rgb(51, 51, 255); text-align: center;" valign="undefined">PIC16F874</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.2</span><br>
+<span style="color: red;">Know bug: </span><br style="color: red;">
+<span style="color: red;">on EEPROM write, add
+CRC at address+1 (<a href="tested_devices_pic.html#Note_1">1</a>)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F874A</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F876</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F876A
+(Dan version) </td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="color: rgb(51, 51, 255); text-align: center;" valign="undefined">PIC16F876A</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.0&nbsp;</span><span style="color: red;">(<a href="tested_devices_pic.html#Note_1">1</a>)</span></td>
+</tr>
+<tr>
+<td style="color: rgb(51, 51, 255); text-align: center;" valign="undefined"><span class="style1">PIC16F877
+(Dan version) </span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="font-style: italic; text-align: center;" valign="undefined"><span style="text-align: center;"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</span></td>
+</tr>
+<tr>
+<td style="color: rgb(51, 51, 255); text-align: center;" valign="undefined">PIC16F877</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="font-style: italic; text-align: center;" valign="undefined">since v0.6.2&nbsp;<span style="color: red;">(<a href="tested_devices_pic.html#Note_1">1</a>)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F877A</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F882</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F883</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F884</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F886
+(Dan version) </td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="color: rgb(0, 153, 0); text-align: center;" valign="undefined">PIC16F886</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader&nbsp;<span style="color: red;">(<a href="tested_devices_pic.html#Note_1">1</a>)</span></td>
+</tr>
+<tr>
+<td style="color: rgb(51, 51, 255); text-align: center;" valign="undefined"><span class="style1">PIC16F887
+(Dan version) </span></td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F887</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader&nbsp;<span style="color: red;">(<a href="tested_devices_pic.html#Note_1">1</a>)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1454</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1455</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1459</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1503</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center; color: rgb(51, 51, 255);" valign="undefined">PIC16F1507</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center; color: rgb(51, 51, 255);" valign="undefined">PIC16F1508</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1509</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1512</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1513</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1516</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1517</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1518</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1519</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1526</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1527</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1613
+(beta) </td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1703
+(beta)</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1704
+(beta)</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1705
+(beta)</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1707
+(beta)</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1708
+(beta)</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1709
+(beta)</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1713
+(beta)</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1716
+(beta)</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1717
+(beta)</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1718
+(beta)</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1719
+(beta)</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1782</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1783</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1784</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1786</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1787</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1788</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1789</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(51, 51, 255);">PIC16F1823</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1824</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1825</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1826</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1827</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1828</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1829</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1847</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1933</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1934</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1936</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1937</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1938</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1939</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1946</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC16F1947</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="color: black; text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+</tr>
+<tr>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+</tr>
+<tr>
+<td style="font-weight: bold; text-align: center;" valign="undefined">PIC Family</td>
+<td style="font-weight: bold; text-align: center;" valign="undefined">Device</td>
+<td style="font-weight: bold; text-align: center;" valign="undefined">Source / Firmware<br>
+in archive</td>
+<td style="font-weight: bold; text-align: center;" valign="undefined">MPLAB Project<br>
+in archive</td>
+<td style="font-weight: bold; text-align: center;" valign="undefined">Can Write<br>
+Config Bytes?</td>
+<td style="font-weight: bold; text-align: center;" valign="undefined">Tips - Remarks</td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="1" rowspan="88" valign="undefined">PIC18</td>
+<td style="color: rgb(0, 153, 0); text-align: center;" valign="undefined"><span style="color: black;">PIC18F252</span><br>
+</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F258</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F452</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F458</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F1220</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F1320</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="color: rgb(51, 51, 255);">PIC18F1330</span></td>
+<td style="text-align: center;"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;"><br>
+</td>
+<td style="text-align: center;"><span style="font-style: italic;">since v0.8.3.1</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F13K22</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F13K50</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center; color: rgb(51, 51, 255);" valign="undefined">PIC18F14K22</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F14K50</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2220</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2320</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F23K20</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F23K22</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F24J10</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.2</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F24J11</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.2</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2420</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F24K20</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F24K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F25J10</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.2</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F25J11</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.2</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F24K50</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="color: rgb(0, 153, 0); text-align: center;" valign="undefined">PIC18F2455</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2480</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2520</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F25K20</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F25K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2525</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2550</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F25K50</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2580</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F25K80</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2585</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F26J11</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.2</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2620</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F26K20</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F26K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(51, 51, 255);">PIC18F26K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.0</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2680</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F26K80</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F2685</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4220</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4320</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F43K20</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F43K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F44J10</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.2</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F44J11</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.2</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4420</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F44K20</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F44K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4455</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4480</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td align="center" valign="undefined">PIC18F45J10</td>
+<td align="center" valign="undefined">yes
+/ no</td>
+<td align="center" valign="undefined">no</td>
+<td align="undefined" valign="undefined"><br>
+</td>
+<td align="center" valign="undefined"><span style="text-align: center;"><span style="font-style: italic;">since v0.8.2</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</span></td>
+</tr>
+<tr>
+<td align="center" valign="undefined">PIC18F45J11</td>
+<td align="center" valign="undefined">yes
+/ no</td>
+<td align="center" valign="undefined">no</td>
+<td align="undefined" valign="undefined"><br>
+</td>
+<td align="center" valign="undefined"><span style="text-align: center;"><span style="font-style: italic;">since v0.8.2</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4520</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F45K20</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F45K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4525</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4550</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC18F45K50</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4580</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F45K80</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4585</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td align="center" valign="undefined">PIC18F46J11</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td align="undefined" valign="undefined"><br>
+</td>
+<td align="center" valign="undefined"><span style="text-align: center;"><span style="font-style: italic;">since v0.8.2</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4620</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F46K20</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F46K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4680</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F46K80</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F4685</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F65K22</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F65K80</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F65K90</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F6621</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F66K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F66K80</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F66K90</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F67K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F67K90</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F85K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F85K90</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F86K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F8680</span></td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined">From
+original TinyPicBootloader</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F86K90</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F87K22</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: black;">PIC18F87K90</span></td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined">yes</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="color: black; text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+</tr>
+<tr>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+</tr>
+<tr>
+<td style="text-align: center; font-weight: bold;" valign="undefined">PIC Family</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Device</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Source / Firmware<br>
+in archive</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">MPLAB Project<br>
+in archive</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Can Write<br>
+Config Bytes?</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Tips - Remarks</td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="1" rowspan="3" valign="undefined">PIC32</td>
+<td style="color: rgb(0, 153, 0); text-align: center;" valign="undefined">PIC32MX460F512L</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">no<br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.0</span></td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC32MX795F512L</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">no<br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.0</span></td>
+</tr>
+<tr>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="color: black; text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+</tr>
+<tr>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+</tr>
+<tr>
+<td style="text-align: center; font-weight: bold;" valign="undefined">PIC Family</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Device ("family type") </td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Source / Firmware<br>
+in archive</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">MPLAB Project<br>
+in archive</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Can Write<br>
+Config Bytes?</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Tips - Remarks</td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="1" rowspan="7" valign="undefined">PIC24</td>
+<td style="text-align: center;" valign="undefined">PIC24F04KA200 ("D")<br>
+</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);"></span><span style="color: rgb(0, 153, 0);">yes
+/ yes</span>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);"></span><span style="color: rgb(0, 153, 0);">yes</span>
+</td>
+<td style="text-align: center;" valign="undefined">yes
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.10.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr><td style="text-align: center;">PIC24F08KL200 ("D")</td><td style="text-align: center;"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td><td style="text-align: center;"><span style="color: rgb(0, 153, 0);">yes</span></td><td style="text-align: center;">yes</td><td style="text-align: center;"><span style="font-style: italic;">since v0.10.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td></tr><tr><td style="text-align: center;">PIC24HJ12GP202
+("D") </td><td style="text-align: center;"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td><td style="text-align: center;"><span style="color: rgb(0, 153, 0);">yes</span></td><td style="text-align: center;">yes</td><td style="text-align: center;"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td></tr><tr><td style="text-align: center;">PIC24F32KA301 /&nbsp;PIC24FV32KA301&nbsp;("D")</td><td style="text-align: center;"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td><td style="text-align: center;"><span style="color: rgb(0, 153, 0);">yes</span></td><td style="text-align: center;">yes</td><td style="text-align: center;"><span style="font-style: italic;">since v0.10.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td></tr><tr>
+<td style="text-align: center;" valign="undefined">PIC24FJ64GA002
+("E") <br>
+</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span><br>
+</td>
+<td style="text-align: center;" valign="undefined">yes<br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr><td style="text-align: center;">PIC24FJ64GB002 ("E")</td><td style="text-align: center;"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td><td style="text-align: center;"><span style="color: rgb(0, 153, 0);">yes</span></td><td style="text-align: center;">yes</td><td style="text-align: center;"><span style="font-style: italic;">since v0.10.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td></tr><tr>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="color: black; text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+</tr>
+<tr>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+</tr>
+<tr>
+<td style="text-align: center; font-weight: bold;" valign="undefined">PIC Family</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Device ("family type") </td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Source / Firmware<br>
+in archive</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">MPLAB Project<br>
+in archive</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Can Write<br>
+Config Bytes?</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Tips - Remarks</td>
+</tr>
+<tr>
+<td style="text-align: center;" colspan="1" rowspan="3" valign="undefined">dsPIC</td>
+<td style="text-align: center;" valign="undefined">dsPIC30F3012
+("D") <br>
+</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span><br>
+</td>
+<td style="text-align: center;" valign="undefined">yes<br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">dsPIC33FJ128GP202
+("D") <br>
+</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span><br>
+</td>
+<td style="text-align: center;" valign="undefined">yes<br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.9.0</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="color: black; text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+</tr>
+<tr>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+<td style="background-color: rgb(153, 153, 153);" align="undefined" valign="undefined"><br>
+</td>
+</tr>
+<tr>
+<td style="text-align: center; font-weight: bold;" valign="undefined">PIC Family</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Device</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Source / Firmware<br>
+in archive</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">MPLAB Project<br>
+in archive</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Can Write<br>
+Config Bytes?</td>
+<td style="text-align: center; font-weight: bold;" valign="undefined">Tips - Remarks</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="10" style="text-align: center;" valign="undefined">Others</td>
+<td style="color: rgb(51, 51, 255); text-align: center;" valign="undefined">PIC10F322</td>
+<td style="color: black; text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes
+/ yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC12F617</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center; color: rgb(51, 51, 255);" valign="undefined">PIC12F752</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC12F1501</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC12F1571
+(beta) </td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC12F1572
+(beta)</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC12F1612
+(beta)</td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined">&nbsp;</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.8.3.1</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined">PIC12F1822</td>
+<td style="text-align: center;" valign="undefined">yes
+/ no</td>
+<td style="text-align: center;" valign="undefined">no</td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(51, 51, 255);">PIC12F1840</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes / yes</span></td>
+<td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">yes</span></td>
+<td style="text-align: center;" valign="undefined"><br>
+</td>
+<td style="text-align: center;" valign="undefined"><span style="font-style: italic;">since v0.6.5</span> From
+Dan (<a href="http://www3.hp-ez.com/hp/bequest333/page30" rel="contact">web site</a>)</td>
+</tr>
+<tr>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+<td style="text-align: center; background-color: white;" valign="undefined"><br>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<a name="Note_1"></a><span style="font-weight: bold;">(1) &nbsp;Message from Dan
+(2014.02.06) "Consistency with previous firmware (PIC12F/PIC16FEEPROM)":</span><br>
+Hi,all<br>
+<br>
+!!!! Note when using the firmware of claudiu.chiculita in Tiny AVR /
+PIC Bootloader + !!!!<br>
+<br>
+Since the transfer format of EEPROM is different in both,<br>
+it is necessary to change the following when using the firmware
+claudiu.chiculita.<br>
+<br>
+Proofed with the latest firmware.<br>
+http://sourceforge.net/p/tinypicbootload/discussion/devices/thread/8f8f8058/#86c4<br>
+2014.02.06.zip<br>
+<br>
+Tiny AVR/PIC Bootloader+:(6byte)<br>
+PC_EEPROM: AddrH AddrL 2 EEDATL EEDATH crc<br>
+claudiu.chiculita:(5byte)<br>
+PC_EEPROM: AddrH AddrL 1 EEDATL crc<br>
+<br>
+(Example)(tinybld16F873A.asm)(v0.8.3)<br>
+waitwre <br>
+btfsc EECON1,WR<br>
+goto waitwre<br>
+bcf EECON1,WREN<br>
+BANK2_<br>
+incf EEADR<br>
+btfss flag,6<br>
+decf contor<br>
+decfsz contor<br>
+goto writeloop<br>
+goto MainLoop<br>
+---------------------------------&gt;<br>
+waitwre <br>
+btfsc EECON1,WR<br>
+goto waitwre<br>
+bcf EECON1,WREN<br>
+BANK2_<br>
+incf EEADR<br>
+; btfss flag,6 &#65307;Unnecessary<br>
+decf contor<br>
+decfsz contor<br>
+goto writeloop<br>
+goto MainLoop<br>
+<br>
+http://tinypicbootload.sourceforge.net/tested_devices_pic.html<br>
+PIC16F874 | yes / yes | yes | since v0.6.2 Know bug: on EEPROM write,
+add CRC at address+1 |<br>
+This bug is derived from the difference described above.<br>
+While using, "btfss contor, 0" in the firmware of some, <br>
+<br>
+Can not be used as well.<br>
+Because the configuration of the firmware is different, there is no
+problem in PIC18, AVR.<br>
+</body></html>

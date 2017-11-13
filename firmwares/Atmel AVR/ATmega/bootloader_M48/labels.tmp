@@ -1,0 +1,39 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.42</VERSION>
+ <DEVICE>ATmega88</DEVICE>
+ <WORKING_DIR>C:\avrasm1\bootloader_M48</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes\m88def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\avrasm1\bootloader_M48\bootloader_M48.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>C:\avrasm1\bootloader_M48\bootloader_M48.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>C:\avrasm1\bootloader_M48\bootloader_M48.map</FILE>
+  <FILE>C:\avrasm1\bootloader_M48\bootloader_M48.lst</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <IntrareBootloader><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>99</LINE></IntrareBootloader>
+  <Receive><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>210</LINE></Receive>
+  <way_to_exit><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>226</LINE></way_to_exit>
+  <rs1tx><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>198</LINE></rs1tx>
+  <MainLoop><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>113</LINE></MainLoop>
+  <mainl><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>115</LINE></mainl>
+  <rcvoct><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>129</LINE></rcvoct>
+  <ctrl_flash><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>182</LINE></ctrl_flash>
+  <ziieroare><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>155</LINE></ziieroare>
+  <eeprom><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>152</LINE></eeprom>
+  <flash><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>146</LINE></flash>
+  <w_eeprom><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>167</LINE></w_eeprom>
+  <rpt2><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>212</LINE></rpt2>
+  <rptc><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>215</LINE></rptc>
+  <loop><FILE>C:\avrasm1\bootloader_M48\bootloader_M48.asm</FILE><LINE>221</LINE></loop>
+ </LABELS>
+</ASSEMBLER_INFO>

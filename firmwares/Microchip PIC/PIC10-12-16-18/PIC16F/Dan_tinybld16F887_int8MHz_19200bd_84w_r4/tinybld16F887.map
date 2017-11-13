@@ -1,0 +1,58 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Fri Jun 27 17:11:55 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000006
+                   .org_2       code   0x001fac    program   0x000000
+                   .org_3       code   0x001fb0    program   0x000094
+.config_2007_TINYBLD16F887.O       code   0x002007    program   0x000002
+.config_2008_TINYBLD16F887.O       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x001fb0    0x001ff9      
+                            0x002007    0x002008      
+            79 out of 8455 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x001fb0    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                 MainLoop   0x001fc0    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                  Receive   0x001fdb    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                    mainl   0x001fc1    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                   rcvoct   0x001fcb    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                     rpt2   0x001fde    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                     rpt3   0x001fdf    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                     rptc   0x001fe0    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+              way_to_exit   0x001fec    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                       wr   0x001fee    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                ziieroare   0x001fd7    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x001fb0    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                 MainLoop   0x001fc0    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                    mainl   0x001fc1    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                   rcvoct   0x001fcb    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                ziieroare   0x001fd7    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                  Receive   0x001fdb    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                     rpt2   0x001fde    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                     rpt3   0x001fdf    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                     rptc   0x001fe0    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+              way_to_exit   0x001fec    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+                       wr   0x001fee    program     static C:\picasm1\tinybld198\picsource\16f\Dan_tinybld16F887_int8MHz_19200bd_84w_r4\tinybld16F887.asm
+
+

@@ -1,0 +1,40 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.42</VERSION>
+ <DEVICE>ATmega168A</DEVICE>
+ <WORKING_DIR>C:\avrasm1\bootloader_M168A</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files\Atmel\AVR Tools\AvrAssembler2\Appnotes\m168Adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.map</FILE>
+  <FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.lst</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <IntrareBootloader><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>99</LINE></IntrareBootloader>
+  <Receive><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>226</LINE></Receive>
+  <way_to_exit><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>242</LINE></way_to_exit>
+  <rs1tx><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>199</LINE></rs1tx>
+  <MainLoop><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>113</LINE></MainLoop>
+  <mainl><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>115</LINE></mainl>
+  <rcvoct><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>130</LINE></rcvoct>
+  <ctrl_flash><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>183</LINE></ctrl_flash>
+  <ziieroare><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>156</LINE></ziieroare>
+  <eeprom><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>153</LINE></eeprom>
+  <flash><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>147</LINE></flash>
+  <w_eeprom><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>168</LINE></w_eeprom>
+  <rs1rx><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>213</LINE></rs1rx>
+  <r1rx11><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>216</LINE></r1rx11>
+  <rpt2><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>228</LINE></rpt2>
+  <rptc><FILE>C:\avrasm1\bootloader_M168A\bootloader_M168A.asm</FILE><LINE>231</LINE></rptc>
+ </LABELS>
+</ASSEMBLER_INFO>

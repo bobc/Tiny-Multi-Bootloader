@@ -1,0 +1,92 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Sun Nov 24 00:31:11 2013
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000004
+                   .org_2       code   0x007ef8    program   0x000008
+                   .org_3       code   0x007f00    program   0x0000ee
+.config_007FF8_TINYBLD18F25J11_INT8MHZ_19200.O    romdata   0x007ff8    program   0x000001
+.config_007FF9_TINYBLD18F25J11_INT8MHZ_19200.O    romdata   0x007ff9    program   0x000001
+.config_007FFA_TINYBLD18F25J11_INT8MHZ_19200.O    romdata   0x007ffa    program   0x000001
+.config_007FFB_TINYBLD18F25J11_INT8MHZ_19200.O    romdata   0x007ffb    program   0x000001
+.config_007FFC_TINYBLD18F25J11_INT8MHZ_19200.O    romdata   0x007ffc    program   0x000001
+.config_007FFD_TINYBLD18F25J11_INT8MHZ_19200.O    romdata   0x007ffd    program   0x000001
+.config_007FFE_TINYBLD18F25J11_INT8MHZ_19200.O    romdata   0x007ffe    program   0x000001
+.config_007FFF_TINYBLD18F25J11_INT8MHZ_19200.O    romdata   0x007fff    program   0x000001
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000003      
+                            0x007ef8    0x007fed      
+                            0x007ff8    0x007fff      
+            258 out of 32770 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x007f00    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                 MainLoop   0x007f56    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  Receive   0x007fcc    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                    Write   0x007fba    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  chk_crc   0x007f48    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                    cp_bl   0x007f26    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                eraseloop   0x007f80    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                    mainl   0x007f58    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  noerase   0x007f94    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                   notrcv   0x007fde    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  rcv_cfg   0x007f40    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                   rcvoct   0x007f70    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                     rpt2   0x007fd0    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                     rpt3   0x007fd2    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                     rptc   0x007fd4    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  set_FSR   0x007f54    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  waitwre   0x007f98    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+              way_to_exit   0x007fea    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                   wr_bl1   0x007f4c    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                   wr_bl2   0x007f50    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                   wr_bld   0x007f9a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                wr_bld_lp   0x007fa6    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+               write64_lp   0x007fb0    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+             write64bytes   0x007fae    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                ziieroare   0x007f7c    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x007f00    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                    cp_bl   0x007f26    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  rcv_cfg   0x007f40    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  chk_crc   0x007f48    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                   wr_bl1   0x007f4c    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                   wr_bl2   0x007f50    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  set_FSR   0x007f54    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                 MainLoop   0x007f56    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                    mainl   0x007f58    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                   rcvoct   0x007f70    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                ziieroare   0x007f7c    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                eraseloop   0x007f80    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  noerase   0x007f94    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  waitwre   0x007f98    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                   wr_bld   0x007f9a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                wr_bld_lp   0x007fa6    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+             write64bytes   0x007fae    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+               write64_lp   0x007fb0    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                    Write   0x007fba    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                  Receive   0x007fcc    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                     rpt2   0x007fd0    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                     rpt3   0x007fd2    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                     rptc   0x007fd4    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+                   notrcv   0x007fde    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+              way_to_exit   0x007fea    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F25J11_int8MHz_19200bd_r3\tinybld18F25J11_int8MHz_19200.asm
+
+

@@ -1,0 +1,831 @@
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001         radix   DEC
+                      00002         
+                      00003         ; change these lines accordingly to your application    
+                      00004 #include "p12f752.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC12F752 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00637         LIST
+  0000001C            00005 IdTypePIC = 0x1C                ; Please refer at the table below, must exists in "piccodes.ini"        
+                      00006 #define max_flash 0x400         ; in WORDS, not bytes!!! (= 'max flash memory' from "piccodes.ini" divid
+                            ed by 2), Please refer at the table below
+                      00007         
+  007A1200            00008 xtal    EQU     8000000         ; you may also want to change: _HS_OSC _XT_OSC
+  00002580            00009 baud    EQU     9600            ; standard TinyBld baud rates: 115200 or 19200
+                      00010 
+                      00011         #define TXP     1                ; PIC TX Data port (1:A,2:C), Please refer to the table below
+                      00012         #define TX      0                ; PIC TX Data output pin (i.e. 2=RA2 or RC2, it depends on "PIC
+                             TX Data port")
+                      00013         #define RXP     1                ; PIC RX Data port (1:A,2:C), Please refer to the table below
+                      00014         #define RX      1                ; PIC RX Data input pin  (i.e. 3=RA3 or RC3, it depends on "PIC
+                             RX Data port")
+                      00015 ;        #define Direct_TX               ; RS-232C TX Direct Connection(No use MAX232)
+                      00016 ;        #define Direct_RX               ; RS-232C RX Direct Connection(No use MAX232)
+                      00017 ;   The above 11 lines can be changed and buid a bootloader for the desired frequency (and PIC type)
+                      00018 
+                      00019 ; +---------+--------+------------+-----------+------+--------+------+
+                      00020 ; |IdTypePIC| Device | Erase_Page | max_flash | PORT | EEPROM | PDIP |
+                      00021 ; +---------+--------+------------+-----------+------+--------+------+
+                      00022 ; |   0x1C  | 12F752 |  16 words  |  0x0400   | A    |  0     |   8  |
+                      00023 ; |   0x39  | 16F753 |  16 words  |  0x0800   | A C  |  0     |  14  |
+                      00024 ; +---------+--------+------------+-----------+------+--------+------+
+                      00025 
+                      00026 ; +----------+------+----------+------+ +----------+------+
+                      00027 ; | register | BANK | register | BANK | |subroutine| BANK |
+                      00028 ; +----------+------+----------+------+ +----------+------+
+                      00029 ; | PMCON1/2 |  3   |PMADRL/DAT|  3   | | Receive  |->0->3|
+                      00030 ; +----------+------+----------+------+ +----------+------+
+                      00031 ; | ANSEL    |  3   |          |      |
+                      00032 ; +----------+------+----------+------+
+                      00033 
+                      00034  #if (TXP==1)
+                      00035         #define TXPORT     PORTA
+                      00036  #endif
+                      00037  #if (TXP==2)
+                      00038         #define TXPORT     PORTA+2      ;PORTC
+                      00039  #endif
+                      00040  #if (RXP==1)
+                      00041         #define RXPORT     PORTA
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00042  #endif
+                      00043  #if (RXP==2)
+                      00044         #define RXPORT     PORTA+2      ;PORTC
+                      00045  #endif
+                      00046 
+                      00047         ;********************************************************************
+                      00048         ;       Tiny Bootloader         12F752 16F753           Size=100words
+                      00049         ;       (2014.06.10 Revision 10)
+                      00050         ;
+                      00051         ;       This program is only available in Tiny PIC Bootloader +.
+                      00052         ;
+                      00053         ;       Tiny PIC Bootloader +
+                      00054         ;       https://sourceforge.net/projects/tinypicbootload/
+                      00055         ;
+                      00056         ;
+                      00057         ;       Please add the following line to piccodes.ini
+                      00058         ;
+                      00059         ;
+                      00060         ;       $1C, B, 12F 752, $800, 0, default, 8,
+                      00061         ;       $39, B, 16F 753, $1000,0, default, 8,
+                      00062         ;
+                      00063         ;********************************************************************
+                      00064 
+                      00065 
+                      00066         #define first_address max_flash-100 ; 100 word in size
+                      00067 
+2007   3CE6           00068            __CONFIG    _FOSC0_INT & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON & _CP_OFF & _BOREN_DIS & _WRT_OFF 
+                            & _CLKOUTEN_OFF
+                      00069 
+                      00070 ;       errorlevel 1, -305              ; suppress warning msg that takes f as default
+                      00071 
+                      00072         cblock 0x7A
+  0000007A            00073         crc             ;0x7A
+  0000007B            00074         cnt1            ;0x7B
+  0000007C            00075         cnt2            ;0x7C
+  0000007D            00076         cnt3            ;0x7D
+  0000007E            00077         cn              ;0x7E
+  0000007F            00078         rxd             ;0x7F
+                      00079         endc
+                      00080 
+                      00081 ;0000000000000000000000000 RESET 00000000000000000000000000
+                      00082 
+0000                  00083                 org     0x0000
+Message[312]: Page or Bank selection not needed for this device.  No code generated.
+                      00084                 pagesel IntrareBootloader
+0000   2BA0           00085                 goto    IntrareBootloader
+                      00086 
+                      00087                                         ;view with TabSize=4
+                      00088 ;&&&&&&&&&&&&&&&&&&&&&&&   START     &&&&&&&&&&&&&&&&&
+                      00089 ;----------------------  Bootloader  ----------------------
+                      00090 ;               
+                      00091                 ;PC_flash:      C1h          AddrH  AddrL  nr  ...(DataLo DataHi)...  crc
+                      00092                 ;PIC_response:  id   K                                                 K
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00093 
+039C                  00094                 org     first_address
+                      00095 ;               nop
+                      00096 ;               nop
+                      00097 ;               nop
+                      00098 ;               nop
+                      00099 
+03A0                  00100                 org     first_address+4
+03A0                  00101 IntrareBootloader:
+                      00102                                         ;init int clock & serial port
+03A0   1683           00103                 bsf     STATUS,RP0      ;BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03A1   168F           00104                 bsf     OSCCON,5        ;internal clock 8MHz
+                      00105 
+                      00106  #if (TXP==1)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03A2   1005           00107                 bcf     TRISA,TX        ;Set TX Port
+                      00108  #endif
+                      00109  #if (TXP==2)
+                      00110                 bcf     TRISA+2,TX      ;Set TX Port (TRISC)
+                      00111  #endif
+                      00112 
+03A3   1703           00113                 bsf     STATUS,RP1      ;BANK3
+                      00114 
+                      00115  #if ((TXP==1) | (RXP==1))
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03A4   0185           00116                 clrf    ANSELA          ;ANSELA
+                      00117  #endif
+                      00118  #if ((TXP==2) | (RXP==2))
+                      00119                 clrf    ANSELA+2        ;ANSELC
+                      00120  #endif
+                      00121                                         ;wait for computer
+03A5   23C6           00122                 call    Receive
+03A6   0183           00123                 clrf    STATUS          ;BANK0
+03A7   3CC1           00124                 sublw   0xC1            ;Expect C1
+03A8   1D03           00125                 skpz
+03A9   2BD6           00126                 goto    way_to_exit
+03AA   301C           00127                 movlw   IdTypePIC       ;PIC type
+03AB   23ED           00128                 call    SendL
+                      00129 ;               SendL   IdSoftVer       ;firmware ver x
+                      00130 
+03AC                  00131 MainLoop:
+03AC   3042           00132                 movlw   'B'
+03AD                  00133 mainl:
+03AD   0183           00134                 clrf    STATUS          ;BANK0
+03AE   23ED           00135                 call    SendL
+03AF   01FA           00136                 clrf    crc             ;clear checksum
+03B0   23C6           00137                 call    Receive         ;get PMADRH
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03B1   008F           00138                 movwf   PMADRH
+03B2   23C6           00139                 call    Receive         ;get PMADRL
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03B3   008E           00140                 movwf   PMADR
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+03B4   23C6           00141                 call    Receive         ;get count (Only Receive)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03B5   038E           00142                 decf    PMADRL,f        ;PMADRL = PMADRL - 1
+                      00143 
+03B6   23E3           00144                 call    wr_d            ;write buffer
+03B7   23E3           00145                 call    wr_d            ;write buffer
+03B8   23E3           00146                 call    wr_d            ;write buffer
+03B9   23C0           00147                 call    set_PMdata      ;set PMDATH:PMDATL,PMADRL
+                      00148 
+03BA   23C6           00149                 call    Receive         ;get checksum
+03BB                  00150 ziieroare:
+03BB   304E           00151                 movlw   'N'
+03BC   1D03           00152                 skpz
+03BD   2BAD           00153                 goto    mainl
+                      00154 
+03BE   23E4           00155                 call    write           ;erase and write
+03BF   2BAC           00156                 goto    MainLoop
+                      00157 
+                      00158 ; ********************************************************************
+                      00159 ;
+                      00160 ;               Set PMDATH:PMDATL and PMADRL
+                      00161 ;
+                      00162 ; ********************************************************************
+                      00163 
+03C0                  00164 set_PMdata:
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03C0   0A8E           00165                 incf    PMADRL,f        ;PMADRL = PMADRL + 1
+03C1   23C6           00166                 call    Receive         ;Data L
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03C2   0090           00167                 movwf   PMDATL
+03C3   23C6           00168                 call    Receive         ;Data H
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03C4   0091           00169                 movwf   PMDATH
+03C5   0008           00170                 return
+                      00171 
+                      00172 ; ********************************************************************
+                      00173 ;
+                      00174 ;               RS-232C Recieve 1byte with Timeout and Check Sum
+                      00175 ;
+                      00176 ; ********************************************************************
+                      00177 
+03C6                  00178 Receive:
+03C6   0183           00179                 clrf    STATUS          ;BANK0
+03C7   3006           00180                 movlw   xtal/2000000+2  ;for 20MHz => 11 => 1second
+03C8   00FB           00181                 movwf   cnt1
+03C9                  00182 rpt2:
+                      00183 ;               clrf    cnt2
+03C9                  00184 rpt3:
+                      00185 ;               clrf    cnt3
+03C9                  00186 rptc:
+                      00187         #ifdef  Direct_RX
+                      00188                 btfss   RXPORT,RX
+                      00189         #else
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+03C9   1885           00190                 btfsc   RXPORT,RX
+                      00191         #endif
+03CA   2BD0           00192                 goto    $+6
+                      00193 
+03CB   23D9           00194                 call    RcvL1           ;get data
+03CC   07FA           00195                 addwf   crc,f           ;compute checksum
+03CD   1703           00196                 bsf     STATUS,RP1      ;BANK3
+03CE   1683           00197                 bsf     STATUS,RP0
+03CF   0008           00198                 return
+                      00199 
+03D0   0BFD           00200                 decfsz  cnt3,f
+03D1   2BC9           00201                 goto    rptc
+03D2   0BFC           00202                 decfsz  cnt2,f
+03D3   2BC9           00203                 goto    rpt3
+03D4   0BFB           00204                 decfsz  cnt1,f
+03D5   2BC9           00205                 goto    rpt2
+03D6                  00206 way_to_exit:
+03D6   2B9C           00207                 goto    first_address   ;timeout:exit in all other cases
+                      00208 
+                      00209 ; ********************************************************************
+                      00210 ;
+                      00211 ;               RS-232C Recieve 1byte
+                      00212 ;
+                      00213 ;               Return in W and rxd
+                      00214 ;
+                      00215 ; ********************************************************************
+                      00216 
+03D7                  00217 RcvL:
+                      00218         #ifdef  Direct_RX
+                      00219                 btfss   RXPORT,RX
+                      00220         #else
+03D7   1885           00221                 btfsc   RXPORT,RX
+                      00222         #endif
+03D8   2BD7           00223                 goto    RcvL            ; check Start bit
+03D9                  00224 RcvL1:
+03D9   23FA           00225                 call    bwait2          ; wait 1/2 bit and W=9
+03DA   00FE           00226                 movwf   cn              ; cn=9
+03DB   0CFF           00227                 rrf     rxd,f           ; get bit data
+03DC   23F9           00228                 call    bwait           ; wait 1 bit and set Carry=1
+                      00229 
+                      00230         #ifdef  Direct_RX
+                      00231                 btfsc   RXPORT,RX
+                      00232         #else
+03DD   1C85           00233                 btfss   RXPORT,RX
+                      00234         #endif
+                      00235 
+03DE   1003           00236                 bcf     STATUS,C
+                      00237 
+03DF   0BFE           00238                 decfsz  cn,f            ; cn=0?
+03E0   2BDB           00239                 goto    $-5             ; loop
+03E1   087F           00240                 movf    rxd,w           ; return in w
+03E2   0008           00241                 return
+                      00242 
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00243 ; ********************************************************************
+                      00244 ;
+                      00245 ;               Program Flash
+                      00246 ;
+                      00247 ; ********************************************************************
+                      00248 
+03E3                  00249 wr_d:
+03E3   23C0           00250                 call    set_PMdata
+03E4                  00251 write:
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03E4   150C           00252                 bsf     PMCON1,WREN
+03E5   3055           00253                 movlw   0x55
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03E6   008D           00254                 movwf   PMCON2
+03E7   30AA           00255                 movlw   0xaa
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03E8   008D           00256                 movwf   PMCON2
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+03E9   148C           00257                 bsf     PMCON1,WR       ;WR=1
+03EA   0000           00258                 nop
+03EB   0000           00259                 nop
+                      00260 ;               clrf    PMCON1
+03EC   0008           00261                 return
+                      00262 
+                      00263 ; ********************************************************************
+                      00264 ;
+                      00265 ;               RS-232C Send 1byte
+                      00266 ;
+                      00267 ;               Set W and Call (Return:W=0x09,Carry=1,Zero=1)
+                      00268 ;
+                      00269 ; ********************************************************************
+                      00270 
+03ED                  00271 SendL:
+                      00272 
+                      00273    #ifdef Direct_TX
+                      00274                 bcf     TXPORT,TX ; TX port Initialization
+                      00275    #else
+03ED   1405           00276                 bsf     TXPORT,TX
+                      00277    #endif
+03EE   00FF           00278                 movwf   rxd     ; rxd=w
+03EF   23F8           00279                 call    bout+3  ; send start bit
+03F0   00FE           00280                 movwf   cn      ; cn=9
+03F1   0CFF           00281                 rrf     rxd,f   ; set Carry             ; 1
+03F2   23F5           00282                 call    bout    ; wait 1bit and Carry=1 ; 2+1+1+1+1+8N+6=8N+12
+03F3   0BFE           00283                 decfsz  cn,f    ; send 10bits?          ; 1
+03F4   2BF1           00284                 goto    $-3     ; loop                  ; 2(1) total:1+8N+12+1+2=8N+16
+                      00285 
+03F5                  00286 bout:
+                      00287 
+                      00288         #ifdef  Direct_TX
+                      00289                 btfsc   STATUS,C                        ; 1
+                      00290                 bcf     TXPORT,TX                       ; 1
+                      00291                 btfss   STATUS,C                        ; 1
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00292                 bsf     TXPORT,TX                       ; 1
+                      00293         #else
+03F5   1803           00294                 btfsc   STATUS,C
+03F6   1405           00295                 bsf     TXPORT,TX
+03F7   1C03           00296                 btfss   STATUS,C
+03F8   1005           00297                 bcf     TXPORT,TX
+                      00298         #endif
+                      00299 
+03F9                  00300 bwait:                          ; wait 1 bit
+03F9   23FA           00301                 call    bwait2                          ; 2+(4N+2)+(4N+2)=8N+6
+03FA                  00302 bwait2:                         ; wait 1/2bit and Set Carry=1
+03FA   30E8           00303                 movlw   .256-((xtal/.4)/baud-.15)/.8    ; 1
+03FB   3E01           00304                 addlw   0x01                            ; 1
+03FC   1D03           00305                 btfss   STATUS,Z                        ; 1
+03FD   2BFB           00306                 goto    $-2                             ; 2(1)
+03FE   3409           00307                 retlw   0x09                            ; 2 total:1+(1+1+2)*N-1+2=4N+2
+                      00308 
+                      00309 ;*************************************************************
+                      00310 ; After reset
+                      00311 ; Do not expect the memory to be zero,
+                      00312 ; Do not expect registers to be initialised like in catalog.
+                      00313 
+                      00314                 end
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001E
+ADCON1                            0000001F
+ADCS0                             00000004
+ADCS1                             00000005
+ADCS2                             00000006
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRES                             0000001C
+ADRESH                            0000001D
+ADRESL                            0000001C
+ANSA0                             00000000
+ANSA1                             00000001
+ANSA2                             00000002
+ANSA4                             00000004
+ANSA5                             00000005
+ANSELA                            00000185
+APFCON                            00000188
+C                                 00000000
+C1CON0                            0000009D
+C1CON1                            0000009E
+C1HYS                             00000001
+C1IE                              00000004
+C1IF                              00000004
+C1INTN                            00000006
+C1INTP                            00000007
+C1NCH0                            00000000
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1PCH0                            00000004
+C1PCH1                            00000005
+C1POL                             00000004
+C1SP                              00000002
+C1SYNC                            00000000
+C1ZLF                             00000003
+C2CON0                            0000009B
+C2CON1                            0000009C
+C2HYS                             00000001
+C2IE                              00000005
+C2IF                              00000005
+C2INTN                            00000006
+C2INTP                            00000007
+C2NCH0                            00000000
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2PCH0                            00000004
+C2PCH1                            00000005
+C2POL                             00000004
+C2SP                              00000002
+C2SYNC                            00000000
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C2ZLF                             00000003
+CCP1CON                           00000015
+CCP1IE                            00000000
+CCP1IF                            00000000
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCPR1                             00000013
+CCPR1H                            00000014
+CCPR1L                            00000013
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CM1CON0                           0000009D
+CM1CON1                           0000009E
+CM2CON0                           0000009B
+CM2CON1                           0000009C
+CMOUT                             0000009F
+COG1ASD                           00000197
+COG1BLK                           00000193
+COG1CON0                          00000195
+COG1CON1                          00000196
+COG1DB                            00000194
+COG1FSEL                          00000002
+COG1IE                            00000002
+COG1IF                            00000002
+COG1O0SEL                         00000000
+COG1O1SEL                         00000001
+COG1PH                            00000192
+DACCON0                           00000091
+DACCON1                           00000092
+DACEN                             00000007
+DACOE                             00000005
+DACPSS0                           00000002
+DACR0                             00000000
+DACR1                             00000001
+DACR2                             00000002
+DACR3                             00000003
+DACR4                             00000004
+DACRNG                            00000006
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+F                                 00000001
+FSR                               00000004
+FVRBUFEN                          00000005
+FVRBUFSS                          00000004
+FVRCON                            00000090
+FVREN                             00000007
+FVRRDY                            00000006
+G1ARSEN                           00000006
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+G1ASDE                            00000007
+G1ASDL0                           00000004
+G1ASDL1                           00000005
+G1ASDSC1                          00000001
+G1ASDSC2                          00000002
+G1ASDSFLT                         00000000
+G1ASDSHLT                         00000003
+G1BDR0                            00000004
+G1BDR1                            00000005
+G1BDR2                            00000006
+G1BDR3                            00000007
+G1BLKF0                           00000000
+G1BLKF1                           00000001
+G1BLKF2                           00000002
+G1BLKF3                           00000003
+G1BLKR0                           00000004
+G1BLKR1                           00000005
+G1BLKR2                           00000006
+G1BLKR3                           00000007
+G1CS0                             00000000
+G1CS1                             00000001
+G1DBF0                            00000000
+G1DBF1                            00000001
+G1DBF2                            00000002
+G1DBF3                            00000003
+G1EN                              00000007
+G1FS0                             00000003
+G1FS1                             00000004
+G1FS2                             00000005
+G1FSIM                            00000007
+G1LD                              00000002
+G1OE0                             00000005
+G1OE1                             00000006
+G1PH0                             00000000
+G1PH1                             00000001
+G1PH2                             00000002
+G1PH3                             00000003
+G1POL0                            00000003
+G1POL1                            00000004
+G1RS0                             00000000
+G1RS1                             00000001
+G1RS2                             00000002
+G1RSIM                            00000006
+GIE                               00000007
+GO_NOT_DONE                       00000001
+H1CKPS0                           00000000
+H1CKPS1                           00000001
+H1ERS0                            00000002
+H1ERS1                            00000003
+H1ERS2                            00000004
+H1FEREN                           00000001
+H1ON                              00000002
+H1OUTPS0                          00000003
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+H1OUTPS1                          00000004
+H1OUTPS2                          00000005
+H1OUTPS3                          00000006
+H1REREN                           00000000
+HLT1CON0                          00000115
+HLT1CON1                          00000116
+HLTMR1                            00000113
+HLTMR1IE                          00000002
+HLTMR1IF                          00000002
+HLTPR1                            00000114
+HTS                               00000002
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOCAF                             00000008
+IOCAF0                            00000000
+IOCAF1                            00000001
+IOCAF2                            00000002
+IOCAF3                            00000003
+IOCAF4                            00000004
+IOCAF5                            00000005
+IOCAN                             00000108
+IOCAN0                            00000000
+IOCAN1                            00000001
+IOCAN2                            00000002
+IOCAN3                            00000003
+IOCAN4                            00000004
+IOCAN5                            00000005
+IOCAP                             00000088
+IOCAP0                            00000000
+IOCAP1                            00000001
+IOCAP2                            00000002
+IOCAP3                            00000003
+IOCAP4                            00000004
+IOCAP5                            00000005
+IOCIE                             00000003
+IOCIF                             00000000
+IRCF0                             00000004
+IRCF1                             00000005
+IRP                               00000007
+IdTypePIC                         0000001C
+IntrareBootloader                 000003A0
+LATA                              00000105
+LATA0                             00000000
+LATA1                             00000001
+LATA2                             00000002
+LATA4                             00000004
+LATA5                             00000005
+LTS                               00000001
+MCOUT                             0000009F
+MCOUT1                            00000000
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+MCOUT2                            00000001
+MainLoop                          000003AC
+NOT_BOR                           00000000
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RAPU                          00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000189
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000010F
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PMADR                             0000018E
+PMADRH                            0000018F
+PMADRL                            0000018E
+PMCON1                            0000018C
+PMCON2                            0000018D
+PMDAT                             00000190
+PMDATH                            00000191
+PMDATL                            00000190
+PORTA                             00000005
+PR2                               00000111
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+RX                                1
+RXP                               1
+RXPORT                            PORTA
+RcvL                              000003D7
+RcvL1                             000003D9
+Receive                           000003C6
+SLRA0                             00000000
+SLRA2                             00000002
+SLRCONA                           0000010D
+STATUS                            00000003
+SendL                             000003ED
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000011
+T1GCON                            00000012
+T1GGO                             00000003
+T1GGO_NOT_DONE                    00000003
+T1GPOL                            00000006
+T1GSEL                            00000004
+T1GSPM                            00000004
+T1GSS0                            00000000
+T1GSS1                            00000001
+T1GTM                             00000005
+T1GVAL                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000112
+T2OUTPS0                          00000003
+T2OUTPS1                          00000004
+T2OUTPS2                          00000005
+T2OUTPS3                          00000006
+TMR0                              00000001
+TMR1                              0000000F
+TMR1CS0                           00000006
+TMR1CS1                           00000007
+TMR1GE                            00000007
+TMR1GIE                           00000007
+TMR1GIF                           00000007
+TMR1H                             00000010
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000F
+TMR1ON                            00000000
+TMR2                              00000110
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX                                0
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TXP                               1
+TXPORT                            PORTA
+VCFG                              00000006
+W                                 00000000
+WPUA                              0000010C
+WPUA0                             00000000
+WPUA1                             00000001
+WPUA2                             00000002
+WPUA3                             00000003
+WPUA4                             00000004
+WPUA5                             00000005
+WR                                00000001
+WREN                              00000002
+Z                                 00000002
+_BOREN_DIS                        00003CFF
+_BOREN_EN                         00003FFF
+_BOREN_SLEEP_DIS                  00003EFF
+_CLKOUTEN_OFF                     00003FFF
+_CLKOUTEN_ON                      00002FFF
+_CONFIG                           00002007
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEVID1                           00002006
+_FOSC0_EC                         00003FFF
+_FOSC0_INT                        00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WRT_ALL                          000033FF
+_WRT_FOURTH                       00003BFF
+_WRT_HALF                         000037FF
+_WRT_OFF                          00003FFF
+__12F752                          00000001
+baud                              00002580
+bout                              000003F5
+bwait                             000003F9
+bwait2                            000003FA
+cn                                0000007E
+cnt1                              0000007B
+cnt2                              0000007C
+cnt3                              0000007D
+crc                               0000007A
+first_address                     max_flash-100
+mainl                             000003AD
+max_flash                         0x400
+rpt2                              000003C9
+MPASM  5.51   TINYBLD12F752_8MHZ_INT_9600.ASM   6-10-2014  15:39:35         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+rpt3                              000003C9
+rptc                              000003C9
+rxd                               0000007F
+set_PMdata                        000003C0
+way_to_exit                       000003D6
+wr_d                              000003E3
+write                             000003E4
+xtal                              007A1200
+ziieroare                         000003BB
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X--------------- ---------------- ---------------- ----------------
+0380 : ---------------- ---------------- XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+03C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXX-
+2000 : -------X-------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:    96
+Program Memory Words Free:   928
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :    14 reported,     0 suppressed
+
+

@@ -1,0 +1,94 @@
+
+Discarded input sections
+
+ .data          0x00000000        0x0 ./src/tinybldlpc810_12MHz_int_19200bd.o
+ .bss           0x00000000        0x0 ./src/tinybldlpc810_12MHz_int_19200bd.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+MFlash4          0x00000000         0x00001000         xr
+RamLoc1          0x10000000         0x00000400         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./src/tinybldlpc810_12MHz_int_19200bd.o
+START GROUP
+LOAD c:/nxp/lpcxpresso_6.1.0_164/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib/armv6-m\libcr_c.a
+LOAD c:/nxp/lpcxpresso_6.1.0_164/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.6.2/armv6-m\libcr_eabihelpers.a
+END GROUP
+                0x00001000                __top_MFlash4 = 0x1000
+                0x10000400                __top_RamLoc1 = 0x10000400
+
+.text           0x00000000      0xfe8
+ FILL mask 0xff
+                0x00000000                __vectors_start__ = ABSOLUTE (.)
+ *(.isr_vector)
+ .isr_vector    0x00000000       0xc0 ./src/tinybldlpc810_12MHz_int_19200bd.o
+                0x000000c0                . = ALIGN (0x4)
+ *(.after_vectors*)
+ *(.text*)
+ .text          0x000000c0      0xf28 ./src/tinybldlpc810_12MHz_int_19200bd.o
+ *(.rodata .rodata.*)
+                0x00000fe8                . = ALIGN (0x4)
+
+.glue_7         0x00000fe8        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x00000fe8        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x00000fe8        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00000fe8        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x00000fe8                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x00000fe8                __exidx_end = .
+                0x00000fe8                _etext = .
+
+.mtb_buffer_default
+ *(.mtb*)
+
+.uninit_RESERVED
+                0x10000000        0x0
+ *(.bss.$RESERVED*)
+                0x10000000                . = ALIGN (0x4)
+                0x10000000                _end_uninit_RESERVED = .
+
+.data           0x10000000        0x0 load address 0x00000fe8
+ FILL mask 0xff
+                0x10000000                _data = .
+ *(vtable)
+ *(.data*)
+                0x10000000                . = ALIGN (0x4)
+                0x10000000                _edata = .
+
+.bss            0x10000000        0x0 load address 0x00000fe8
+                0x10000000                _bss = .
+ *(.bss*)
+ *(COMMON)
+                0x10000000                . = ALIGN (0x4)
+                0x10000000                _ebss = .
+                0x10000000                PROVIDE (end, .)
+
+.noinit         0x10000000        0x0 load address 0x00000fe8
+                0x10000000                _noinit = .
+ *(.noinit*)
+                0x10000000                . = ALIGN (0x4)
+                0x10000000                _end_noinit = .
+                0x10000000                PROVIDE (_pvHeapStart, .)
+                0x10000400                PROVIDE (_vStackTop, (__top_RamLoc1 - 0x0))
+OUTPUT(bootloader.axf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x21
+ .ARM.attributes
+                0x00000000       0x21 ./src/tinybldlpc810_12MHz_int_19200bd.o

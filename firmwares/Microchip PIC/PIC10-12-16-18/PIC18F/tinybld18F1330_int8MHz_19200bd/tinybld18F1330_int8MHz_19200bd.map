@@ -1,0 +1,83 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Thu Feb 13 19:42:28 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000004
+                   .org_1       code   0x001f38    program   0x000008
+                   .org_2       code   0x001f40    program   0x0000ba
+                   .cinit    romdata   0x001ffa    program   0x000002
+.config_300001_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x300001    program   0x000001
+.config_300002_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x300002    program   0x000001
+.config_300003_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x300003    program   0x000001
+.config_300004_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x300004    program   0x000001
+.config_300005_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x300005    program   0x000001
+.config_300006_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x300006    program   0x000001
+.config_300008_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x300008    program   0x000001
+.config_300009_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x300009    program   0x000001
+.config_30000A_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x30000a    program   0x000001
+.config_30000B_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x30000b    program   0x000001
+.config_30000C_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x30000c    program   0x000001
+.config_30000D_TINYBLD18F1330_INT8MHZ_19200BD.O    romdata   0x30000d    program   0x000001
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000003      
+                            0x001f38    0x001ffb      
+                            0x300001    0x300006      
+                            0x300008    0x30000d      
+            212 out of 8344 program addresses used, program memory utilization is 2%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x001f40    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                 MainLoop   0x001f5e    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                  Receive   0x001fd8    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                    Write   0x001fc8    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                eraseloop   0x001f9a    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                    mainl   0x001f62    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                 noeeprom   0x001f9a    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                   notrcv   0x001fea    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                   rcvoct   0x001f7e    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                     rpt2   0x001fdc    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                     rpt3   0x001fde    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                     rptc   0x001fe0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                  waitwre   0x001fbe    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+              way_to_exit   0x001ff6    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+             writebigloop   0x001fa0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                writebyte   0x001fac    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+               writesloop   0x001fa8    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                ziieroare   0x001fc2    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x001f40    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                 MainLoop   0x001f5e    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                    mainl   0x001f62    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                   rcvoct   0x001f7e    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                eraseloop   0x001f9a    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                 noeeprom   0x001f9a    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+             writebigloop   0x001fa0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+               writesloop   0x001fa8    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                writebyte   0x001fac    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                  waitwre   0x001fbe    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                ziieroare   0x001fc2    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                    Write   0x001fc8    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                  Receive   0x001fd8    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                     rpt2   0x001fdc    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                     rpt3   0x001fde    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                     rptc   0x001fe0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+                   notrcv   0x001fea    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+              way_to_exit   0x001ff6    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip PIC\PIC10-12-16-18\PIC18F\tinybld18F1330_int8MHz_19200bd\tinybld18F1330_int8MHz_19200bd.asm
+
+

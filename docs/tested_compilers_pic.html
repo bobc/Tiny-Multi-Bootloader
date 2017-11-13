@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Tiny AVR/PIC Bootloader+ : Tested PIC Compilers</title>
+    
+    <style type="text/css">
+<!--
+.style1 {color: #FF0000}
+-->
+    </style></head><body>
+    <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="text-align: center; vertical-align: top;">
+            <h1 style="color: rgb(0, 0, 153);">Tiny AVR/PIC
+              Bootloader+</h1>
+            <div style="text-align: left; color: rgb(0, 0, 153);">
+              <h2>Tested PIC Compilers:</h2>
+              <hr style="width: 100%; height: 2px;"><span style="color: black;"><span style="font-weight: bold; color: rgb(0, 153, 0);">In green</span>:
+                compilers working <span style="text-decoration: underline;">without</span>
+                modifications to the application source code.<br>
+                <span style="color: rgb(51, 51, 255); font-weight: bold;">In
+                  blue</span>:&nbsp;</span><span style="color: black;">compilers
+                working <span style="text-decoration: underline;">with</span>
+                modifications to the application source code (your code,&nbsp;or
+                the linker
+                script,nor remap reset/interrupts vectors to new locations,
+                etc...)<br>
+              </span><span style="color: black;">
+                <span style="font-weight: bold;"></span><span style="font-weight: bold; color: red;">In
+                  red</span>: compilers not working</span><span style="color: black;">.<br>
+                <br>
+              </span></div>
+            <div style="text-align: left;">
+              <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+                <tbody>
+                  <tr>
+                    <td style="text-align: center; font-weight: bold;"><br>                    </td>
+                    <td style="text-align: center; font-weight: bold;" valign="undefined">Compiler's
+                      name</td>
+                    <td style="text-align: center; font-weight: bold;" valign="undefined">Tips
+                      - Remarks</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" colspan="1" rowspan="10" valign="undefined">PIC
+                      10/12/16/18 MCUs<br>
+                      8 bits</td>
+                    <td style="text-align: center; color: rgb(0, 153, 0);" valign="undefined">CCS
+                      C Compiler</td>
+                    <td style="color: rgb(0, 153, 0); text-align: center;" valign="undefined">Works
+                      out of the box<span style="color: rgb(0, 153, 0);"> - Don't modify your code</span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center; color: rgb(0, 153, 0);" valign="undefined">Great
+                      Cow Basic (<a href="http://gcbasic.sourceforge.net/update.html">link</a>)</td>
+                    <td style="color: rgb(0, 153, 0); text-align: center;" valign="undefined">Works
+                      out of the box<span style="color: rgb(0, 153, 0);"> - Don't modify your code</span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">Microchip
+                        XC8</span></td>
+                    <td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">Works
+                        since v0.7.0.2 - Don't modify your code <span class="style1">(sure??? must try)</span> </span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" valign="undefined"><span style="color: rgb(51, 51, 255);">JALv2</span>
+                      (<a href="http://justanotherlanguage.org/">link</a>)</td>
+                    <td align="undefined" valign="undefined">
+                      <div style="text-align: center;">(From Sunish:) just add
+                        these two lines to your code:</div>
+                      <span style="font-family: monospace;">pragma bootloader
+                        bloader </span><br style="font-family: monospace;">
+                      <span style="font-family: monospace;">pragma fuses no</span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" valign="undefined"><span style="color: rgb(51, 51, 255);">PIC18
+                        assembler</span></td>
+                    <td align="undefined" valign="undefined">(From Dan:)<br>
+                      1.With or without interrupt, you must use the instruction
+                      'goto' in the first four words.<br>
+                      2.You can not use the relative jump instruction in the
+                      frist four words (rcall, bra).<br>
+                      3.Maximum program size = max_flash_size - bootloader_size<br>
+                      <br>
+                      source Examples:<br>
+                      [good]<br>
+                      <span style="font-family: monospace;">0000:call AAA</span><br style="font-family: monospace;">
+                      <span style="font-family: monospace;">0002:goto INIT</span><br>
+                      [good]<br>
+                      <span style="font-family: monospace;">0000:goto INIT</span><br>
+                      [Not Good]<br>
+                      <span style="font-family: monospace;">0000:rcall AAA</span><br style="font-family: monospace;">
+                      <span style="font-family: monospace;">0001:rcall BBB</span><br style="font-family: monospace;">
+                      <span style="font-family: monospace;">0002:goto INIT</span><br>
+                      [Not Good]<br>
+                      <span style="font-family: monospace;">0000:call AAA</span><br style="font-family: monospace;">
+                      <span style="font-family: monospace;">0002:bra INIT</span><br>
+                      [Not Good]<br>
+                      <span style="font-family: monospace;">0000:bra INIT</span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" valign="undefined">Mikro C</td>
+                    <td style="text-align: center;" valign="undefined">Waiting
+                      feedback from MAIP</td>
+                  </tr>
+                  <tr>
+            <td style="vertical-align: top; text-align: center;"><span style="color: rgb(0, 153, 0);">SourceBoost - BoostC</span> (<a href="http://www.sourceboost.com/Products/BoostC/Overview.html">link</a>)<br>
+            </td>
+            <td style="vertical-align: top; color: rgb(0, 153, 0); text-align: center;">Works
+                      out of the box - Don't modify your code (thanks to TFCROFT4)<br>
+            </td>
+          </tr>
+<tr>
+                    <td style="text-align: center;" valign="undefined">HI-TECH C compiler </td>
+                    <td style="text-align: center;" valign="undefined"><span class="style1">To test...</span> </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" valign="undefined">SDCC (<a href="http://sdcc.sourceforge.net/">link</a>) </td>
+                    <td style="text-align: center;" valign="undefined"><span class="style1">To test...</span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" valign="undefined"><span style="color: rgb(51, 51, 255);"></span><br>                    </td>
+                    <td style="text-align: center;" valign="undefined"><br>                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" colspan="1" rowspan="3" valign="undefined">PIC
+                      24 MCUs / dsPIC
+                      DSCs<br>
+                      16 bits</td>
+                    <td style="text-align: center;" valign="undefined"><br>                    </td>
+                    <td style="text-align: center;" valign="undefined"><br>                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" valign="undefined"><br>                    </td>
+                    <td style="text-align: center;" valign="undefined"><br>                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" valign="undefined"><br>                    </td>
+                    <td style="text-align: center;" valign="undefined"><br>                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" colspan="1" rowspan="3" valign="undefined">PIC
+                      32 MCUs<br>
+                      32 bits</td>
+                    <td style="text-align: center; color: rgb(0, 153, 0);" valign="undefined">Microchip
+                      C32 Compiler</td>
+                    <td style="text-align: center; color: rgb(0, 153, 0);" valign="undefined">Works
+                      out of the box<span style="color: rgb(0, 153, 0);"> - Don't modify your code</span></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center; color: rgb(0, 153, 0);" valign="undefined">mikroC
+                      PRO for PIC32</td>
+                    <td style="text-align: center;" valign="undefined"><span style="color: rgb(0, 153, 0);">Works
+                        since v0.6.1</span><span style="color: rgb(0, 153, 0);"> - Don't modify your code</span><br>                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;" valign="undefined"><br>                    </td>
+                    <td style="text-align: center;" valign="undefined"><br>                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </body></html>

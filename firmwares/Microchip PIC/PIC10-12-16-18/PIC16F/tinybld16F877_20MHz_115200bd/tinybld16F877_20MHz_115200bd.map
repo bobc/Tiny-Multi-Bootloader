@@ -1,0 +1,62 @@
+MPLINK 4.45, Linker
+Linker Map File - Created Mon May 13 18:06:38 2013
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000006
+                   .cinit    romdata   0x001800    program   0x000004
+                   .org_1       code   0x001f9c    program   0x000008
+                   .org_2       code   0x001fa0    program   0x0000c0
+.config_2007_TINYBLD16F877.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x001800    0x001801      
+                            0x001f9c    0x001fff      
+                            0x002007    0x002007      
+            106 out of 8454 program addresses used, program memory utilization is 1%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x001fa0    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                 MainLoop   0x001faf    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                  Receive   0x001fed    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+             _.org_2_1FF3   0x001ff3    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                    mainl   0x001fb2    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                   rcvoct   0x001fc2    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                     rpt2   0x001ff0    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                     rpt3   0x001ff1    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                     rptc   0x001ff2    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                  waitwre   0x001fe0    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+              way_to_exit   0x001ffe    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                writeloop   0x001fcd    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                ziieroare   0x001fea    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x001fa0    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                 MainLoop   0x001faf    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                    mainl   0x001fb2    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                   rcvoct   0x001fc2    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                writeloop   0x001fcd    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                  waitwre   0x001fe0    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                ziieroare   0x001fea    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                  Receive   0x001fed    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                     rpt2   0x001ff0    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                     rpt3   0x001ff1    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+                     rptc   0x001ff2    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+             _.org_2_1FF3   0x001ff3    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+              way_to_exit   0x001ffe    program     static D:\Quercioli\Documents\SourceForge\TinyPicBootloader+ (v0.6.4.x)\firmwares\PIC10-12-16-18\PIC16F\tinybld16F877_20MHz_115200bd\tinybld16F877.asm
+
+

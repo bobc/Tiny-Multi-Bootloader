@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <title>Tiny AVR/PIC Bootloader+ : Modify PIC32 family firmwares</title>
+  </head>
+  <body>
+    <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="text-align: center; vertical-align: top;">
+            <h1 style="color: rgb(0, 0, 153);">Tiny AVR/PIC Bootloader+</h1>
+            <div style="text-align: left; color: rgb(0, 0, 153);">
+              <h2>PIC32 family firmwares:</h2>
+              <hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><br>
+              </span></div>
+            <div style="text-align: left;">
+              <h3>PIC32's firmwares principles:</h3>
+              <div style="margin-left: 40px;">
+                <h4>Operation:</h4>
+                ### todo<br>
+                <h4>Modify it to suit your needs:</h4>
+                <h5>Needed Tools: </h5>
+                <p>MPLAB-X (<a href="http://www.microchip.com/pagehandler/en-us/family/mplabx/">download link</a>) <br>
+                Used compiler: C32 (<a href="http://ww1.microchip.com/downloads/en/DeviceDoc/mplabc32_v2_02a_windows_installer.exe">download link</a>)<br>
+                <br>
+                For USB version, you'll also need
+                &quot;Microchip Libraries for Applications - Legacy&quot;  (<a href="http://ww1.microchip.com/downloads/en/softwarelibrary/microchip-libraries-for-applications-v2013-06-15-windows-installer.exe">download link</a>). It should be installed in &quot;C:\Program Files\Microchip\Microchip Sloutions&quot; if you don't want to modify the MPLAB project.</p>
+                <h5> How to: </h5>
+                <p>### todo</p>
+              </div>
+              <h3>UART Firmware:</h3>
+              <div style="margin-left: 40px;">UART firmwares are located in
+                "Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip
+                PIC\PIC32MX3xx_to_7xx\UART version" folder.<br>
+              ### todo </div>
+              <br>
+              <h3>USB Firmware:</h3>
+              <div style="margin-left: 40px;">USB firmwares are located in
+                "Tiny_Avr-Pic_Bootloader+ (v0.8.x)\firmwares\Microchip
+                PIC\PIC32MX3xx_to_7xx\USB version" folder.</div>
+              <h4 style="margin-left: 40px;">PC driver intallation:</h4>
+              <div style="margin-left: 40px;">In "Tiny_Avr-Pic_Bootloader+
+                (v0.8.x)\firmwares\Microchip PIC\PIC32MX3xx_to_7xx\USB
+                version\_Virtual_COM_Install" folder you'll find two other
+                folders: "PC Driver" and "Virtual_COM_Install_Firmware". <br>
+                As Tiny AVR/PIC Bootloader+ firmwares are waiting for PC
+                connection only for 1 second before launching the application's
+                firmware, you won't have the time to install the virtual COM
+                driver on you PC! So, you must follow the PC driver's
+                installation procedure given below:</div>
+              <ul style="margin-left: 40px;">
+                <li>put "PIC32MXxxxF512L_Virtual_COM_Install_Firmware.hex", from
+                  "Virtual_COM_Install_Firmware" folder, in your device.</li>
+                <li>connect your device to an USB port.</li>
+                <li>when Windows ask for a driver, point to the "PC Driver"
+                  folder and install it.</li>
+                <li>now, you'll have a new COM on your computer. Note it's
+                  number (for example: COM7).</li>
+                <li>now put the real PIC32 USB Tiny Bootloader firmware (i.e.
+                  "tinyboot_PIC32MXxxxF512L_USB-CDC.hex") in your PIC32 device.</li>
+                <li>in "Tiny AVR/PIC Bootloader+" PC software, put the name of
+                  the new COM port (for example: COM7), in "Selected COM:" text
+                  zone.</li>
+              </ul>
+              <div style="margin-left: 40px;">
+                <h4>Notes:</h4>
+                Beware, with USB firmware, automatic RTS Reset is ineffective.
+                So you'll have to reset your device manually, either by powering
+                it Off then On or by puting /MCLR to ground via a switch. Once
+                reseted, you'll just have a little second to clic on "Write Device"
+                or "Check Device" button!<br>
+                <br>
+                With USB firmware, you can use any baudrate, it will work.</div>
+            </div>          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </body>
+</html>

@@ -1,0 +1,812 @@
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE    1
+
+       1                    ; change these lines accordingly to your application
+       2                            .cdecls C,LIST,"msp430.h"
+ A     1            ; ------------------------------------------
+ A     2            ; Assembly Generated from C/C++ Source Code
+ A     3            ; ------------------------------------------
+ A     4            
+ A     5            ; =========== MACRO DEFINITIONS ===========
+ A     6            ; ASM HEADER WARNING - function-like macro 'SFR_8BIT(address)' not supported
+ A     7            ; ASM HEADER WARNING - function-like macro 'SFR_16BIT(address)' not supported
+ A     8            ; ASM HEADER WARNING - function-like macro 'VECTOR_NAME(name)' not supported
+ A     9            ; ASM HEADER WARNING - function-like macro 'EMIT_PRAGMA(x)' not supported
+ A    10            ; ASM HEADER WARNING - function-like macro 'CREATE_VECTOR(name)' not supported
+ A    11            ; ASM HEADER WARNING - function-like macro 'PLACE_VECTOR(vector,section)' not supported
+ A    12            ; ASM HEADER WARNING - function-like macro 'ISR_VECTOR(func,offset)' not supported
+ A    13                       .define "(0x0800)",SCS 
+ A    14                       .define "1",_OPTIMIZE_FOR_SPACE 
+ A    15                       .define "(0x02)",USIOE 
+ A    16                       .define "(0x08)",RSTIFG 
+ A    17                       .define "(0x40)",XT2S0 
+ A    18                       .define "(0x80)",XT2S1 
+ A    19                       .define "1",__ASM_HEADER__ 
+ A    20                       .define """.int08""",TIMERA1_VECTOR 
+ A    21                       .define "(0x9600)",FRKEY 
+ A    22                       .define "(0x0010)",CCIE 
+ A    23                       .define "(0x20)",USISTTIE 
+ A    24                       .define "1",__MSP430__ 
+ A    25                       .define "(0x0010)",WDTTMSEL 
+ A    26                       .define "(0x20)",DCO0 
+ A    27                       .define "(0x40)",DCO1 
+ A    28                       .define "(0x80)",DCO2 
+ A    29                       .define "(0x0040)",ID0 
+ A    30                       .define "(0x0020)",SD16OVIFG 
+ A    31                       .define "(0x80)",USICKPH 
+ A    32                       .define "(0x0080)",ID1 
+ A    33                       .define "(0x00)",USISSEL_0 
+ A    34                       .define "(0x04)",USISSEL_1 
+ A    35                       .define "(0x08)",USISSEL_2 
+ A    36                       .define "(0x02)",USICKPL 
+ A    37                       .define "(0x0C)",USISSEL_3 
+ A    38                       .define "(0x10)",USISSEL_4 
+ A    39                       .define "(0x0080)",BLKWRT 
+ A    40                       .define "(0x14)",USISSEL_5 
+ A    41                       .define "(0x01)",USISWRST 
+ A    42                       .define "1",__edg_front_end__ 
+ A    43                       .define "(0x18)",USISSEL_6 
+ A    44                       .define "(0x1C)",USISSEL_7 
+ A    45                       .define "1",__MSP430_HAS_SD16_A1__ 
+ A    46                       .define "(0x0100)",CAP 
+ A    47                       .define "(WDTPW+WDTTMSEL+WDTCNTCL+WDTSSEL+WDTIS0)",WDT_ADLY_250 
+ A    48                       .define "1",__MSP430_HAS_TA2__ 
+ A    49                       .define "(0x0002)",TAIV_TACCR1 
+ A    50                       .define "(0x1000)",CCIS0 
+ A    51                       .define "1",__NO_LONG_LONG 
+ A    52                       .define "(0x2000)",CCIS1 
+ A    53                       .define "(0x40)",USI16B 
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE    2
+
+ A    54                       .define "3003003",__COMPILER_VERSION__ 
+ A    55                       .define "(0x0008)",CCI 
+ A    56                       .define "0",__TI_STRICT_ANSI_MODE__ 
+ A    57                       .define "(0x0001)",C 
+ A    58                       .define """11:19:24""",__TIME__ 
+ A    59                       .define "(0x0010)",CPUOFF 
+ A    60                       .define "TACCR0_",TA0CCR0_ 
+ A    61                       .define "(0x5A00)",WDTPW 
+ A    62                       .define "(0x10)",NMIIE 
+ A    63                       .define "(0x0004)",N 
+ A    64                       .define "(0x0200)",SD16XDIV0 
+ A    65                       .define "TACCR1_",TA0CCR1_ 
+ A    66                       .define "(0x0400)",SD16XDIV1 
+ A    67                       .define "(0x0100)",V 
+ A    68                       .define "TACCTL0_",TA0CCTL0_ 
+ A    69                       .define "(WDTPW+WDTTMSEL+WDTCNTCL+WDTSSEL)",WDT_ADLY_1000 
+ A    70                       .define "(0x10)",LFXT1S0 
+ A    71                       .define "(0x00)",LFXT1S_0 
+ A    72                       .define "(0x0008)",SD16VMIDON 
+ A    73                       .define "(0x20)",LFXT1S1 
+ A    74                       .define "(0x10)",LFXT1S_1 
+ A    75                       .define "(0x20)",LFXT1S_2 
+ A    76                       .define "(0x0002)",Z 
+ A    77                       .define "(0x30)",LFXT1S_3 
+ A    78                       .define "(0x80)",XT2OFF 
+ A    79                       .define "unsigned",__SIZE_T_TYPE__ 
+ A    80                       .define "TACCTL1_",TA0CCTL1_ 
+ A    81                       .define "(0x3300)",FXKEY 
+ A    82                       .define "(0x0008)",WDTCNTCL 
+ A    83                       .define "TACCR0",TA0CCR0 
+ A    84                       .define "TACCR1",TA0CCR1 
+ A    85                       .define "int",__PTRDIFF_T_TYPE__ 
+ A    86                       .define """.int14""",NMI_VECTOR 
+ A    87                       .define "(0*0x1000u)",CCIS_0 
+ A    88                       .define "(1*0x1000u)",CCIS_1 
+ A    89                       .define "(WDTPW+WDTTMSEL+WDTCNTCL+WDTIS1+WDTIS0)",WDT_MDLY_0_064 
+ A    90                       .define "(2*0x1000u)",CCIS_2 
+ A    91                       .define "(3*0x1000u)",CCIS_3 
+ A    92                       .define "(0x0010)",SD16DF 
+ A    93                       .define "1",__msp430 
+ A    94                       .define "(0x20)",USIDIV0 
+ A    95                       .define "(0x40)",USIDIV1 
+ A    96                       .define "(0x80)",USIDIV2 
+ A    97                       .define "(0x0008)",GIE 
+ A    98                       .define "(CPUOFF)",LPM0 
+ A    99                       .define "(SCG0+CPUOFF)",LPM1 
+ A   100                       .define "(SCG1+CPUOFF)",LPM2 
+ A   101                       .define "(0x10)",USILSB 
+ A   102                       .define "(0x10)",DIVM0 
+ A   103                       .define "(SCG1+SCG0+CPUOFF)",LPM3 
+ A   104                       .define "(0x20)",DIVM1 
+ A   105                       .define "(SCG1+SCG0+OSCOFF+CPUOFF)",LPM4 
+ A   106                       .define "TACCR0",CCR0 
+ A   107                       .define "(0x01)",LFXT1OF 
+ A   108                       .define "TACCR1",CCR1 
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE    3
+
+ A   109                       .define "TAIV",TA0IV 
+ A   110                       .define "1",__MSP430_HAS_PORT2_R__ 
+ A   111                       .define "(WDTPW+WDTTMSEL+WDTCNTCL+WDTIS0)",WDT_MDLY_8 
+ A   112                       .define "(0x0008)",SD16GAIN0 
+ A   113                       .define "(0x0010)",SD16GAIN1 
+ A   114                       .define "(0*0x10u)",MC_0 
+ A   115                       .define "(0x0020)",SD16GAIN2 
+ A   116                       .define "(1*0x10u)",MC_1 
+ A   117                       .define "(2*0x10u)",MC_2 
+ A   118                       .define "(0x01)",WDTIFG 
+ A   119                       .define "TACCTL0",CCTL0 
+ A   120                       .define "(3*0x10u)",MC_3 
+ A   121                       .define "(0x0040)",SD16INTDLY0 
+ A   122                       .define "TACCTL1",CCTL1 
+ A   123                       .define "(0x0080)",SD16INTDLY1 
+ A   124                       .define "(WDTPW+WDTCNTCL+WDTSSEL)",WDT_ARST_1000 
+ A   125                       .define "TACCTL0",TA0CCTL0 
+ A   126                       .define "TACCTL1",TA0CCTL1 
+ A   127                       .define "(WDTPW+WDTCNTCL+WDTIS1+WDTIS0)",WDT_MRST_0_064 
+ A   128                       .define "(0x10)",NMIIFG 
+ A   129                       .define "(0x0000)",SD16INCH_0 
+ A   130                       .define "(0x0008)",WAIT 
+ A   131                       .define "(0x0001)",SD16INCH_1 
+ A   132                       .define "(0x0002)",SD16INCH_2 
+ A   133                       .define "(0x0003)",SD16INCH_3 
+ A   134                       .define "(0x0004)",SD16INCH_4 
+ A   135                       .define "(0x0005)",SD16INCH_5 
+ A   136                       .define "(0x0006)",SD16INCH_6 
+ A   137                       .define "(WDTPW+WDTCNTCL+WDTSSEL+WDTIS1)",WDT_ARST_16 
+ A   138                       .define "(0x0007)",SD16INCH_7 
+ A   139                       .define "(0*0x40u)",ID_0 
+ A   140                       .define "(1*0x40u)",ID_1 
+ A   141                       .define "(2*0x40u)",ID_2 
+ A   142                       .define "(0xA500)",FWKEY 
+ A   143                       .define "(3*0x40u)",ID_3 
+ A   144                       .define "(SD16XOSR)",SD16OSR_512 
+ A   145                       .define "(0x0040)",WDTNMIES 
+ A   146                       .define "(0x0000)",SD16DIV_0 
+ A   147                       .define "(SD16DIV0)",SD16DIV_1 
+ A   148                       .define "(SD16DIV1)",SD16DIV_2 
+ A   149                       .define "(0x01)",MOD0 
+ A   150                       .define "(SD16DIV0+SD16DIV1)",SD16DIV_3 
+ A   151                       .define "(0x02)",MOD1 
+ A   152                       .define "(0x04)",MOD2 
+ A   153                       .define "(0x08)",MOD3 
+ A   154                       .define "(0x0001)",BUSY 
+ A   155                       .define "(0x10)",MOD4 
+ A   156                       .define "(WDTPW+WDTCNTCL)",WDT_MRST_32 
+ A   157                       .define "(0x4000)",CM0 
+ A   158                       .define "(0x0020)",OUTMOD0 
+ A   159                       .define "(0x8000)",CM1 
+ A   160                       .define "(0x0040)",OUTMOD1 
+ A   161                       .define "(0x0080)",OUTMOD2 
+ A   162                       .define "(0x0040)",LOCKA 
+ A   163                       .define "(0x00)",SELM_0 
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE    4
+
+ A   164                       .define "(0x40)",SELM_1 
+ A   165                       .define "(0x80)",SELM_2 
+ A   166                       .define "(0x0008)",SD16IE 
+ A   167                       .define "(0xC0)",SELM_3 
+ A   168                       .define "(WDTPW+WDTTMSEL+WDTCNTCL+WDTSSEL+WDTIS1)",WDT_ADLY_16 
+ A   169                       .define "(0x01)",USIIFG 
+ A   170                       .define "(0x0100)",TASSEL0 
+ A   171                       .define "(0x0200)",TASSEL1 
+ A   172                       .define "1",__STDC__ 
+ A   173                       .define """.int04""",USI_VECTOR 
+ A   174                       .define "(0x000A)",TAIV_TAIFG 
+ A   175                       .define """.int02""",PORT1_VECTOR 
+ A   176                       .define "(0x0001)",BIT0 
+ A   177                       .define "(0x0002)",BIT1 
+ A   178                       .define "(0x0004)",BIT2 
+ A   179                       .define "(0x0008)",BIT3 
+ A   180                       .define "(0x0010)",BIT4 
+ A   181                       .define "(SD16OSR0)",SD16OSR_128 
+ A   182                       .define "(0x0040)",WRT 
+ A   183                       .define "(0x0020)",BIT5 
+ A   184                       .define "(0x0040)",BIT6 
+ A   185                       .define "(0x02)",USISTTIFG 
+ A   186                       .define "(0x0080)",BIT7 
+ A   187                       .define "(0x0100)",BIT8 
+ A   188                       .define "(WDTPW+WDTTMSEL+WDTCNTCL)",WDT_MDLY_32 
+ A   189                       .define "(0x0200)",BIT9 
+ A   190                       .define "(0x0002)",KEYV 
+ A   191                       .define "(0x0001)",TAIFG 
+ A   192                       .define "(WDTPW+WDTCNTCL+WDTIS1)",WDT_MRST_0_5 
+ A   193                       .define "(0x0020)",OSCOFF 
+ A   194                       .define "(0x0400)",BITA 
+ A   195                       .define "(0x02)",DIVS0 
+ A   196                       .define "(0x0800)",BITB 
+ A   197                       .define "(0x04)",DIVS1 
+ A   198                       .define "(0x1000)",BITC 
+ A   199                       .define "(0x2000)",BITD 
+ A   200                       .define "(0x4000)",BITE 
+ A   201                       .define "(0x8000)",BITF 
+ A   202                       .define "(0x0000)",SD16GAIN_1 
+ A   203                       .define "(0x0001)",SD16INCH0 
+ A   204                       .define "(0x0008)",SD16GAIN_2 
+ A   205                       .define "(0x0002)",SD16INCH1 
+ A   206                       .define "(0x0004)",SD16INCH2 
+ A   207                       .define "(0x0010)",SD16GAIN_4 
+ A   208                       .define "(0x0018)",SD16GAIN_8 
+ A   209                       .define "3003003",__TI_COMPILER_VERSION__ 
+ A   210                       .define "1",__MSP430_HAS_PORT1_R__ 
+ A   211                       .define """.int10""",WDT_VECTOR 
+ A   212                       .define "(0x0000)",SD16XDIV_0 
+ A   213                       .define "(SD16XDIV0)",SD16XDIV_1 
+ A   214                       .define "(SD16XDIV1)",SD16XDIV_2 
+ A   215                       .define "(SD16XDIV0+SD16XDIV1)",SD16XDIV_3 
+ A   216                       .define "(0x0100)",SD16LP 
+ A   217                       .define "1",__msp430x20x3 
+ A   218                       .define "(0x0002)",COV 
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE    5
+
+ A   219                       .define "(0x0010)",LOCK 
+ A   220                       .define "(0x0002)",SD16IV_SD16OVIFG 
+ A   221                       .define "TACTL",TA0CTL 
+ A   222                       .define "1",__unsigned_chars__ 
+ A   223                       .define "(WDTPW+WDTCNTCL+WDTSSEL+WDTIS1+WDTIS0)",WDT_ARST_1_9 
+ A   224                       .define "(0x01)",USICNT0 
+ A   225                       .define "(0x0400)",SD16SNGL 
+ A   226                       .define "(0x02)",USICNT1 
+ A   227                       .define "TACCR0_",CCR0_ 
+ A   228                       .define "(0x04)",USICNT2 
+ A   229                       .define "(0x08)",USICNT3 
+ A   230                       .define "(0x01)",RSEL0 
+ A   231                       .define "(0x10)",USICNT4 
+ A   232                       .define "(0x02)",RSEL1 
+ A   233                       .define "(0x04)",RSEL2 
+ A   234                       .define "(0x08)",RSEL3 
+ A   235                       .define "(0x0000)",SD16SSEL_0 
+ A   236                       .define "(SD16SSEL0)",SD16SSEL_1 
+ A   237                       .define "(SD16SSEL1)",SD16SSEL_2 
+ A   238                       .define "(SD16SSEL0+SD16SSEL1)",SD16SSEL_3 
+ A   239                       .define "TAR_",TA0R_ 
+ A   240                       .define "TACCR1_",CCR1_ 
+ A   241                       .define "TAIV_",TA0IV_ 
+ A   242                       .define "(0x0000)",SD16OSR_256 
+ A   243                       .define "(SD16OSR0+SD16OSR1)",SD16OSR_32 
+ A   244                       .define "(0*0x100u)",TASSEL_0 
+ A   245                       .define "(1*0x100u)",TASSEL_1 
+ A   246                       .define "(2*0x100u)",TASSEL_2 
+ A   247                       .define "0",__TI_GNU_ATTRIBUTE_SUPPORT__ 
+ A   248                       .define "(0*0x4000u)",CM_0 
+ A   249                       .define "(3*0x100u)",TASSEL_3 
+ A   250                       .define "(1*0x4000u)",CM_1 
+ A   251                       .define "(0x0020)",EMEX 
+ A   252                       .define "(2*0x4000u)",CM_2 
+ A   253                       .define "(0x0004)",OUT 
+ A   254                       .define "(3*0x4000u)",CM_3 
+ A   255                       .define "(0x0040)",SD16LSBACC 
+ A   256                       .define "(0x08)",USIAL 
+ A   257                       .define """.reset""",RESET_VECTOR 
+ A   258                       .define "1",__little_endian__ 
+ A   259                       .define "199409L",__STDC_VERSION__ 
+ A   260                       .define "(0x0001)",SD16AE0 
+ A   261                       .define "(0x0002)",SD16AE1 
+ A   262                       .define "(0x0004)",SD16AE2 
+ A   263                       .define "(0x0008)",SD16AE3 
+ A   264                       .define "(0x0004)",SD16IFG 
+ A   265                       .define "(0x0010)",SD16AE4 
+ A   266                       .define "(0x0020)",SD16AE5 
+ A   267                       .define "(0x0040)",SD16AE6 
+ A   268                       .define "(0x0080)",SD16AE7 
+ A   269                       .define "(0x20)",ACCVIE 
+ A   270                       .define "(0x0400)",SCCI 
+ A   271                       .define "(0x0001)",WDTIS0 
+ A   272                       .define "(0x04)",XCAP0 
+ A   273                       .define "(0x0002)",WDTIS1 
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE    6
+
+ A   274                       .define "(0x08)",XCAP1 
+ A   275                       .define "(0x0080)",FAIL 
+ A   276                       .define "(0x0004)",MERAS 
+ A   277                       .define "(0x0080)",SEGWRT 
+ A   278                       .define "unsigned int",__WCHAR_T_TYPE__ 
+ A   279                       .define "(0x0080)",WDTHOLD 
+ A   280                       .define """.int03""",PORT2_VECTOR 
+ A   281                       .define "(0x0004)",TACLR 
+ A   282                       .define "(0x0004)",TAIV_2 
+ A   283                       .define "(0x0002)",SD16SC 
+ A   284                       .define "(0x0002)",TAIE 
+ A   285                       .define "(0x0006)",TAIV_6 
+ A   286                       .define "(0x0008)",TAIV_8 
+ A   287                       .define "(0x0100)",SD16OSR0 
+ A   288                       .define "TACTL_",TA0CTL_ 
+ A   289                       .define "(0x0200)",SD16OSR1 
+ A   290                       .define "1",__MSP430_HAS_BC2__ 
+ A   291                       .define "(0x0002)",ERASE 
+ A   292                       .define "(0x0040)",SCG0 
+ A   293                       .define "(0x0080)",SCG1 
+ A   294                       .define "(0x00)",USIDIV_0 
+ A   295                       .define "(0x20)",USIDIV_1 
+ A   296                       .define "(0x40)",USIDIV_2 
+ A   297                       .define "(0x0000)",FSSEL_0 
+ A   298                       .define "(0x60)",USIDIV_3 
+ A   299                       .define "(0x0040)",FSSEL_1 
+ A   300                       .define "(0x80)",USIDIV_4 
+ A   301                       .define "(0x0080)",FSSEL_2 
+ A   302                       .define """.int05""",SD16_VECTOR 
+ A   303                       .define "(0xA0)",USIDIV_5 
+ A   304                       .define "(0x00C0)",FSSEL_3 
+ A   305                       .define "(0xC0)",USIDIV_6 
+ A   306                       .define "(0x0080)",SD16LSBTOG 
+ A   307                       .define "(0x40)",SELM0 
+ A   308                       .define "(0xE0)",USIDIV_7 
+ A   309                       .define "(0x80)",SELM1 
+ A   310                       .define "(0x0004)",SD16REFON 
+ A   311                       .define "(0x0001)",CCIFG 
+ A   312                       .define "(0x04)",USISSEL0 
+ A   313                       .define "(0x08)",USISSEL1 
+ A   314                       .define "(0x10)",USISSEL2 
+ A   315                       .define "(0x0040)",SD16DIV0 
+ A   316                       .define "(0x0080)",SD16DIV1 
+ A   317                       .define "(0x0028)",SD16GAIN_32 
+ A   318                       .define "(0x80)",USISCLREL 
+ A   319                       .define "(0x04)",USISTP 
+ A   320                       .define "(0x04)",USIGE 
+ A   321                       .define "(0x20)",USIPE5 
+ A   322                       .define "(0x40)",USIPE6 
+ A   323                       .define "(0x40)",USII2C 
+ A   324                       .define "(0x80)",USIPE7 
+ A   325                       .define "(0x00)",DIVS_0 
+ A   326                       .define "(0x02)",DIVS_1 
+ A   327                       .define "(0x0000)",SD16INTDLY_0 
+ A   328                       .define "(0x1000)",SD16UNI 
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE    7
+
+ A   329                       .define "(0x04)",DIVS_2 
+ A   330                       .define "(0x0040)",SD16INTDLY_1 
+ A   331                       .define "1",__MSP430_HAS_WDT__ 
+ A   332                       .define "(0x06)",DIVS_3 
+ A   333                       .define "(0x0080)",SD16INTDLY_2 
+ A   334                       .define "(0x00C0)",SD16INTDLY_3 
+ A   335                       .define "(0x08)",USIMST 
+ A   336                       .define "(0x0010)",SD16SSEL0 
+ A   337                       .define "1",__MSP430_HAS_USI__ 
+ A   338                       .define "(0x02)",OFIFG 
+ A   339                       .define "(0x0020)",SD16SSEL1 
+ A   340                       .define "(WDTPW+WDTTMSEL+WDTCNTCL+WDTIS1)",WDT_MDLY_0_5 
+ A   341                       .define "(0x0020)",SD16GAIN_16 
+ A   342                       .define "(0x10)",USIIE 
+ A   343                       .define "(WDTPW+WDTCNTCL+WDTSSEL+WDTIS0)",WDT_ARST_250 
+ A   344                       .define "(0*0x20u)",OUTMOD_0 
+ A   345                       .define "(0x00)",DIVM_0 
+ A   346                       .define "(1*0x20u)",OUTMOD_1 
+ A   347                       .define "(0x10)",DIVM_1 
+ A   348                       .define "(2*0x20u)",OUTMOD_2 
+ A   349                       .define "(0x20)",DIVM_2 
+ A   350                       .define "(3*0x20u)",OUTMOD_3 
+ A   351                       .define "(0x30)",DIVM_3 
+ A   352                       .define "(4*0x20u)",OUTMOD_4 
+ A   353                       .define "(5*0x20u)",OUTMOD_5 
+ A   354                       .define "(6*0x20u)",OUTMOD_6 
+ A   355                       .define "(7*0x20u)",OUTMOD_7 
+ A   356                       .define "(0x02)",OFIE 
+ A   357                       .define "(0x0004)",ACCVIFG 
+ A   358                       .define "(0x0040)",FSSEL0 
+ A   359                       .define "(0x0080)",FSSEL1 
+ A   360                       .define "(0x0004)",WDTSSEL 
+ A   361                       .define "(0x00)",XT2S_0 
+ A   362                       .define "(0x40)",XT2S_1 
+ A   363                       .define "(0x80)",XT2S_2 
+ A   364                       .define "(0xC0)",XT2S_3 
+ A   365                       .define "(0x0001)",FN0 
+ A   366                       .define "(0x01)",WDTIE 
+ A   367                       .define "(0x0002)",FN1 
+ A   368                       .define "(0x0004)",FN2 
+ A   369                       .define "(SD16OSR0+SD16XOSR)",SD16OSR_1024 
+ A   370                       .define "(0x0008)",FN3 
+ A   371                       .define "(0x0010)",FN4 
+ A   372                       .define "(0x0020)",FN5 
+ A   373                       .define "(0x20)",USIIFGCC 
+ A   374                       .define "1",__MSP430F2013__ 
+ A   375                       .define "(0x04)",PORIFG 
+ A   376                       .define "(0x10)",DIVA0 
+ A   377                       .define """Aug  2 2014""",__DATE__ 
+ A   378                       .define "(0x20)",DIVA1 
+ A   379                       .define "(WDTPW+WDTTMSEL+WDTCNTCL+WDTSSEL+WDTIS1+WDTIS0)",WDT_ADLY_1_9 
+ A   380                       .define "TACCTL0_",CCTL0_ 
+ A   381                       .define "(0x00)",XCAP_0 
+ A   382                       .define "(0x04)",XCAP_1 
+ A   383                       .define "(SD16OSR1)",SD16OSR_64 
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE    8
+
+ A   384                       .define "(0x08)",XCAP_2 
+ A   385                       .define "(0x0C)",XCAP_3 
+ A   386                       .define "(0x08)",SELS 
+ A   387                       .define "(0x0000)",SD16IV_NONE 
+ A   388                       .define "(0x0000)",TAIV_NONE 
+ A   389                       .define "1",_INLINE  
+ A   390                       .define "(0x00)",DIVA_0 
+ A   391                       .define "(0x10)",DIVA_1 
+ A   392                       .define "(0x02)",XT2OF 
+ A   393                       .define "TACCTL1_",CCTL1_ 
+ A   394                       .define "(0x20)",DIVA_2 
+ A   395                       .define "(0x30)",DIVA_3 
+ A   396                       .define "(0x0002)",SD16OVIE 
+ A   397                       .define "(0x01)",USISWCLK 
+ A   398                       .define "303",__EDG_VERSION__ 
+ A   399                       .define "(WDTPW+WDTCNTCL+WDTIS0)",WDT_MRST_8 
+ A   400                       .define "TAR",TA0R   
+ A   401                       .define "(0x0020)",WDTNMI 
+ A   402                       .define "(0x0004)",SD16IV_SD16MEM0 
+ A   403                       .define "(0x0800)",SD16XOSR 
+ A   404                       .define "(0x40)",XTS 
+ A   405                       .define "(0x0010)",MC0 
+ A   406                       .define "(0x0020)",MC1 
+ A   407                       .define "1",__MSP430_HAS_FLASH2__ 
+ A   408                       .define """.int09""",TIMERA0_VECTOR 
+ A   409            
+ A   410            ; =========== TYPE DEFINITIONS ===========
+ A   411            
+ A   412            ; =========== EXTERNAL FUNCTIONS ===========
+ A   413            
+ A   414            ; =========== EXTERNAL VARIABLES ===========
+ A   415                       .global IE1          
+ A   416                       .global IFG1         
+ A   417                       .global DCOCTL       
+ A   418                       .global BCSCTL1      
+ A   419                       .global BCSCTL2      
+ A   420                       .global BCSCTL3      
+ A   421                       .global FCTL1        
+ A   422                       .global FCTL2        
+ A   423                       .global FCTL3        
+ A   424                       .global P1IN         
+ A   425                       .global P1OUT        
+ A   426                       .global P1DIR        
+ A   427                       .global P1IFG        
+ A   428                       .global P1IES        
+ A   429                       .global P1IE         
+ A   430                       .global P1SEL        
+ A   431                       .global P1REN        
+ A   432                       .global P2IN         
+ A   433                       .global P2OUT        
+ A   434                       .global P2DIR        
+ A   435                       .global P2IFG        
+ A   436                       .global P2IES        
+ A   437                       .global P2IE         
+ A   438                       .global P2SEL        
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE    9
+
+ A   439                       .global P2REN        
+ A   440                       .global SD16INCTL0   
+ A   441                       .global SD16AE       
+ A   442                       .global SD16CONF0    
+ A   443                       .global SD16CONF1    
+ A   444                       .global SD16CTL      
+ A   445                       .global SD16CCTL0    
+ A   446                       .global SD16IV       
+ A   447                       .global SD16MEM0     
+ A   448                       .global TAIV         
+ A   449                       .global TACTL        
+ A   450                       .global TACCTL0      
+ A   451                       .global TACCTL1      
+ A   452                       .global TAR          
+ A   453                       .global TACCR0       
+ A   454                       .global TACCR1       
+ A   455                       .global USICTL0      
+ A   456                       .global USICTL1      
+ A   457                       .global USICKCTL     
+ A   458                       .global USICNT       
+ A   459                       .global USISRL       
+ A   460                       .global USISRH       
+ A   461                       .global USICTL       
+ A   462                       .global USICCTL      
+ A   463                       .global USISR        
+ A   464                       .global WDTCTL       
+ A   465                       .global CALDCO_16MHZ 
+ A   466                       .global CALBC1_16MHZ 
+ A   467                       .global CALDCO_12MHZ 
+ A   468                       .global CALBC1_12MHZ 
+ A   469                       .global CALDCO_8MHZ  
+ A   470                       .global CALBC1_8MHZ  
+ A   471                       .global CALDCO_1MHZ  
+ A   472                       .global CALBC1_1MHZ  
+       3      0042  IdTypeMSP430    .equ    0x42            ; must exists in "piccodes.ini"
+       4      0034  FamilyMSP430    .equ    0x34            ; LPC Family "4"
+       5            
+       6      0800  max_flash       .equ    0x800           ; in bytes, not WORDS!!!
+       7            
+       8      4240  xtal            .equ    1000000         ; you may also want to change
+              000F 
+       9      2580  baud            .equ    9600            ; standard TinyBld baud rates: 115200 or 19200
+      10            
+      11      0004  TX              .equ    4               ; MSP430 TX Data output pin (i.e. 2 = P1.2)
+      12      0005  RX              .equ    5               ; MSP430 RX Data input  pin (i.e. 3 = P1.3)
+      13            ;Direct_TX      .equ    0               ; RS-232C TX Direct Connection(No use MAX232)
+      14            ;Direct_RX      .equ    0               ; RS-232C RX Direct Connection(No use MAX232)
+      15            
+      16            ;   The above 10 lines can be changed and buid a bootloader for the desired frequency (and PIC type)
+      17            
+      18      0004  _bwait2         .equ    R4
+      19      0005  _SendL          .equ    R5
+      20      0006  _Receive        .equ    R6
+      21      0007  _wr             .equ    R7
+      22      0008  _TX             .equ    R8
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE   10
+
+      23      0009  _RX             .equ    R9
+      24      000A  count           .equ    R10
+      25      000B  Address         .equ    R11
+      26      000C  crc             .equ    R12
+      27      000D  cnt1            .equ    R13
+      28      000E  cnt2            .equ    R14
+      29      000D  cn              .equ    cnt1
+      30      000E  rs              .equ    cnt2
+      31      000F  rxd             .equ    R15
+      32            
+      33                    ;********************************************************************
+      34                    ;       Tiny Bootloader             MSP430F2XX      Size=136+192bytes
+      35                    ;
+      36                    ;       (2013.08.02 Revision 1)
+      37                    ;       This program is only available in Tiny PIC/AVR Bootloader +.
+      38                    ;
+      39                    ;       Tiny PIC/AVR Bootloader +
+      40                    ;       https://sourceforge.net/projects/tinypicbootload/
+      41                    ;
+      42                    ;
+      43                    ;       Please add the following line to piccodes.ini
+      44                    ;
+      45                    ;       $41, 4, MSP430 F2001,   $400,   0,     136, 64,
+      46                    ;       $42, 4, MSP430 F2011,   $800,   0,     136, 64,
+      47                    ;       $41, 4, MSP430 F2002,   $400,   0,     136, 64,
+      48                    ;       $42, 4, MSP430 F2012,   $800,   0,     136, 64,
+      49                    ;       $41, 4, MSP430 F2003,   $400,   0,     136, 64,
+      50                    ;       $42, 4, MSP430 F2013,   $800,   0,     136, 64,
+      51                    ;
+      52                    ;********************************************************************
+      53            
+      54      0778  first_address   .equ    max_flash - 136         ; 68 word in size
+      55      0280  STACK           .equ    0x0280                  ; Stack start address
+      56      0200  BUFTOP          .equ    0x0200                  ; Buffer
+      57      0260  BUFEND          .equ    0x0260
+      58      FF80  BLDTOP          .equ    0x10000 - 136 + 8       ; Bootloader
+      59      FFE0  BLDEND          .equ    0xFFE0
+      60            
+      61            ;------------------------------------------------------------------------------
+      62 000000                    .sect   ".text2"
+      63            ;------------------------------------------------------------------------------
+      64            
+      65 000000       IntrareBootloader2:
+      66 000000 4034                  MOV.W   #bwait2,_bwait2                 ; _bwait2
+         000002 079E!
+      67 000004 4035                  MOV.W   #SendL,_SendL                   ; _SendL
+         000006 0784!
+      68 000008 4036                  MOV.W   #Receive,_Receive               ; _Receive
+         00000a 07AA!
+      69 00000c 4037                  MOV.W   #wr,_wr                         ; _wr
+         00000e 00AE!
+      70 000010 4078                  MOV.B   #(1<<TX),_TX                    ; _TX
+         000012 0010 
+      71 000014 4079                  MOV.B   #(1<<RX),_RX                    ; _RX
+         000016 0020 
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE   11
+
+      72 000018 4031                  MOV.W   #STACK,SP                       ; Initialize stackpointer
+         00001a 0280 
+      73 00001c 40B2                  MOV.W   #WDTPW+WDTHOLD,&WDTCTL          ; Stop WDT
+         00001e 5A80 
+         000020 0000!
+      74 000022 42D2                  MOV.B   &CALBC1_1MHZ,&BCSCTL1           ; Clock Calibration
+         000024 0000!
+         000026 0000!
+      75 000028 42D2                  MOV.B   &CALDCO_1MHZ,&DCOCTL            ; 1MHz
+         00002a 0000!
+         00002c 0000!
+      76 00002e 40B2                  MOV.W   #FWKEY+FSSEL1+FN0,&FCTL2        ; Flash Clock = SMCLK/2
+         000030 A581 
+         000032 0000!
+      77 000034 40B2                  MOV.W   #FWKEY,&FCTL3                   ; Flash UNLOCK
+         000036 A500 
+         000038 0000!
+      78 00003a D8C2                  BIS.B   _TX,&P1DIR                      ; set TX Port
+         00003c 0000!
+      79            
+      80 00003e 1286                  CALL    _Receive                        ; wait for computer
+      81 000040 807F                  SUB.B   #0xC1,rxd                       ; Expect C1
+         000042 00C1 
+      82 000044 2402                  JEQ     copy_to_RAM_48W                 ; Receive C1
+      83 000046 4030                  MOV.W   #User_Vector,PC                 ; connection errer or timeout
+         000048 0778!
+      84            
+      85 00004a       copy_to_RAM_48W:                                        ; copy Flash to RAM 48 words
+      86 00004a 403F                  MOV.W   #BLDTOP,R15                     ; R15 = #BLDTOP
+         00004c FF80 
+      87 00004e 4F0B                  MOV.W   R15,Address                     ; Address = #BLDTOP
+      88 000050 4FBF  $1              MOV.W   @R15+,BUFTOP-BLDTOP-2(R15)      ; [0xFF80,0xFFDF] --> [0x0200,0x025F]
+         000052 027E 
+      89 000054 903F                  CMP.W   #BLDEND,R15                     ; 
+         000056 FFE0 
+      90 000058 23FB                  JNE     $1                              ; loop
+      91 00005a       erase_All_Segments:                                     ; erase All Segments
+      92 00005a 40B2                  MOV.W   #FWKEY+MERAS,&FCTL1             ; enable erase
+         00005c A504 
+         00005e 0000!
+      93 000060 43CF                  CLR.B   0(R15)                          ; dummy write
+         000062 0000 
+      94 000064       back_to_Flash_48W:                                      ; back to Flash 48 words
+      95 000064 403E                  MOV.W   #BUFTOP,R14                     ; R14 = #BUFTOP
+         000066 0200 
+      96 000068 4E7F  $2              MOV.B   @R14+,rxd                       ; [0x0200,0x025F] --> [0xFF80,0xFFDF]
+      97 00006a 1287                  CALL    _wr                             ; write Data
+      98 00006c 531B                  INC.W   Address                         ; Address = Address + 1
+      99 00006e 903E                  CMP.W   #BUFEND,R14                     ; 
+         000070 0260 
+     100 000072 23FA                  JNE     $2                              ; loop
+     101 000074       write_Reset_Vector:                                     ; write Reset Vector
+     102 000074 403B                  MOV.W   #0xFFFE,Address                 ; (0xFFFE)=0xFF80
+         000076 FFFE 
+     103 000078 407F                  MOV.B   #(IntrareBootloader & 0xFF),rxd ;
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE   12
+
+         00007a 0000%
+     104 00007c 1287                  CALL    _wr                             ; write Data
+     105            
+     106 00007e 407F                  MOV.B   #IdTypeMSP430,rxd               ; send IdType
+         000080 0042 
+     107 000082 1285                  CALL    _SendL
+     108 000084       MainLoop:
+     109 000084 407F                  MOV.B   #FamilyMSP430,rxd               ; send Family ID
+         000086 0034 
+     110 000088       mainl:
+     111 000088 1285                  CALL    _SendL                          ;
+     112 00008a 434C                  CLR.B   crc                             ; clear Checksum
+     113 00008c 1286                  CALL    _Receive                        ; Address_H
+     114 00008e 4F0B                  MOV.W   rxd,Address                     ; set Address(H)
+     115 000090 1286                  CALL    _Receive                        ; Address_L
+     116 000092 108B                  SWPB    Address                         ; set Address(H:L)
+     117 000094 5F0B                  ADD.W   rxd,Address                     ;
+     118 000096 1286                  CALL    _Receive                        ; count
+     119 000098 4F4A                  MOV.B   rxd,count                       ; set count
+     120 00009a       write_Data:
+     121 00009a 1286                  CALL    _Receive                        ; get Data
+     122 00009c 1287                  CALL    _wr                             ; write Data
+     123 00009e 531B                  INC.W   Address                         ; Address = Address + 1
+     124 0000a0 835A                  DEC.B   count                           ; count = 0 ?
+     125 0000a2 23FB                  JNE     write_Data                      ; loop
+     126            
+     127 0000a4 1286                  CALL    _Receive                        ; crc
+     128 0000a6       ziieroare:
+     129 0000a6 407F                  MOV.B   #'N',rxd                        ; send "N"
+         0000a8 004E 
+     130 0000aa 23EE                  JNE     mainl                           ; retry
+     131 0000ac 3FEB                  JMP     MainLoop                        ; loop
+     132            
+     133 0000ae       wr:
+     134 0000ae 40B2                  MOV.W   #FWKEY+WRT,&FCTL1               ; enable Word/Byte Write
+         0000b0 A540 
+         0000b2 0000!
+     135 0000b4 4FCB                  MOV.B   rxd,0(Address)                  ; write
+         0000b6 0000 
+     136 0000b8 40B2                  MOV.W   #FWKEY,&FCTL1                   ; clear WRT
+         0000ba A500 
+         0000bc 0000!
+     137 0000be 4130                  RET
+     138            
+     139            ;------------------------------------------------------------------------------
+     140 000000                    .text
+     141            ;------------------------------------------------------------------------------
+     142            
+     143 000000                       .space  first_address
+     144 000778       User_Vector:
+     145 000778 4303                  NOP
+     146 00077a 4303                  NOP
+     147 00077c 4303                  NOP
+     148 00077e 4303                  NOP
+     149            
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE   13
+
+     150 000780       IntrareBootloader:
+     151 000780 4030                  MOV.W   #IntrareBootloader2,PC  ;goto bootloader
+         000782 0000!
+     152            
+     153 000784       SendL:
+     154 000784 407D                  MOV.B   #(1+8+1)*2,cn           ; 10-bit Data
+         000786 0014 
+     155                        .if $defined(Direct_TX)
+     156                            BIC.B   _TX,&P1OUT              ; rs must be 0
+     157                            JMP     $11                     ; Start bit
+     158                        .else
+     159 000788 D8C2                  BIS.B   _TX,&P1OUT              ; rs must be 0
+         00078a 0000!
+     160 00078c 3C03                  JMP     $12                     ; Start bit
+     161                        .endif
+     162 00078e 104F  $10             RRC.B   rxd                     ; Rotate Right through Carry    [1]
+     163                        .if $defined(Direct_TX)
+     164                            JC      $12                     ;
+     165                        .else
+     166 000790 2801                  JNC     $12                     ;                               [2]
+     167                        .endif
+     168 000792 E37E  $11             INV.B   rs                      ; rs = 0b11111111               [1]
+     169 000794 4EC2  $12             MOV.B   rs,&P1OUT               ; set TX='1' if Carry='1'       [2]
+         000796 0000!
+     170 000798 1284                  CALL    _bwait2                 ; wait 1/2 bit                  [4+3N+7]
+     171 00079a 1284                  CALL    _bwait2                 ; wait 1/2 bit                  [4+3N+7]
+     172 00079c 23F8                  JNE     $10                     ; Carry='1' loop                [2]
+     173 00079e       bwait2:
+     174 00079e 407E                  MOV.B   #(xtal/baud-31)/6,rs    ;[2]
+         0007a0 000C 
+     175 0007a2 835E  $20             DEC.B   rs                      ;[1]
+     176 0007a4 23FE                  JNE     $20                     ;[2]
+     177 0007a6 835D                  DEC.B   cn                      ;[1]
+     178 0007a8 4130                  RET                             ;[4] 3N+7
+     179            
+     180 0007aa       Receive:
+     181 0007aa 422D                  MOV.W   #xtal/500000+2,cnt1
+     182 0007ac       rpt2:
+     183            ;               CLR.W   cnt2
+     184 0007ac       rptc:                                           ; check Start bit
+     185 0007ac B9C2                  BIT.B   _RX,&P1IN
+         0007ae 0000!
+     186                        .if $defined(Direct_RX)
+     187                            JEQ     nodata
+     188                        .else
+     189 0007b0 200C                  JNE     nodata
+     190                        .endif
+     191 0007b2 1284                  CALL    _bwait2                 ; wait 1/2 bit
+     192 0007b4 407D                  MOV.B   #(8+1)*2,cn             ; 9-bit Data
+         0007b6 0012 
+     193 0007b8 B9C2  $30             BIT.B   _RX,&P1IN               ; get Bit Data
+         0007ba 0000!
+     194 0007bc 104F                  RRC.B   rxd                     ; set Bit Data
+     195 0007be 1284                  CALL    _bwait2                 ; wait 1/2 bit
+     196 0007c0 1284                  CALL    _bwait2                 ; wait 1/2 bit
+MSP430 Evaluation Assembler PC v3.3.3 Sat Aug 02 11:19:24 2014
+
+Tools Copyright (c) 2003-2010 Texas Instruments Incorporated
+../MSP430F2013.asm                                                   PAGE   14
+
+     197 0007c2 23FA                  JNE     $30                     ; loop
+     198                        .if $defined(Direct_RX)
+     199                            INV.B   rxd
+     200                        .else
+     201 0007c4 4F4F                  MOV.B   rxd,rxd
+     202                        .endif
+     203 0007c6 5F4C                  ADD.B   rxd,crc                 ; compute checksum
+     204 0007c8 4130                  RET
+     205 0007ca       nodata:
+     206 0007ca 831E                  DEC.W   cnt2
+     207 0007cc 23EF                  JNE     rptc
+     208 0007ce 831D                  DEC.W   cnt1
+     209 0007d0 23ED                  JNE     rpt2
+     210 0007d2       way_to_exit:
+     211 0007d2 40B2                  MOV.W   #FWKEY+LOCK,&FCTL3      ; Flash LOCK
+         0007d4 A510 
+         0007d6 0000!
+     212 0007d8 3FCF                  JMP     User_Vector             ; timeout:exit in all other cases
+     213            
+     214            ;------------------------------------------------------------------------------
+     215            ;           Interrupt Vectors
+     216            ;------------------------------------------------------------------------------
+     217 000000                   .sect   ".reset"                ; MSP430 RESET Vector
+     218 000000 0780!             .short  IntrareBootloader       ;
+     219                        .end
+
+No Assembly Errors, No Assembly Warnings

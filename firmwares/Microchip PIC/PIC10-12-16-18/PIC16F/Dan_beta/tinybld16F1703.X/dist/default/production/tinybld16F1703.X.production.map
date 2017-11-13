@@ -1,0 +1,72 @@
+MPLINK 5.01, LINKER
+Linker Map File - Created Mon Jun 09 11:50:48 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x00079c    program   0x000000
+                   .org_3       code   0x0007a0    program   0x0000bc
+.config_8007_TINYBLD16F1703_16MHZ_INT_9600BD.       code   0x008007    program   0x000002
+.config_8008_TINYBLD16F1703_16MHZ_INT_9600BD.       code   0x008008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x0007a0    0x0007fd      
+                            0x008007    0x008008      
+            97 out of 2055 program addresses used, program memory utilization is 4%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x0007a0    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                 MainLoop   0x0007ad    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                  Receive   0x0007c8    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                    SendL   0x0007ec    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     bout   0x0007f4    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                    bwait   0x0007f8    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                   bwait2   0x0007f9    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     loop   0x0007d9    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                    mainl   0x0007ae    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                   r1rx11   0x0007cd    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                   rcvoct   0x0007b7    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     rpt2   0x0007cb    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     rpt3   0x0007cb    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     rptc   0x0007cb    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+              way_to_exit   0x0007df    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     wr_e   0x0007e2    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     wr_w   0x0007e3    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                ziieroare   0x0007c1    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x0007a0    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                 MainLoop   0x0007ad    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                    mainl   0x0007ae    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                   rcvoct   0x0007b7    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                ziieroare   0x0007c1    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                  Receive   0x0007c8    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     rpt2   0x0007cb    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     rpt3   0x0007cb    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     rptc   0x0007cb    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                   r1rx11   0x0007cd    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     loop   0x0007d9    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+              way_to_exit   0x0007df    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     wr_e   0x0007e2    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     wr_w   0x0007e3    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                    SendL   0x0007ec    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                     bout   0x0007f4    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                    bwait   0x0007f8    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+                   bwait2   0x0007f9    program     static C:\Documents and Settings\Administrator\MPLABXProjects\tinybld16F1703.X\tinybld16F1703_16MHz_int_9600bd.asm
+
+

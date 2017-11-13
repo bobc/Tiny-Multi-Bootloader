@@ -1,0 +1,90 @@
+MPLINK 5.00, LINKER
+Linker Map File - Created Sun Mar 22 08:59:51 2015
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000004
+                   .org_2       code   0x007ef8    program   0x000008
+                   .org_3       code   0x007f00    program   0x0000c2
+.config_300000_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x300000    program   0x000001
+.config_300001_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x300001    program   0x000001
+.config_300002_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x300002    program   0x000001
+.config_300003_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x300003    program   0x000001
+.config_300004_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x300004    program   0x000001
+.config_300005_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x300005    program   0x000001
+.config_300006_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x300006    program   0x000001
+.config_300008_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x300008    program   0x000001
+.config_300009_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x300009    program   0x000001
+.config_30000A_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x30000a    program   0x000001
+.config_30000B_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x30000b    program   0x000001
+.config_30000C_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x30000c    program   0x000001
+.config_30000D_TINYBLD18F65K90_INT16MHZ_19200.O    romdata   0x30000d    program   0x000001
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000003      
+                            0x007ef8    0x007fc1      
+                            0x300000    0x300006      
+                            0x300008    0x30000d      
+            219 out of 33816 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x007f00    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                 MainLoop   0x007f22    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                  Receive   0x007fa0    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                    Write   0x007f90    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                eraseloop   0x007f74    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+              lp_noeeprom   0x007f6a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                    mainl   0x007f24    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                 noconfig   0x007f74    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                 noeeprom   0x007f60    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                   notrcv   0x007fb0    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                 put1byte   0x007f88    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                   rcvoct   0x007f44    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                     rpt2   0x007fa4    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                     rpt3   0x007fa4    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                     rptc   0x007fa4    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                  waitwre   0x007f84    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+              way_to_exit   0x007fbc    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+             writebigloop   0x007f7a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                writebyte   0x007f7a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+               writesloop   0x007f7a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                ziieroare   0x007f52    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x007f00    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                 MainLoop   0x007f22    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                    mainl   0x007f24    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                   rcvoct   0x007f44    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                ziieroare   0x007f52    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                 noeeprom   0x007f60    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+              lp_noeeprom   0x007f6a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                eraseloop   0x007f74    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                 noconfig   0x007f74    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+             writebigloop   0x007f7a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                writebyte   0x007f7a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+               writesloop   0x007f7a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                  waitwre   0x007f84    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                 put1byte   0x007f88    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                    Write   0x007f90    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                  Receive   0x007fa0    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                     rpt2   0x007fa4    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                     rpt3   0x007fa4    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                     rptc   0x007fa4    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+                   notrcv   0x007fb0    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+              way_to_exit   0x007fbc    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F65K90_int16MHz_19200bd_r4\tinybld18F65K90_int16MHz_19200.asm
+
+

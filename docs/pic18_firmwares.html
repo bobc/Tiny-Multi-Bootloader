@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    
+    <title>Tiny Multi Bootloader+ : Modify PIC18 family firmwares</title><style type="text/css">
+<!--
+.style1 {color: rgb(0, 0, 153)}
+-->
+    </style></head>
+
+  <body>
+    <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="0">
+      <tbody>
+        <tr>
+          <td style="text-align: center; vertical-align: top;">
+            <h1 style="color: rgb(0, 0, 153);">Tiny Multi
+              Bootloader+</h1>
+            <div style="text-align: left; color: rgb(0, 0, 153);">
+              <h2>PIC18 family firmwares:</h2>
+              <hr style="width: 100%; height: 2px;"><span style="font-weight: bold;"><br>
+              </span></div>
+            <div style="text-align: left;">
+              <h3><span style="color: rgb(0, 0, 153);">Principle</span></h3>
+              <p>Example given for a PIC16F1847, but it's exactly the same principle for PIC18 device family. </p>
+              <p>&nbsp;</p>
+              <p><img src="pic16_operation.jpg" height="445" width="834"></p>
+              <h3><span class="style1">Description of the data tranfert </span></h3>
+              <p>Represents the character of one byte [] below.</p>
+              <p>&#9312; Flash transfer format:<br>
+              [AddressU][AddressH][AddressL][2*N][DataL(1)][DataH(1)]....[DataL(N)][DataH(N)][SUM]</p>
+              <p>[AddressU]&nbsp;Start address of the flash page to override the data. (upper)<br>
+                [AddressH]&nbsp;Start address of the flash page to override the data. (middle)<br>
+                [AddressL]&nbsp;Start address of the flash page to override the data. (lower)<br>
+                [2*N]&nbsp;Number of transfers of data as described in piccode.ini. (byte notation)<br>
+                [DataL/H(n)]&nbsp;Rewrite data (2*N)bytes.<br>
+                [SUM]&nbsp;Checksum.</p>
+              <p>&#9313; EEPROM transfer format:<br>
+                [EEAddressU][EEAddressH][EEAddressL][1][EEData][SUM]</p>
+              <p>[EEAddressU]&nbsp;Address of the EEPROM to override the data | 0x40. (upper)<br>
+                [EEAddressH]&nbsp;Address of the EEPROM to override the data. (middle)<br>
+                [EEAddressL]&nbsp;Address of the EEPROM to override the data. (lower)<br>
+                EEAddressU:EEAddressH:EEAddressL &gt;= 0x400000<br>
+                [1]&nbsp;Number of data transfers. (Always 1)<br>
+                [EEData]&nbsp;EEPROM 8-bit data to be rewritten.<br>
+                [SUM]&nbsp;Checksum.</p>
+              <p>&#9314; Config transfer format:<br>
+                [CFGAddressU][CFGAddressH][CFGAddressL][14][CFGDataL(1)][CFGDataH(1)].....[CFGDataL(7)][CFGDataH(7)][SUM]</p>
+              <p>[CFGAddressU]&nbsp;Start address of the Config data to overwrite the data | 0x80. (upper)<br>
+                [CFGAddressH]&nbsp;Start address of the Config data to overwrite the data. (middle)<br>
+                [CFGAddressL]&nbsp;Start address of the Config data to overwrite the data. (lower)<br>
+                CFGAddressU:CFGAddressH:CFGAddressL &gt;= 0x800000<br>
+                [14]&nbsp;Number of data transfers. (Always 14)<br>
+                [CFGData(n)]&nbsp;Rewrite data (2*7)bytes.<br>
+                [SUM]&nbsp;Checksum.</p>
+              <h3><span class="style1">Modify existing fimwares for a new device</span></h3>
+              <p>###todo</p><p>Before you compile your new bootloader verify that your compiler will <span style="font-weight: bold;">generate absolute code</span> (and not relocatable code)!<br>To do so, in MPLAB IDE go to "Project" &gt; "Build Options..." &gt; "Project"<br>Your "MPASM/C17/C18" tab must look like the following:</p><p><img style="width: 446px; height: 544px;" alt="" src="../../Tiny_Avr-Pic_Bootloader+%20%28v0.9.x%29/docs/build_options_8bits.jpg"></p><p></p>
+            </div>          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </body></html>

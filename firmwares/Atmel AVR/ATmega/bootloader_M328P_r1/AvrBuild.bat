@@ -1,0 +1,2 @@
+@ECHO OFF
+"C:\Program Files\Atmel\AVR Tools\AvrAssembler2\avrasm2.exe" -S "C:\avrasm1\bootloader_M328P_r1\labels.tmp" -fI -W+ie -C V2E -o "C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.hex" -d "C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.obj" -e "C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.eep" -m "C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.map" -l "C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.lst" "C:\avrasm1\bootloader_M328P_r1\bootloader_M328P.asm"

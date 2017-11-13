@@ -1,0 +1,177 @@
+
+bootloader.axf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <UserVector-0xef8>:
+   0:	10000400 	.word	0x10000400
+   4:	00000f01 	.word	0x00000f01
+   8:	00000f01 	.word	0x00000f01
+   c:	00000f01 	.word	0x00000f01
+	...
+  2c:	00000f01 	.word	0x00000f01
+	...
+  38:	00000f01 	.word	0x00000f01
+  3c:	00000f01 	.word	0x00000f01
+  40:	00000f01 	.word	0x00000f01
+  44:	00000f01 	.word	0x00000f01
+  48:	00000000 	.word	0x00000000
+  4c:	00000f01 	.word	0x00000f01
+  50:	00000f01 	.word	0x00000f01
+  54:	00000f01 	.word	0x00000f01
+	...
+  60:	00000f01 	.word	0x00000f01
+  64:	00000f01 	.word	0x00000f01
+  68:	00000f01 	.word	0x00000f01
+  6c:	00000f01 	.word	0x00000f01
+  70:	00000f01 	.word	0x00000f01
+  74:	00000f01 	.word	0x00000f01
+  78:	00000000 	.word	0x00000000
+  7c:	00000f01 	.word	0x00000f01
+	...
+  a0:	00000f01 	.word	0x00000f01
+  a4:	00000f01 	.word	0x00000f01
+  a8:	00000f01 	.word	0x00000f01
+  ac:	00000f01 	.word	0x00000f01
+  b0:	00000f01 	.word	0x00000f01
+  b4:	00000f01 	.word	0x00000f01
+  b8:	00000f01 	.word	0x00000f01
+  bc:	00000f01 	.word	0x00000f01
+	...
+
+00000ef8 <UserVector>:
+ ef8:	00000f01 	.word	0x00000f01
+ efc:	ffffffff 	.word	0xffffffff
+
+00000f00 <IntrareBootloader>:
+ f00:	2001      	movs	r0, #1
+ f02:	4931      	ldr	r1, [pc, #196]	; (fc8 <way_to_exit+0x16>)
+ f04:	6148      	str	r0, [r1, #20]
+ f06:	4831      	ldr	r0, [pc, #196]	; (fcc <way_to_exit+0x1a>)
+ f08:	680a      	ldr	r2, [r1, #0]
+ f0a:	6008      	str	r0, [r1, #0]
+ f0c:	2026      	movs	r0, #38	; 0x26
+ f0e:	4f30      	ldr	r7, [pc, #192]	; (fd0 <way_to_exit+0x1e>)
+ f10:	6238      	str	r0, [r7, #32]
+ f12:	2005      	movs	r0, #5
+ f14:	6038      	str	r0, [r7, #0]
+ f16:	2400      	movs	r4, #0
+ f18:	0220      	lsls	r0, r4, #8
+ f1a:	3001      	adds	r0, #1
+ f1c:	4b2d      	ldr	r3, [pc, #180]	; (fd4 <way_to_exit+0x22>)
+ f1e:	8018      	strh	r0, [r3, #0]
+ f20:	b40e      	push	{r1, r2, r3}
+ f22:	4e2d      	ldr	r6, [pc, #180]	; (fd8 <way_to_exit+0x26>)
+ f24:	47b0      	blx	r6
+ f26:	2ac1      	cmp	r2, #193	; 0xc1
+ f28:	d143      	bne.n	fb2 <way_to_exit>
+ f2a:	2231      	movs	r2, #49	; 0x31
+ f2c:	61fa      	str	r2, [r7, #28]
+ f2e:	2204      	movs	r2, #4
+
+00000f30 <lp>:
+ f30:	68b8      	ldr	r0, [r7, #8]
+ f32:	4210      	tst	r0, r2
+ f34:	d0fc      	beq.n	f30 <lp>
+
+00000f36 <MainLoop>:
+ f36:	2233      	movs	r2, #51	; 0x33
+
+00000f38 <mainl>:
+ f38:	61fa      	str	r2, [r7, #28]
+ f3a:	2500      	movs	r5, #0
+ f3c:	47b0      	blx	r6
+ f3e:	0213      	lsls	r3, r2, #8
+ f40:	47b0      	blx	r6
+ f42:	189b      	adds	r3, r3, r2
+ f44:	47b0      	blx	r6
+ f46:	0594      	lsls	r4, r2, #22
+
+00000f48 <rcvoct>:
+ f48:	47b0      	blx	r6
+ f4a:	7022      	strb	r2, [r4, #0]
+ f4c:	3401      	adds	r4, #1
+ f4e:	06a2      	lsls	r2, r4, #26
+ f50:	d1fa      	bne.n	f48 <rcvoct>
+
+00000f52 <ziieroare>:
+ f52:	47b0      	blx	r6
+ f54:	224e      	movs	r2, #78	; 0x4e
+ f56:	062d      	lsls	r5, r5, #24
+ f58:	d1ee      	bne.n	f38 <mainl>
+
+00000f5a <erase_flash>:
+ f5a:	f000 f813 	bl	f84 <pswo>
+ f5e:	60c2      	str	r2, [r0, #12]
+ f60:	099a      	lsrs	r2, r3, #6
+ f62:	6082      	str	r2, [r0, #8]
+ f64:	6042      	str	r2, [r0, #4]
+ f66:	223b      	movs	r2, #59	; 0x3b
+ f68:	6002      	str	r2, [r0, #0]
+ f6a:	47a8      	blx	r5
+
+00000f6c <write_flash>:
+ f6c:	f000 f80a 	bl	f84 <pswo>
+ f70:	6102      	str	r2, [r0, #16]
+ f72:	2240      	movs	r2, #64	; 0x40
+ f74:	60c2      	str	r2, [r0, #12]
+ f76:	1aa4      	subs	r4, r4, r2
+ f78:	6084      	str	r4, [r0, #8]
+ f7a:	6043      	str	r3, [r0, #4]
+ f7c:	2233      	movs	r2, #51	; 0x33
+ f7e:	6002      	str	r2, [r0, #0]
+ f80:	47a8      	blx	r5
+ f82:	e7d8      	b.n	f36 <MainLoop>
+
+00000f84 <pswo>:
+ f84:	0020      	movs	r0, r4
+ f86:	0021      	movs	r1, r4
+ f88:	4d14      	ldr	r5, [pc, #80]	; (fdc <way_to_exit+0x2a>)
+ f8a:	b503      	push	{r0, r1, lr}
+ f8c:	0a9a      	lsrs	r2, r3, #10
+ f8e:	6082      	str	r2, [r0, #8]
+ f90:	6042      	str	r2, [r0, #4]
+ f92:	2232      	movs	r2, #50	; 0x32
+ f94:	6002      	str	r2, [r0, #0]
+ f96:	47a8      	blx	r5
+ f98:	4a11      	ldr	r2, [pc, #68]	; (fe0 <way_to_exit+0x2e>)
+ f9a:	bd03      	pop	{r0, r1, pc}
+
+00000f9c <Receive>:
+ f9c:	2119      	movs	r1, #25
+ f9e:	0409      	lsls	r1, r1, #16
+ fa0:	2201      	movs	r2, #1
+
+00000fa2 <rptc>:
+ fa2:	68b8      	ldr	r0, [r7, #8]
+ fa4:	4210      	tst	r0, r2
+ fa6:	d002      	beq.n	fae <nodata>
+ fa8:	697a      	ldr	r2, [r7, #20]
+ faa:	18ad      	adds	r5, r5, r2
+ fac:	4770      	bx	lr
+
+00000fae <nodata>:
+ fae:	3901      	subs	r1, #1
+ fb0:	d1f7      	bne.n	fa2 <rptc>
+
+00000fb2 <way_to_exit>:
+ fb2:	bc0e      	pop	{r1, r2, r3}
+ fb4:	2000      	movs	r0, #0
+ fb6:	43c4      	mvns	r4, r0
+ fb8:	601c      	str	r4, [r3, #0]
+ fba:	6038      	str	r0, [r7, #0]
+ fbc:	6238      	str	r0, [r7, #32]
+ fbe:	600a      	str	r2, [r1, #0]
+ fc0:	6148      	str	r0, [r1, #20]
+ fc2:	4908      	ldr	r1, [pc, #32]	; (fe4 <way_to_exit+0x32>)
+ fc4:	6808      	ldr	r0, [r1, #0]
+ fc6:	4780      	blx	r0
+ fc8:	40048080 	.word	0x40048080
+ fcc:	000440df 	.word	0x000440df
+ fd0:	40064000 	.word	0x40064000
+ fd4:	4000c000 	.word	0x4000c000
+ fd8:	00000f9d 	.word	0x00000f9d
+ fdc:	1fff1ff1 	.word	0x1fff1ff1
+ fe0:	00002ee0 	.word	0x00002ee0
+ fe4:	00000ef9 	.word	0x00000ef9

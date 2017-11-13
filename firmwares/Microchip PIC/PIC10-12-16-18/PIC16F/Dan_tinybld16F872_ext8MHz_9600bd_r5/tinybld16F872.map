@@ -1,0 +1,67 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Jun 11 11:08:08 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000002
+                   .org_2       code   0x00079c    program   0x000000
+                   .org_3       code   0x0007a0    program   0x0000b6
+.config_2007_TINYBLD16F872.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000000      
+                            0x0007a0    0x0007fa      
+                            0x002007    0x002007      
+            93 out of 2118 program addresses used, program memory utilization is 4%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x0007a0    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                 MainLoop   0x0007a9    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                     RcvL   0x0007d4    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                    RcvL1   0x0007d6    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                  Receive   0x0007c2    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                    SendL   0x0007e9    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                     bout   0x0007f1    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                    bwait   0x0007f5    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                   bwait2   0x0007f6    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                    mainl   0x0007aa    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                     rpt2   0x0007c5    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                     rpt3   0x0007c6    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                     rptc   0x0007c7    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+              way_to_exit   0x0007d3    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                       wr   0x0007e0    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                ziieroare   0x0007be    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x0007a0    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                 MainLoop   0x0007a9    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                    mainl   0x0007aa    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                ziieroare   0x0007be    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                  Receive   0x0007c2    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                     rpt2   0x0007c5    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                     rpt3   0x0007c6    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                     rptc   0x0007c7    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+              way_to_exit   0x0007d3    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                     RcvL   0x0007d4    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                    RcvL1   0x0007d6    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                       wr   0x0007e0    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                    SendL   0x0007e9    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                     bout   0x0007f1    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                    bwait   0x0007f5    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+                   bwait2   0x0007f6    program     static C:\picasm1\tinybld198\picsource\2014.06.11\Dan_tinybld16F872_ext8MHz_9600bd_r5\tinybld16F872.asm
+
+

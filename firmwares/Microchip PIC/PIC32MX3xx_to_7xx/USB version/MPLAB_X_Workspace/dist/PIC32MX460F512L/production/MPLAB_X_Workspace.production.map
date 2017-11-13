@@ -1,0 +1,1273 @@
+Archive member included because of file (symbol)
+
+c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(memset.o)
+                              build/PIC32MX460F512L/production/_ext/592283297/usb_device.o (memset)
+c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(general-exception.o)
+                              c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o (_general_exception_context)
+c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+                              c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(general-exception.o) (_general_exception_handler)
+c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+                              c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o (_bootstrap_exception_handler)
+c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+                              c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o (_on_reset)
+c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+                              c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o (_on_bootstrap)
+c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-nmi-handler.o)
+                              c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o (_nmi_handler)
+c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+                              build/PIC32MX460F512L/production/_ext/812168374/main.o (ReadCoreTimer)
+c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+                              build/PIC32MX460F512L/production/_ext/812168374/main.o (WriteCoreTimer)
+c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+                              build/PIC32MX460F512L/production/_ext/592283297/usb_device.o (INTClearFlag)
+
+Allocating common symbols
+Common symbol       size              file
+
+pDst                0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+control_signal_bitmap
+                    0x4               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+USBDeferINDataStagePackets
+                    0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+BDT                 0x80              build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+CtrlTrfData         0x8               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+USBDeferOUTDataStagePackets
+                    0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+USBDeviceState      0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+controlTransferState
+                    0x1               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+cdc_tx_len          0x1               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+endpoint_number     0x1               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+pCDCSrc             0x4               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+cdc_data_tx         0x40              build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+inPipes             0x10              build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+pBDTEntryIn         0x10              build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+CDCDataOutHandle    0x4               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+cdc_rx_len          0x1               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+line_coding         0x8               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ep_data_out         0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+USBStatusStageEnabledFlag1
+                    0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+jump                0x10              build/PIC32MX460F512L/production/_ext/812168374/main.o
+BaudRateGen         0x4               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+USBStatusStageEnabledFlag2
+                    0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+pBDTEntryOut        0x10              build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+CDCDataInHandle     0x4               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+BothEP0OutUOWNsSet  0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+cdc_data_rx         0x40              build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+cdc_notice          0x8               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+pBDTEntryEP0OutNext
+                    0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+USBBusIsSuspended   0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+USBStatusStageTimeoutCounter
+                    0x1               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+USB_Buffer          0x40              build/PIC32MX460F512L/production/_ext/812168374/main.o
+cdc_trf_state       0x1               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+SetupPkt            0x8               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+pCDCDst             0x4               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+cdc_mem_type        0x1               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ep_data_in          0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+shortPacketStatus   0x1               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+pBDTEntryEP0OutCurrent
+                    0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+USBActiveConfiguration
+                    0x1               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+RemoteWakeup        0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+dataBytes           0x100             build/PIC32MX460F512L/production/_ext/812168374/main.o
+USTATcopy           0x1               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+USBAlternateInterface
+                    0x1               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+outPipes            0xb               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+dummy_encapsulated_cmd_response
+                    0x8               build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+USBDeferStatusStagePacket
+                    0x4               build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+nbPages             0x1               build/PIC32MX460F512L/production/_ext/812168374/main.o
+config              0x10              build/PIC32MX460F512L/production/_ext/812168374/main.o
+
+Microchip PIC32 Memory-Usage Report
+
+kseg0 Program-Memory Usage
+section                    address  length [bytes]      (dec)  Description
+-------                 ----------  -------------------------  -----------
+.text                   0x9d07a008         0x4990       18832  App's exec code 
+.rodata                 0x9d07e998          0x528        1320  Read-only const 
+.reset.startup          0x9d07eec0          0x1e4         484   
+.rodata                 0x9d07f0a4           0xd4         212  Read-only const 
+.text.general_exception 0x9d07f178           0xd0         208   
+.text                   0x9d07f248           0xa8         168  App's exec code 
+.text.INTEnable         0x9d07f2f0           0x58          88   
+.dinit                  0x9d07f348           0x4c          76   
+.text.INTSetVectorPrior 0x9d07f394           0x3c          60   
+.text.INTSetVectorSubPr 0x9d07f3d0           0x3c          60   
+.text.INTGetVectorPrior 0x9d07f40c           0x30          48   
+.text.INTGetVectorSubPr 0x9d07f43c           0x30          48   
+.text.INTClearFlag      0x9d07f46c           0x2c          44   
+.text.INTSetFlag        0x9d07f498           0x2c          44   
+.text.INTGetFlag        0x9d07f4c4           0x2c          44   
+.text.INTGetEnable      0x9d07f4f0           0x2c          44   
+.text                   0x9d07f51c           0x28          40  App's exec code 
+.text._general_exceptio 0x9d07f544            0xc          12   
+.text._bootstrap_except 0x9d07f550            0xc          12   
+.text._on_reset         0x9d07f55c            0x8           8   
+.text._on_bootstrap     0x9d07f564            0x8           8   
+.text.ReadCoreTimer     0x9d07f56c            0x8           8   
+.text.WriteCoreTimer    0x9d07f574            0x8           8   
+.rodata                 0x9d07f57c            0x4           4  Read-only const 
+.app_excpt              0x9d07ffe0           0x10          16  General-Exception 
+.bev_excpt              0x9d07fff0           0x10          16  BEV-Exception 
+      Total kseg0_program_mem used  :      0x5598       21912  89.2% of 0x6000
+
+kseg0 Boot-Memory Usage
+section                    address  length [bytes]      (dec)  Description
+-------                 ----------  -------------------------  -----------
+.app_excpt              0x9d07ffe0           0x10          16  General-Exception 
+.bev_excpt              0x9d07fff0           0x10          16  BEV-Exception 
+         Total kseg0_boot_mem used  :        0x20          32  4.2% of 0x300
+
+Exception-Memory Usage 
+section                    address  length [bytes]      (dec)  Description
+-------                 ----------  -------------------------  -----------
+.bev_excpt              0x9d07fff0           0x10          16  BEV-Exception 
+          Total exception_mem used  :        0x10          16  100.0% of 0x10
+
+kseg1 Boot-Memory Usage
+section                    address  length [bytes]      (dec)  Description
+-------                 ----------  -------------------------  -----------
+.reset                  0xbfc00000           0x10          16  Reset handler 
+         Total kseg1_boot_mem used  :        0x10          16  100.0% of 0x10
+        --------------------------------------------------------------------------
+         Total Program Memory used  :      0x55d8       21976  86.6% of 0x6320
+        --------------------------------------------------------------------------
+
+
+kseg1 Data-Memory Usage
+section                    address  length [bytes]      (dec)  Description
+-------                 ----------  -------------------------  -----------
+.sdata                  0xa0000000            0xc          12  Small init data 
+.sbss                   0xa000000c           0xb5         181  Small uninit data 
+.bss                    0xa0000200          0x29c         668  Uninitialized data 
+         Total kseg1_data_mem used  :       0x35d         861  2.6% of 0x8000
+        --------------------------------------------------------------------------
+            Total Data Memory used  :       0x35d         861  2.6% of 0x8000
+        --------------------------------------------------------------------------
+
+
+Dynamic Data-Memory Reservation
+section                    address  length [bytes]      (dec)  Description
+-------                 ----------  -------------------------  -----------
+heap                    0xa00004a0              0           0  Reserved for heap 
+stack                   0xa00004b8         0x7b38       31544  Reserved for stack 
+
+        --------------------------------------------------------------------------
+
+Discarded input sections
+
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o
+ .pdr           0x00000000       0xa0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o
+ .reginfo       0x00000000       0x18 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .pdr           0x00000000      0x300 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .reginfo       0x00000000       0x18 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .pdr           0x00000000      0x100 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .reginfo       0x00000000       0x18 build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .pdr           0x00000000      0x240 build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .reginfo       0x00000000       0x18 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+ .pdr           0x00000000        0x0 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/./proc/32MX460F512L\processor.o
+ .pdr           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/./proc/32MX460F512L\processor.o
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(memset.o)
+ .pdr           0x00000000       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(memset.o)
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(general-exception.o)
+ .pdr           0x00000000       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(general-exception.o)
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .pdr           0x00000000       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .pdr           0x00000000       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .pdr           0x00000000       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .pdr           0x00000000       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-nmi-handler.o)
+ .pdr           0x00000000       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-nmi-handler.o)
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+ .pdr           0x00000000       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .pdr           0x00000000       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .reginfo       0x00000000       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+ .pdr           0x00000000      0x120 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+kseg0_program_mem 0x9d07a000         0x00006000         xr
+kseg0_boot_mem   0x9d07fd00         0x00000300
+exception_mem    0x9d07fff0         0x00000010
+kseg1_boot_mem   0xbfc00000         0x00000010
+debug_exec_mem   0x9d07ff20         0x00000010
+config3          0xbfc02ff0         0x00000004
+config2          0xbfc02ff4         0x00000004
+config1          0xbfc02ff8         0x00000004
+config0          0xbfc02ffc         0x00000004
+kseg1_data_mem   0xa0000000         0x00008000         w !x
+sfrs             0xbf800000         0x00002000
+configsfrs       0xbfc02ff0         0x00000010
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o
+LOAD build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+LOAD build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+LOAD build/PIC32MX460F512L/production/_ext/812168374/main.o
+LOAD build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+                0x00000001                __MPLAB_BUILD = 0x1
+                0x00000400                PROVIDE (_min_stack_size, 0x400)
+                0x00000000                PROVIDE (_min_heap_size, 0x0)
+LOAD c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/./proc/32MX460F512L\processor.o
+                0x00000000                _ramfunc_begin = 0x0
+                0x00000001                PROVIDE (_vector_spacing, 0x1)
+                0x9d07ffe0                _ebase_address = 0x9d07ffe0
+                0xbfc00000                _RESET_ADDR = 0xbfc00000
+                0x9d07fff0                _BEV_EXCPT_ADDR = 0x9d07fff0
+                0x9d079f10                _DBG_EXCPT_ADDR = 0x9d079f10
+                0x9d079f20                _DBG_CODE_ADDR = 0x9d079f20
+                0x00000010                _DBG_CODE_SIZE = 0x10
+                0x9d07ffe0                _GEN_EXCPT_ADDR = _ebase_address
+
+.config_BFC02FF0
+ *(.config_BFC02FF0)
+
+.config_BFC02FF4
+                0xbfc02ff4        0x4
+ *(.config_BFC02FF4)
+ .config_BFC02FF4
+                0xbfc02ff4        0x4 build/PIC32MX460F512L/production/_ext/812168374/main.o
+
+.config_BFC02FF8
+                0xbfc02ff8        0x4
+ *(.config_BFC02FF8)
+ .config_BFC02FF8
+                0xbfc02ff8        0x4 build/PIC32MX460F512L/production/_ext/812168374/main.o
+
+.config_BFC02FFC
+                0xbfc02ffc        0x4
+ *(.config_BFC02FFC)
+ .config_BFC02FFC
+                0xbfc02ffc        0x4 build/PIC32MX460F512L/production/_ext/812168374/main.o
+
+.reset          0xbfc00000       0x10
+ *(.reset)
+ .reset         0xbfc00000       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o
+                0xbfc00000                _reset
+
+.startup
+ *(.startup)
+
+.bev_excpt      0x9d07fff0       0x10
+ *(.bev_handler)
+ .bev_handler   0x9d07fff0       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o
+
+.dbg_excpt      0x9d079f10        0x0
+                0x9d079f10                . = (. + DEFINED (_DEBUGGER)?0x8:0x0)
+
+.dbg_code       0x9d079f20        0x0
+                0x9d079f20                . = (. + DEFINED (_DEBUGGER)?_DBG_CODE_SIZE:0x0)
+
+.app_excpt      0x9d07ffe0       0x10
+ *(.gen_handler)
+ .gen_handler   0x9d07ffe0       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o
+
+.vector_0       0x9d0801e0        0x0
+ *(.vector_0)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_0) <= (_vector_spacing << 0x5))), function at exception vector 0 too large)
+
+.vector_1       0x9d080200        0x0
+ *(.vector_1)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_1) <= (_vector_spacing << 0x5))), function at exception vector 1 too large)
+
+.vector_2       0x9d080220        0x0
+ *(.vector_2)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_2) <= (_vector_spacing << 0x5))), function at exception vector 2 too large)
+
+.vector_3       0x9d080240        0x0
+ *(.vector_3)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_3) <= (_vector_spacing << 0x5))), function at exception vector 3 too large)
+
+.vector_4       0x9d080260        0x0
+ *(.vector_4)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_4) <= (_vector_spacing << 0x5))), function at exception vector 4 too large)
+
+.vector_5       0x9d080280        0x0
+ *(.vector_5)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_5) <= (_vector_spacing << 0x5))), function at exception vector 5 too large)
+
+.vector_6       0x9d0802a0        0x0
+ *(.vector_6)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_6) <= (_vector_spacing << 0x5))), function at exception vector 6 too large)
+
+.vector_7       0x9d0802c0        0x0
+ *(.vector_7)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_7) <= (_vector_spacing << 0x5))), function at exception vector 7 too large)
+
+.vector_8       0x9d0802e0        0x0
+ *(.vector_8)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_8) <= (_vector_spacing << 0x5))), function at exception vector 8 too large)
+
+.vector_9       0x9d080300        0x0
+ *(.vector_9)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_9) <= (_vector_spacing << 0x5))), function at exception vector 9 too large)
+
+.vector_10      0x9d080320        0x0
+ *(.vector_10)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_10) <= (_vector_spacing << 0x5))), function at exception vector 10 too large)
+
+.vector_11      0x9d080340        0x0
+ *(.vector_11)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_11) <= (_vector_spacing << 0x5))), function at exception vector 11 too large)
+
+.vector_12      0x9d080360        0x0
+ *(.vector_12)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_12) <= (_vector_spacing << 0x5))), function at exception vector 12 too large)
+
+.vector_13      0x9d080380        0x0
+ *(.vector_13)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_13) <= (_vector_spacing << 0x5))), function at exception vector 13 too large)
+
+.vector_14      0x9d0803a0        0x0
+ *(.vector_14)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_14) <= (_vector_spacing << 0x5))), function at exception vector 14 too large)
+
+.vector_15      0x9d0803c0        0x0
+ *(.vector_15)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_15) <= (_vector_spacing << 0x5))), function at exception vector 15 too large)
+
+.vector_16      0x9d0803e0        0x0
+ *(.vector_16)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_16) <= (_vector_spacing << 0x5))), function at exception vector 16 too large)
+
+.vector_17      0x9d080400        0x0
+ *(.vector_17)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_17) <= (_vector_spacing << 0x5))), function at exception vector 17 too large)
+
+.vector_18      0x9d080420        0x0
+ *(.vector_18)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_18) <= (_vector_spacing << 0x5))), function at exception vector 18 too large)
+
+.vector_19      0x9d080440        0x0
+ *(.vector_19)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_19) <= (_vector_spacing << 0x5))), function at exception vector 19 too large)
+
+.vector_20      0x9d080460        0x0
+ *(.vector_20)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_20) <= (_vector_spacing << 0x5))), function at exception vector 20 too large)
+
+.vector_21      0x9d080480        0x0
+ *(.vector_21)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_21) <= (_vector_spacing << 0x5))), function at exception vector 21 too large)
+
+.vector_22      0x9d0804a0        0x0
+ *(.vector_22)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_22) <= (_vector_spacing << 0x5))), function at exception vector 22 too large)
+
+.vector_23      0x9d0804c0        0x0
+ *(.vector_23)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_23) <= (_vector_spacing << 0x5))), function at exception vector 23 too large)
+
+.vector_24      0x9d0804e0        0x0
+ *(.vector_24)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_24) <= (_vector_spacing << 0x5))), function at exception vector 24 too large)
+
+.vector_25      0x9d080500        0x0
+ *(.vector_25)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_25) <= (_vector_spacing << 0x5))), function at exception vector 25 too large)
+
+.vector_26      0x9d080520        0x0
+ *(.vector_26)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_26) <= (_vector_spacing << 0x5))), function at exception vector 26 too large)
+
+.vector_27      0x9d080540        0x0
+ *(.vector_27)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_27) <= (_vector_spacing << 0x5))), function at exception vector 27 too large)
+
+.vector_28      0x9d080560        0x0
+ *(.vector_28)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_28) <= (_vector_spacing << 0x5))), function at exception vector 28 too large)
+
+.vector_29      0x9d080580        0x0
+ *(.vector_29)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_29) <= (_vector_spacing << 0x5))), function at exception vector 29 too large)
+
+.vector_30      0x9d0805a0        0x0
+ *(.vector_30)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_30) <= (_vector_spacing << 0x5))), function at exception vector 30 too large)
+
+.vector_31      0x9d0805c0        0x0
+ *(.vector_31)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_31) <= (_vector_spacing << 0x5))), function at exception vector 31 too large)
+
+.vector_32      0x9d0805e0        0x0
+ *(.vector_32)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_32) <= (_vector_spacing << 0x5))), function at exception vector 32 too large)
+
+.vector_33      0x9d080600        0x0
+ *(.vector_33)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_33) <= (_vector_spacing << 0x5))), function at exception vector 33 too large)
+
+.vector_34      0x9d080620        0x0
+ *(.vector_34)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_34) <= (_vector_spacing << 0x5))), function at exception vector 34 too large)
+
+.vector_35      0x9d080640        0x0
+ *(.vector_35)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_35) <= (_vector_spacing << 0x5))), function at exception vector 35 too large)
+
+.vector_36      0x9d080660        0x0
+ *(.vector_36)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_36) <= (_vector_spacing << 0x5))), function at exception vector 36 too large)
+
+.vector_37      0x9d080680        0x0
+ *(.vector_37)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_37) <= (_vector_spacing << 0x5))), function at exception vector 37 too large)
+
+.vector_38      0x9d0806a0        0x0
+ *(.vector_38)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_38) <= (_vector_spacing << 0x5))), function at exception vector 38 too large)
+
+.vector_39      0x9d0806c0        0x0
+ *(.vector_39)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_39) <= (_vector_spacing << 0x5))), function at exception vector 39 too large)
+
+.vector_40      0x9d0806e0        0x0
+ *(.vector_40)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_40) <= (_vector_spacing << 0x5))), function at exception vector 40 too large)
+
+.vector_41      0x9d080700        0x0
+ *(.vector_41)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_41) <= (_vector_spacing << 0x5))), function at exception vector 41 too large)
+
+.vector_42      0x9d080720        0x0
+ *(.vector_42)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_42) <= (_vector_spacing << 0x5))), function at exception vector 42 too large)
+
+.vector_43      0x9d080740        0x0
+ *(.vector_43)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_43) <= (_vector_spacing << 0x5))), function at exception vector 43 too large)
+
+.vector_44      0x9d080760        0x0
+ *(.vector_44)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_44) <= (_vector_spacing << 0x5))), function at exception vector 44 too large)
+
+.vector_45      0x9d080780        0x0
+ *(.vector_45)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_45) <= (_vector_spacing << 0x5))), function at exception vector 45 too large)
+
+.vector_46      0x9d0807a0        0x0
+ *(.vector_46)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_46) <= (_vector_spacing << 0x5))), function at exception vector 46 too large)
+
+.vector_47      0x9d0807c0        0x0
+ *(.vector_47)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_47) <= (_vector_spacing << 0x5))), function at exception vector 47 too large)
+
+.vector_48      0x9d0807e0        0x0
+ *(.vector_48)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_48) <= (_vector_spacing << 0x5))), function at exception vector 48 too large)
+
+.vector_49      0x9d080800        0x0
+ *(.vector_49)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_49) <= (_vector_spacing << 0x5))), function at exception vector 49 too large)
+
+.vector_50      0x9d080820        0x0
+ *(.vector_50)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_50) <= (_vector_spacing << 0x5))), function at exception vector 50 too large)
+
+.vector_51      0x9d080840        0x0
+ *(.vector_51)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_51) <= (_vector_spacing << 0x5))), function at exception vector 51 too large)
+
+.vector_52      0x9d080860        0x0
+ *(.vector_52)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_52) <= (_vector_spacing << 0x5))), function at exception vector 52 too large)
+
+.vector_53      0x9d080880        0x0
+ *(.vector_53)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_53) <= (_vector_spacing << 0x5))), function at exception vector 53 too large)
+
+.vector_54      0x9d0808a0        0x0
+ *(.vector_54)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_54) <= (_vector_spacing << 0x5))), function at exception vector 54 too large)
+
+.vector_55      0x9d0808c0        0x0
+ *(.vector_55)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_55) <= (_vector_spacing << 0x5))), function at exception vector 55 too large)
+
+.vector_56      0x9d0808e0        0x0
+ *(.vector_56)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_56) <= (_vector_spacing << 0x5))), function at exception vector 56 too large)
+
+.vector_57      0x9d080900        0x0
+ *(.vector_57)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_57) <= (_vector_spacing << 0x5))), function at exception vector 57 too large)
+
+.vector_58      0x9d080920        0x0
+ *(.vector_58)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_58) <= (_vector_spacing << 0x5))), function at exception vector 58 too large)
+
+.vector_59      0x9d080940        0x0
+ *(.vector_59)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_59) <= (_vector_spacing << 0x5))), function at exception vector 59 too large)
+
+.vector_60      0x9d080960        0x0
+ *(.vector_60)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_60) <= (_vector_spacing << 0x5))), function at exception vector 60 too large)
+
+.vector_61      0x9d080980        0x0
+ *(.vector_61)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_61) <= (_vector_spacing << 0x5))), function at exception vector 61 too large)
+
+.vector_62      0x9d0809a0        0x0
+ *(.vector_62)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_62) <= (_vector_spacing << 0x5))), function at exception vector 62 too large)
+
+.vector_63      0x9d0809c0        0x0
+ *(.vector_63)
+                0x00000001                ASSERT (((_vector_spacing == 0x0) || (SIZEOF (.vector_63) <= (_vector_spacing << 0x5))), function at exception vector 63 too large)
+
+.text
+ *(.stub .gnu.linkonce.t.*)
+ *(.text.*personality*)
+ *(.mips16.fn.*)
+ *(.mips16.call.*)
+ *(.gnu.warning)
+
+.rodata         0x9d07a000        0x0
+ *(.rodata.* .gnu.linkonce.r.*)
+ *(.rodata1)
+                0x9d07a000                . = ALIGN (0x4)
+
+.sdata2         0x9d0809c0        0x0
+ *(.sdata2 .sdata2.* .gnu.linkonce.s2.*)
+                0x9d0809c0                . = ALIGN (0x4)
+
+.sbss2          0x9d0809c0        0x0
+ *(.sbss2 .sbss2.* .gnu.linkonce.sb2.*)
+                0x9d0809c0                . = ALIGN (0x4)
+
+.eh_frame_hdr
+ *(.eh_frame_hdr)
+
+.eh_frame
+ *(.eh_frame)
+
+.dbg_data       0xa0000000        0x0
+                0xa0000000                . = (. + DEFINED (_DEBUGGER)?0x200:0x0)
+
+.persist        0xa0000000        0x0
+                0xa0000000                _persist_begin = .
+ *(.persist .persist.*)
+                0xa0000000                . = ALIGN (0x4)
+                0xa0000000                _persist_end = .
+
+.eh_frame
+ *(.eh_frame)
+                0xa0000000                . = .
+                0xa0007ff0                _gp = (ALIGN (0x10) + 0x7ff0)
+
+.got
+ *(.got.plt)
+ *(.got)
+
+.sdata          0xa0000000        0xc
+                0xa0000000                _sdata_begin = .
+ *(.sdata .sdata.* .gnu.linkonce.s.*)
+ .sdata         0xa0000000        0xc build/PIC32MX460F512L/production/_ext/812168374/main.o
+                0xa0000000                Status
+                0xa0000004                baseZoneMem
+                0xa000000c                _sdata_end = .
+
+.lit8
+ *(.lit8)
+
+.lit4
+ *(.lit4)
+                0xa000000c                . = ALIGN (0x4)
+                0xa000000c                _data_end = .
+                0xa000000c                _bss_begin = .
+
+.sbss           0xa000000c       0xb5
+                0xa000000c                _sbss_begin = .
+ *(.dynsbss)
+ *(.sbss .sbss.* .gnu.linkonce.sb.*)
+ .sbss          0xa000000c       0x14 build/PIC32MX460F512L/production/_ext/812168374/main.o
+                0xa000000c                waitingLoops
+                0xa0000010                erasingPageNb
+                0xa0000014                numData
+                0xa0000018                writeOK
+ *(.scommon)
+ .scommon       0xa0000020       0x60 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+                0xa0000020                pDst
+                0xa0000024                USBDeferINDataStagePackets
+                0xa0000028                CtrlTrfData
+                0xa0000030                USBDeferOUTDataStagePackets
+                0xa0000034                USBDeviceState
+                0xa0000038                controlTransferState
+                0xa0000039                endpoint_number
+                0xa000003c                ep_data_out
+                0xa0000040                USBStatusStageEnabledFlag1
+                0xa0000044                USBStatusStageEnabledFlag2
+                0xa0000048                BothEP0OutUOWNsSet
+                0xa000004c                pBDTEntryEP0OutNext
+                0xa0000050                USBBusIsSuspended
+                0xa0000054                USBStatusStageTimeoutCounter
+                0xa0000058                SetupPkt
+                0xa0000060                ep_data_in
+                0xa0000064                shortPacketStatus
+                0xa0000068                pBDTEntryEP0OutCurrent
+                0xa000006c                USBActiveConfiguration
+                0xa0000070                RemoteWakeup
+                0xa0000074                USTATcopy
+                0xa0000078                USBAlternateInterface
+                0xa000007c                USBDeferStatusStagePacket
+ .scommon       0xa0000080       0x40 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+                0xa0000080                control_signal_bitmap
+                0xa0000084                cdc_tx_len
+                0xa0000088                pCDCSrc
+                0xa000008c                CDCDataOutHandle
+                0xa0000090                cdc_rx_len
+                0xa0000094                line_coding
+                0xa000009c                BaudRateGen
+                0xa00000a0                CDCDataInHandle
+                0xa00000a4                cdc_notice
+                0xa00000ac                cdc_trf_state
+                0xa00000b0                pCDCDst
+                0xa00000b4                cdc_mem_type
+                0xa00000b8                dummy_encapsulated_cmd_response
+ .scommon       0xa00000c0        0x1 build/PIC32MX460F512L/production/_ext/812168374/main.o
+                0xa00000c0                nbPages
+                0xa00000c1                _sbss_end = .
+
+.bss            0xa0000200      0x29c
+ *(.dynbss)
+ *(COMMON)
+ COMMON         0xa0000200       0xbb build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+                0xa0000200                BDT
+                0xa0000280                inPipes
+                0xa0000290                pBDTEntryIn
+                0xa00002a0                pBDTEntryOut
+                0xa00002b0                outPipes
+ *fill*         0xa00002bb        0x1 00
+ COMMON         0xa00002bc       0x80 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+                0xa00002bc                cdc_data_tx
+                0xa00002fc                cdc_data_rx
+ COMMON         0xa000033c      0x160 build/PIC32MX460F512L/production/_ext/812168374/main.o
+                0xa000033c                jump
+                0xa000034c                USB_Buffer
+                0xa000038c                dataBytes
+                0xa000048c                config
+                0xa000049c                . = ALIGN (0x4)
+                0xa000049c                . = ALIGN (0x4)
+                0xa000049c                _end = .
+                0xa000049c                _bss_end = .
+                0x00008000                _bmxdudba_address = 0x8000
+                0x00008000                _bmxdupba_address = 0x8000
+
+/DISCARD/
+ *(.pdr)
+ *(.reginfo)
+ *(.rel.dyn)
+ *(.note.GNU-stack)
+ *(.note.GNU-stack)
+ *(.gnu_debuglink)
+ *(.gnu.lto_*)
+ *(.discard)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000       0xf7
+ *(.comment)
+ .comment       0x00000000       0x51 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+                                 0x52 (size before relaxing)
+ .comment       0x00000000       0x52 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .comment       0x00000000       0x52 build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .comment       0x00000000       0x52 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+ .comment       0x00000051       0x55 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(memset.o)
+                                 0x56 (size before relaxing)
+ .comment       0x00000000       0x52 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .comment       0x00000000       0x52 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .comment       0x00000000       0x52 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .comment       0x00000000       0x52 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .comment       0x000000a6       0x51 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+                                 0x52 (size before relaxing)
+ .comment       0x00000000       0x52 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .comment       0x00000000       0x52 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x180
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .debug_aranges
+                0x00000020       0x20 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .debug_aranges
+                0x00000040       0x20 build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .debug_aranges
+                0x00000060       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .debug_aranges
+                0x00000080       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .debug_aranges
+                0x000000a0       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .debug_aranges
+                0x000000c0       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .debug_aranges
+                0x000000e0       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_aranges
+                0x00000100       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .debug_aranges
+                0x00000120       0x60 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.debug_pubnames
+                0x00000000      0x8f6
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000      0x312 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .debug_pubnames
+                0x00000312      0x1b2 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .debug_pubnames
+                0x000004c4      0x204 build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .debug_pubnames
+                0x000006c8       0x73 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+ .debug_pubnames
+                0x0000073b       0x31 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .debug_pubnames
+                0x0000076c       0x33 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .debug_pubnames
+                0x0000079f       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .debug_pubnames
+                0x000007bf       0x24 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .debug_pubnames
+                0x000007e3       0x24 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_pubnames
+                0x00000807       0x25 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .debug_pubnames
+                0x0000082c       0xca c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.debug_info     0x00000000     0x988f
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000     0x36e3 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .debug_info    0x000036e3     0x2772 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .debug_info    0x00005e55     0x1d07 build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .debug_info    0x00007b5c     0x1638 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+ .debug_info    0x00009194      0x102 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .debug_info    0x00009296      0x106 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .debug_info    0x0000939c       0xe0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .debug_info    0x0000947c       0xe8 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .debug_info    0x00009564       0xbf c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_info    0x00009623       0xc1 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .debug_info    0x000096e4      0x1ab c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.debug_abbrev   0x00000000      0xb2c
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x2f3 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .debug_abbrev  0x000002f3      0x29d build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .debug_abbrev  0x00000590      0x2b4 build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .debug_abbrev  0x00000844      0x1e5 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+ .debug_abbrev  0x00000a29       0x25 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .debug_abbrev  0x00000a4e       0x25 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .debug_abbrev  0x00000a73       0x25 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .debug_abbrev  0x00000a98       0x25 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .debug_abbrev  0x00000abd       0x25 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_abbrev  0x00000ae2       0x25 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .debug_abbrev  0x00000b07       0x25 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.debug_line     0x00000000     0x1419
+ *(.debug_line)
+ .debug_line    0x00000000      0x6e6 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .debug_line    0x000006e6      0x35c build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .debug_line    0x00000a42      0x3ea build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .debug_line    0x00000e2c      0x238 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+ .debug_line    0x00001064       0xa4 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .debug_line    0x00001108       0xa6 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .debug_line    0x000011ae       0x93 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .debug_line    0x00001241       0x97 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .debug_line    0x000012d8       0x6e c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_line    0x00001346       0x6f c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .debug_line    0x000013b5       0x64 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.debug_frame    0x00000000      0x6b4
+ *(.debug_frame)
+ .debug_frame   0x00000000      0x288 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .debug_frame   0x00000288       0xe0 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .debug_frame   0x00000368      0x1ec build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .debug_frame   0x00000554       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .debug_frame   0x00000574       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .debug_frame   0x00000594       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .debug_frame   0x000005b4       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .debug_frame   0x000005d4       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_frame   0x000005f4       0x20 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .debug_frame   0x00000614       0xa0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.debug_str      0x00000000      0x788
+ *(.debug_str)
+ .debug_str     0x00000000      0x347 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .debug_str     0x00000347      0x1b7 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .debug_str     0x000004fe      0x17e build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .debug_str     0x0000067c      0x10c build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+ .debug_str     0x00000788        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .debug_str     0x00000788        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .debug_str     0x00000788        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .debug_str     0x00000788        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .debug_str     0x00000788        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_str     0x00000788        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .debug_str     0x00000788        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+                0x00000000      0x6f4
+ *(.debug_pubtypes)
+ .debug_pubtypes
+                0x00000000      0x285 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .debug_pubtypes
+                0x00000285      0x21f build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .debug_pubtypes
+                0x000004a4      0x14c build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .debug_pubtypes
+                0x000005f0      0x104 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+
+.debug_ranges   0x00000000       0xc8
+ *(.debug_ranges)
+ .debug_ranges  0x00000000       0x18 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .debug_ranges  0x00000018       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .debug_ranges  0x00000028       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .debug_ranges  0x00000038       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .debug_ranges  0x00000048       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .debug_ranges  0x00000058       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+ .debug_ranges  0x00000068       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .debug_ranges  0x00000078       0x50 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.gnu.attributes
+                0x00000000       0x10
+ *(.gnu.attributes)
+ .gnu.attributes
+                0x00000000       0x10 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+ .gnu.attributes
+                0x00000010       0x10 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+ .gnu.attributes
+                0x00000020       0x10 build/PIC32MX460F512L/production/_ext/812168374/main.o
+ .gnu.attributes
+                0x00000030       0x10 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+ .gnu.attributes
+                0x00000040       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+ .gnu.attributes
+                0x00000050       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+ .gnu.attributes
+                0x00000060       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+ .gnu.attributes
+                0x00000070       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+ .gnu.attributes
+                0x00000080       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+ .gnu.attributes
+                0x00000090       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+ .gnu.attributes
+                0x000000a0       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+LOAD c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1\libgcc.a
+START GROUP
+LOAD c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libdebug.a
+LOAD c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a
+LOAD c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libm.a
+LOAD c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libe.a
+LOAD c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libdsp.a
+LOAD c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a
+LOAD c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a
+END GROUP
+LOAD c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1\libgcc.a
+OUTPUT(dist/PIC32MX460F512L/production/MPLAB_X_Workspace.production.elf elf32-tradlittlemips)
+LOAD stack
+LOAD data_init
+
+.stack          0xa00004b8      0x400
+ .stack         0xa00004b8      0x400 stack
+
+.mdebug.abi32%z1
+                0x00000000        0x0
+ .mdebug.abi32  0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.bss%z2         0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.data%z3        0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.mdebug.abi32%z4
+                0x00000000        0x0
+ .mdebug.abi32  0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+
+.bss%z5         0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+
+.data%z6        0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+
+.mdebug.abi32%z7
+                0x00000000        0x0
+ .mdebug.abi32  0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+
+.bss%z8         0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+
+.data%z9        0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+
+.bss%z10        0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-nmi-handler.o)
+
+.data%z11       0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-nmi-handler.o)
+
+.mdebug.abi32%z12
+                0x00000000        0x0
+ .mdebug.abi32  0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+
+.bss%z13        0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+
+.data%z14       0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+
+.mdebug.abi32%z15
+                0x00000000        0x0
+ .mdebug.abi32  0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+
+.bss%z16        0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+
+.data%z17       0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+
+.mdebug.abi32%z18
+                0x00000000        0x0
+ .mdebug.abi32  0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+
+.bss%z19        0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+
+.data%z20       0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+
+.mdebug.abi32%z21
+                0x00000000        0x0
+ .mdebug.abi32  0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+
+.bss%z22        0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+
+.data%z23       0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+
+.bss%z24        0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(general-exception.o)
+
+.data%z25       0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(general-exception.o)
+
+.bss%z26        0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(memset.o)
+
+.data%z27       0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(memset.o)
+
+.bss%z28        0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/./proc/32MX460F512L\processor.o
+
+.data%z29       0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/./proc/32MX460F512L\processor.o
+
+.mdebug.abi32%z30
+                0x00000000        0x0
+ .mdebug.abi32  0x00000000        0x0 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+
+.bss%z31        0x00000000        0x0
+ .bss           0x00000000        0x0 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+
+.data%z32       0x00000000        0x0
+ .data          0x00000000        0x0 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+
+.mdebug.abi32%z33
+                0x00000000        0x0
+ .mdebug.abi32  0x00000000        0x0 build/PIC32MX460F512L/production/_ext/812168374/main.o
+
+.bss%z34        0x00000000        0x0
+ .bss           0x00000000        0x0 build/PIC32MX460F512L/production/_ext/812168374/main.o
+
+.data%z35       0x00000000        0x0
+ .data          0x00000000        0x0 build/PIC32MX460F512L/production/_ext/812168374/main.o
+
+.mdebug.abi32%z36
+                0x00000000        0x0
+ .mdebug.abi32  0x00000000        0x0 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+
+.bss%z37        0x00000000        0x0
+ .bss           0x00000000        0x0 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+
+.data%z38       0x00000000        0x0
+ .data          0x00000000        0x0 build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+
+.mdebug.abi32%z39
+                0x00000000        0x0
+ .mdebug.abi32  0x00000000        0x0 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+
+.bss%z40        0x00000000        0x0
+ .bss           0x00000000        0x0 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+
+.data%z41       0x00000000        0x0
+ .data          0x00000000        0x0 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+
+.bss%z42        0x00000000        0x0
+ .bss           0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o
+
+.data%z43       0x00000000        0x0
+ .data          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o
+
+.text           0x9d07a008     0x4990
+ .text          0x9d07a008     0x3470 build/PIC32MX460F512L/production/_ext/592283297/usb_device.o
+                0x9d07a008                USBDeviceInit
+                0x9d07a304                USBDeviceTasks
+                0x9d07a760                USBEnableEndpoint
+                0x9d07a804                USBTransferOnePacket
+                0x9d07aa84                USBStallEndpoint
+                0x9d07ac94                USBCancelIO
+                0x9d07b0c8                USBCtrlEPAllowStatusStage
+                0x9d07b2f4                USBCtrlEPAllowDataStage
+ .text          0x9d07d478      0xbf4 build/PIC32MX460F512L/production/_ext/812168374/main.o
+                0x9d07d4a8                USBCBSuspend
+                0x9d07d4c8                USBCBWakeFromSuspend
+                0x9d07d4e8                USBCB_SOF_Handler
+                0x9d07d508                USBCBErrorHandler
+                0x9d07d528                USBCBCheckOtherReq
+                0x9d07d558                USBCBStdSetDscHandler
+                0x9d07d578                USBCBInitEP
+                0x9d07d5a8                USBCBSendResume
+                0x9d07d610                USER_USB_CALLBACK_EVENT_HANDLER
+                0x9d07d744                JumpToApp
+                0x9d07d790                delay_us
+                0x9d07d7fc                checkChkSum
+                0x9d07d828                NVMemOperation
+                0x9d07d8c0                NVMemWriteWord
+                0x9d07d918                eraseZoneFlash
+                0x9d07d974                ProcessIO
+                0x9d07dfd4                main
+ .text          0x9d07e06c      0x92c build/PIC32MX460F512L/production/_ext/796499546/usb_function_cdc.o
+                0x9d07e06c                USBCheckCDCRequest
+                0x9d07e350                CDCInitEP
+                0x9d07e3dc                USBCDCEventHandler
+                0x9d07e47c                getsUSBUSART
+                0x9d07e5c0                putUSBUSART
+                0x9d07e618                putsUSBUSART
+                0x9d07e6cc                putrsUSBUSART
+                0x9d07e77c                CDCTxService
+
+.rodata         0x9d07e998      0x528
+ .rodata        0x9d07e998      0x528 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+                0x9d07e998                __IntSrcTbl
+                0x9d07ec98                __IntVectorTbl
+
+.reset.startup  0x9d07eec0      0x1e4
+ .reset.startup
+                0x9d07eec0      0x1e4 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o
+
+.rodata         0x9d07f0a4       0xd4
+ .rodata        0x9d07f0a4       0xd4 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o
+                0x9d07f0a4                device_dsc
+                0x9d07f0b8                configDescriptor1
+                0x9d07f0fc                sd000
+                0x9d07f100                sd001
+                0x9d07f134                sd002
+                0x9d07f168                USB_CD_Ptr
+                0x9d07f16c                USB_SD_Ptr
+
+.text.general_exception
+                0x9d07f178       0xd0
+ .text.general_exception
+                0x9d07f178       0xd0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(general-exception.o)
+                0x9d07f178                _general_exception_context
+
+.text           0x9d07f248       0xa8
+ .text          0x9d07f248       0xa8 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(memset.o)
+                0x9d07f248                memset
+
+.text.INTEnable
+                0x9d07f2f0       0x58
+ .text.INTEnable
+                0x9d07f2f0       0x58 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+                0x9d07f2f0                INTEnable
+
+.dinit          0x9d07f348       0x4c
+ .dinit         0x9d07f348       0x4c data_init
+
+.text.INTSetVectorPriority
+                0x9d07f394       0x3c
+ .text.INTSetVectorPriority
+                0x9d07f394       0x3c c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+                0x9d07f394                INTSetVectorPriority
+
+.text.INTSetVectorSubPriority
+                0x9d07f3d0       0x3c
+ .text.INTSetVectorSubPriority
+                0x9d07f3d0       0x3c c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+                0x9d07f3d0                INTSetVectorSubPriority
+
+.text.INTGetVectorPriority
+                0x9d07f40c       0x30
+ .text.INTGetVectorPriority
+                0x9d07f40c       0x30 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+                0x9d07f40c                INTGetVectorPriority
+
+.text.INTGetVectorSubPriority
+                0x9d07f43c       0x30
+ .text.INTGetVectorSubPriority
+                0x9d07f43c       0x30 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+                0x9d07f43c                INTGetVectorSubPriority
+
+.text.INTClearFlag
+                0x9d07f46c       0x2c
+ .text.INTClearFlag
+                0x9d07f46c       0x2c c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+                0x9d07f46c                INTClearFlag
+
+.text.INTSetFlag
+                0x9d07f498       0x2c
+ .text.INTSetFlag
+                0x9d07f498       0x2c c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+                0x9d07f498                INTSetFlag
+
+.text.INTGetFlag
+                0x9d07f4c4       0x2c
+ .text.INTGetFlag
+                0x9d07f4c4       0x2c c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+                0x9d07f4c4                INTGetFlag
+
+.text.INTGetEnable
+                0x9d07f4f0       0x2c
+ .text.INTGetEnable
+                0x9d07f4f0       0x2c c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+                0x9d07f4f0                INTGetEnable
+
+.text           0x9d07f51c       0x28
+ .text          0x9d07f51c       0x18 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-nmi-handler.o)
+                0x9d07f51c                _nmi_handler
+ .text          0x9d07f534       0x10 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/crt0.o
+                0x9d07f53c                __crt0_exit
+
+.text._general_exception_handler
+                0x9d07f544        0xc
+ .text._general_exception_handler
+                0x9d07f544        0xc c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+                0x9d07f544                _general_exception_handler
+
+.text._bootstrap_exception_handler
+                0x9d07f550        0xc
+ .text._bootstrap_exception_handler
+                0x9d07f550        0xc c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+                0x9d07f550                _bootstrap_exception_handler
+
+.text._on_reset
+                0x9d07f55c        0x8
+ .text._on_reset
+                0x9d07f55c        0x8 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+                0x9d07f55c                _on_reset
+
+.text._on_bootstrap
+                0x9d07f564        0x8
+ .text._on_bootstrap
+                0x9d07f564        0x8 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+                0x9d07f564                _on_bootstrap
+
+.text.ReadCoreTimer
+                0x9d07f56c        0x8
+ .text.ReadCoreTimer
+                0x9d07f56c        0x8 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+                0x9d07f56c                ReadCoreTimer
+
+.text.WriteCoreTimer
+                0x9d07f574        0x8
+ .text.WriteCoreTimer
+                0x9d07f574        0x8 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+                0x9d07f574                WriteCoreTimer
+
+.rodata         0x9d07f57c        0x4
+ .rodata        0x9d07f57c        0x4 build/PIC32MX460F512L/production/_ext/812168374/main.o
+                0x9d07f57c                countPerMicroSec
+
+.text%z44       0x00000000        0x0
+ .text          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral_32MX460F512L.a(int_tbl_lib.o)
+
+.text%z45       0x00000000        0x0
+ .text          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(write_core_timer_lib.o)
+
+.text%z46       0x00000000        0x0
+ .text          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libmchp_peripheral.a(read_core_timer_lib.o)
+
+.text%z47       0x00000000        0x0
+ .text          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-bootstrap.o)
+
+.text%z48       0x00000000        0x0
+ .text          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-on-reset.o)
+
+.text%z49       0x00000000        0x0
+ .text          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-bootstrap-exception-handler.o)
+
+.text%z50       0x00000000        0x0
+ .text          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(default-general-exception-handler.o)
+
+.text%z51       0x00000000        0x0
+ .text          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib\libc.a(general-exception.o)
+
+.text%z52       0x00000000        0x0
+ .text          0x00000000        0x0 c:/program files/microchip/mplabc32/bin/../lib/gcc/pic32mx/4.5.1/../../../../pic32mx/lib/./proc/32MX460F512L\processor.o
+
+.text%z53       0x00000000        0x0
+ .text          0x00000000        0x0 build/PIC32MX460F512L/production/_ext/812168374/usb_descriptors.o

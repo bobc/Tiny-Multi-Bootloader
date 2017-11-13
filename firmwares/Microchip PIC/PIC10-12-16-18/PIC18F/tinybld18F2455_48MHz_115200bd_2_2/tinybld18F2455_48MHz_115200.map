@@ -1,0 +1,83 @@
+MPLINK 4.45, Linker
+Linker Map File - Created Tue Sep 17 15:54:18 2013
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000004
+                   .org_1       code   0x005f38    program   0x000008
+                   .org_2       code   0x005f40    program   0x0000be
+                   .cinit    romdata   0x005ffe    program   0x000002
+.config_300000_TINYBLD18F2455USB.O       code   0x300000    program   0x000002
+.config_300002_TINYBLD18F2455USB.O       code   0x300002    program   0x000002
+.config_300004_TINYBLD18F2455USB.O       code   0x300004    program   0x000002
+.config_300006_TINYBLD18F2455USB.O       code   0x300006    program   0x000002
+.config_300008_TINYBLD18F2455USB.O       code   0x300008    program   0x000002
+.config_30000A_TINYBLD18F2455USB.O       code   0x30000a    program   0x000002
+.config_30000C_TINYBLD18F2455USB.O       code   0x30000c    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000003      
+                            0x005f38    0x005fff      
+                            0x300000    0x30000d      
+            218 out of 24856 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x005f40    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                 MainLoop   0x005f56    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                  Receive   0x005fdc    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                    Write   0x005fcc    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                eraseloop   0x005fa0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+              lp_noeeprom   0x005f96    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                    mainl   0x005f58    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                 noconfig   0x005fa0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                 noeeprom   0x005f8e    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                   notrcv   0x005fee    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                 put1byte   0x005fc4    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                   rcvoct   0x005f74    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                     rpt2   0x005fe0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                     rpt3   0x005fe2    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                     rptc   0x005fe4    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                  waitwre   0x005fbc    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+              way_to_exit   0x005ffa    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+             writebigloop   0x005fa6    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                writebyte   0x005fae    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+               writesloop   0x005faa    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                ziieroare   0x005fc0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x005f40    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                 MainLoop   0x005f56    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                    mainl   0x005f58    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                   rcvoct   0x005f74    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                 noeeprom   0x005f8e    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+              lp_noeeprom   0x005f96    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                eraseloop   0x005fa0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                 noconfig   0x005fa0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+             writebigloop   0x005fa6    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+               writesloop   0x005faa    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                writebyte   0x005fae    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                  waitwre   0x005fbc    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                ziieroare   0x005fc0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                 put1byte   0x005fc4    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                    Write   0x005fcc    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                  Receive   0x005fdc    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                     rpt2   0x005fe0    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                     rpt3   0x005fe2    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                     rptc   0x005fe4    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+                   notrcv   0x005fee    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+              way_to_exit   0x005ffa    program     static D:\Quercioli\Documents\SourceForge\Tiny_Avr-Pic_Bootloader+ (v0.8.x)\temp\PIC10-12-16-18\tinybld18F2455_48MHz_115200bd_2_2\tinybld18F2455usb.asm
+
+

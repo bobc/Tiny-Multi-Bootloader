@@ -1,0 +1,71 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=C:\picasm1\tinybld198\picsource\Type-E\tinybld_24FJ64GB002_int8MHz_19200bd\tinybld_24FJ64GB002.o
+Folder=Intermediary
+DeviceName=PIC24FJ64GB002
+LanguageToolSuiteID={F62E444C-B232-4066-9AB0-A6F4E5261396}
+LanguageToolID={DE18EB1A-B46B-486B-B96F-A811A635DFAC}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB ASM30 Suite\bin\pic30-as.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|tinybld_24FJ64GB002.s||<obj>||<lib>||<lkr>|C:\Program Files\Microchip\MPLAB ASM30 Suite\Support\PIC24F\gld\p24FJ64GB002.gld||
+SuiteArgsString=
+ToolArgsString=-g -a="$(BINDIR_)$(INFILEBASE).lst"
+TraceCmdString=
+DebugOptions=--defsym=__DEBUG=1
+[File001]
+Location=C:\picasm1\tinybld198\picsource\Type-E\tinybld_24FJ64GB002_int8MHz_19200bd\tinybld_24FJ64GB002.lst
+Folder=Output
+DeviceName=PIC24FJ64GB002
+LanguageToolSuiteID={F62E444C-B232-4066-9AB0-A6F4E5261396}
+LanguageToolID={DE18EB1A-B46B-486B-B96F-A811A635DFAC}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB ASM30 Suite\bin\pic30-as.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|tinybld_24FJ64GB002.s||<obj>||<lib>||<lkr>|C:\Program Files\Microchip\MPLAB ASM30 Suite\Support\PIC24F\gld\p24FJ64GB002.gld||
+SuiteArgsString=
+ToolArgsString=-g -a="$(BINDIR_)$(INFILEBASE).lst"
+TraceCmdString=
+DebugOptions=--defsym=__DEBUG=1
+[File002]
+Location=C:\picasm1\tinybld198\picsource\Type-E\tinybld_24FJ64GB002_int8MHz_19200bd\tinybld_24FJ64GB002.cof
+Folder=Output
+DeviceName=PIC24FJ64GB002
+LanguageToolSuiteID={F62E444C-B232-4066-9AB0-A6F4E5261396}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB ASM30 Suite\bin\pic30-ld.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|tinybld_24FJ64GB002.s||<obj>||<lib>||<lkr>|C:\Program Files\Microchip\MPLAB ASM30 Suite\Support\PIC24F\gld\p24FJ64GB002.gld||
+SuiteArgsString=
+ToolArgsString=-Map="$(BINDIR_)$(TARGETBASE).map" --report-mem --no-data-init --no-isr -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
+TraceCmdString=
+DebugOptions=--defsym=__MPLAB_DEBUG=1
+[File003]
+Location=C:\picasm1\tinybld198\picsource\Type-E\tinybld_24FJ64GB002_int8MHz_19200bd\tinybld_24FJ64GB002.hex
+Folder=Output
+DeviceName=PIC24FJ64GB002
+LanguageToolSuiteID={F62E444C-B232-4066-9AB0-A6F4E5261396}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB ASM30 Suite\bin\pic30-ld.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|tinybld_24FJ64GB002.s||<obj>||<lib>||<lkr>|C:\Program Files\Microchip\MPLAB ASM30 Suite\Support\PIC24F\gld\p24FJ64GB002.gld||
+SuiteArgsString=
+ToolArgsString=-Map="$(BINDIR_)$(TARGETBASE).map" --report-mem --no-data-init --no-isr -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
+TraceCmdString=
+DebugOptions=--defsym=__MPLAB_DEBUG=1
+[File004]
+Location=
+Folder=Output
+DeviceName=PIC24FJ64GB002
+LanguageToolSuiteID={F62E444C-B232-4066-9AB0-A6F4E5261396}
+LanguageToolID={433C3D55-811D-409D-A6BF-159CF9355B42}
+LanguageToolLocation=C:\Program Files\Microchip\MPLAB ASM30 Suite\bin\pic30-ld.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|tinybld_24FJ64GB002.s||<obj>||<lib>||<lkr>|C:\Program Files\Microchip\MPLAB ASM30 Suite\Support\PIC24F\gld\p24FJ64GB002.gld||
+SuiteArgsString=
+ToolArgsString=-Map="$(BINDIR_)$(TARGETBASE).map" --report-mem --no-data-init --no-isr -o"$(BINDIR_)$(TARGETBASE).$(TARGETSUFFIX)"
+TraceCmdString=
+DebugOptions=--defsym=__MPLAB_DEBUG=1
+[TOOL_LOC_STAMPS]
+tool_loc{DE18EB1A-B46B-486B-B96F-A811A635DFAC}=C:\Program Files\Microchip\MPLAB ASM30 Suite\bin\pic30-as.exe
+tool_loc{433C3D55-811D-409D-A6BF-159CF9355B42}=C:\Program Files\Microchip\MPLAB ASM30 Suite\bin\pic30-ld.exe

@@ -1,0 +1,90 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Sun Nov 24 00:31:55 2013
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000004
+                   .org_2       code   0x003ef8    program   0x000008
+                   .org_3       code   0x003f00    program   0x0000ec
+.config_003FF8_TINYBLD18F24J10_EXT16MHZ_19200.O    romdata   0x003ff8    program   0x000001
+.config_003FF9_TINYBLD18F24J10_EXT16MHZ_19200.O    romdata   0x003ff9    program   0x000001
+.config_003FFA_TINYBLD18F24J10_EXT16MHZ_19200.O    romdata   0x003ffa    program   0x000001
+.config_003FFB_TINYBLD18F24J10_EXT16MHZ_19200.O    romdata   0x003ffb    program   0x000001
+.config_003FFD_TINYBLD18F24J10_EXT16MHZ_19200.O    romdata   0x003ffd    program   0x000001
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000003      
+                            0x003ef8    0x003feb      
+                            0x003ff8    0x003ffb      
+                            0x003ffd    0x003ffd      
+            253 out of 16384 program addresses used, program memory utilization is 1%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x003f00    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                 MainLoop   0x003f54    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  Receive   0x003fca    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                    Write   0x003fb8    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  chk_crc   0x003f46    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                    cp_bl   0x003f24    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                eraseloop   0x003f7e    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                    mainl   0x003f56    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  noerase   0x003f92    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                   notrcv   0x003fdc    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  rcv_cfg   0x003f3e    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                   rcvoct   0x003f6e    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                     rpt2   0x003fce    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                     rpt3   0x003fd0    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                     rptc   0x003fd2    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  set_FSR   0x003f52    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  waitwre   0x003f96    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+              way_to_exit   0x003fe8    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                   wr_bl1   0x003f4a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                   wr_bl2   0x003f4e    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                   wr_bld   0x003f98    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                wr_bld_lp   0x003fa4    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+               write64_lp   0x003fae    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+             write64bytes   0x003fac    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                ziieroare   0x003f7a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x003f00    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                    cp_bl   0x003f24    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  rcv_cfg   0x003f3e    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  chk_crc   0x003f46    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                   wr_bl1   0x003f4a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                   wr_bl2   0x003f4e    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  set_FSR   0x003f52    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                 MainLoop   0x003f54    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                    mainl   0x003f56    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                   rcvoct   0x003f6e    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                ziieroare   0x003f7a    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                eraseloop   0x003f7e    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  noerase   0x003f92    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  waitwre   0x003f96    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                   wr_bld   0x003f98    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                wr_bld_lp   0x003fa4    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+             write64bytes   0x003fac    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+               write64_lp   0x003fae    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                    Write   0x003fb8    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                  Receive   0x003fca    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                     rpt2   0x003fce    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                     rpt3   0x003fd0    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                     rptc   0x003fd2    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+                   notrcv   0x003fdc    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+              way_to_exit   0x003fe8    program     static C:\picasm1\tinybld198\picsource\18f\Dan_tinybld18F24J10_ext16MHz_19200bd_r4\tinybld18F24J10_ext16MHz_19200.asm
+
+

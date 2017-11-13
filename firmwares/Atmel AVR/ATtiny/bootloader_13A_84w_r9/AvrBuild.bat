@@ -1,0 +1,2 @@
+@ECHO OFF
+"C:\Program Files\Atmel\AVR Tools\AvrAssembler2\avrasm2.exe" -S "C:\avrasm1\bootloader_13A_84w_r9\labels.tmp" -fI -W+ie -C V2 -o "C:\avrasm1\bootloader_13A_84w_r9\ATTINY13BL.hex" -d "C:\avrasm1\bootloader_13A_84w_r9\ATTINY13BL.obj" -e "C:\avrasm1\bootloader_13A_84w_r9\ATTINY13BL.eep" -m "C:\avrasm1\bootloader_13A_84w_r9\ATTINY13BL.map" -l "C:\avrasm1\bootloader_13A_84w_r9\ATTINY13BL.lst" "C:\avrasm1\bootloader_13A_84w_r9\ATTINY13A.asm"

@@ -1,0 +1,63 @@
+MPLINK 4.49, Linker
+Linker Map File - Created Wed Jun 04 13:59:54 2014
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000006
+                   .org_2       code   0x0001ac    program   0x000000
+                   .org_3       code   0x0001b0    program   0x0000a0
+.config_2007_TINYBLD10F322_8MHZ_INT_9600_RX_0       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x0001b0    0x0001ff      
+                            0x002007    0x002007      
+            84 out of 518 program addresses used, program memory utilization is 16%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x0001b0    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                 MainLoop   0x0001ba    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                     RcvL   0x0001d3    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                  Receive   0x0001d2    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                    SendL   0x0001e2    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                     bout   0x0001ea    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                    bwait   0x0001ee    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                   bwait2   0x0001ef    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                    mainl   0x0001bb    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                   rcvoct   0x0001c2    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                     wr_e   0x0001f4    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                     wr_l   0x0001f5    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                     wr_w   0x0001f6    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                ziieroare   0x0001cb    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+        IntrareBootloader   0x0001b0    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                 MainLoop   0x0001ba    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                    mainl   0x0001bb    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                   rcvoct   0x0001c2    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                ziieroare   0x0001cb    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                  Receive   0x0001d2    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                     RcvL   0x0001d3    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                    SendL   0x0001e2    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                     bout   0x0001ea    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                    bwait   0x0001ee    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                   bwait2   0x0001ef    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                     wr_e   0x0001f4    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                     wr_l   0x0001f5    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+                     wr_w   0x0001f6    program     static C:\picasm1\tinybld198\picsource\2014.06.04\Dan_tinybld10F322_8MHz_int_9600_rx_03_tx_02_84words_r9\tinybld10F322_8MHz_int_9600_rx_03_tx_02.asm
+
+
